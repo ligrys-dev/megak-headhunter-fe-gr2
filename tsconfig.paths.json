@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "types": ["../megak-v3-headhunter-be-gr2/src/types"]
+    }
+  }
+}
