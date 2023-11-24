@@ -63,9 +63,4 @@
 
 .authorization_container .authorization_wrapper form .go_to_registration button {
     margin-left: auto;
-    padding: 8px 10px;
-    border: none;
-    background-color: var(--button_color);
-    font-size: 1rem;
-    cursor: pointer;
 }
