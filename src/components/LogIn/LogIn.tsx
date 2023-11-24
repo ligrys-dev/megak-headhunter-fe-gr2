@@ -11,7 +11,7 @@ export const LogIn = () => {
                 <form>
                     <Input type="text" placeholder="E-mail"/>
                     <Input type="password" placeholder="Hasło"/>
-                    <a href="#">Zapomniałeś hasła?</a>
+                    <a href="/reset-password">Zapomniałeś hasła?</a>
                     <div className="go_to_registration">
                         <p>Nie masz konta?</p><a href="/signin">Zarejestruj się</a>
                         <Btn text="Zaloguj się"></Btn>
