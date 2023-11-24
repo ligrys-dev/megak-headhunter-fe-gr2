@@ -1,0 +1,8 @@
+input {
+    margin: 7px 0;
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    background-color: var(--input_color);
+    font-size: 0.9rem;
+}
