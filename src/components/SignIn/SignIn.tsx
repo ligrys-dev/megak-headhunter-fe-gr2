@@ -2,6 +2,7 @@ import React from "react";
 import {Input} from "../common/Input/Input";
 import {Btn} from "../common/Btn/Btn";
 import './SignIn.css';
+import {AuthorizationInfo} from "../common/AuthorizationInfo/AuthorizationInfo";
 
 export const SignIn = () => {
     return (
@@ -14,10 +15,7 @@ export const SignIn = () => {
                     <Input type="password" placeholder="Powtórz hasło"/>
                     <Btn text="Zarejestruj się"></Btn>
                 </form>
-                <div className="signin_info">
-                    <p>Poprawnie zarejestrowano użytkownika. - ! Do zrobienia !</p>
-                    <a href="/">Przejdz do strony logowania</a>
-                </div>
+                <AuthorizationInfo text="Poprawnie dodano użytkownika. - !! Do zrobienia !!"/>
             </div>
         </div>
     )

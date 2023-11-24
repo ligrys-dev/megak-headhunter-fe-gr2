@@ -1,13 +1,3 @@
 .authorization_container .authorization_wrapper form input:nth-child(3){
     margin-bottom: 20px;
 }
-
-.authorization_container .authorization_wrapper .signin_info {
-    margin-top: 20px;
-}
-
-.authorization_container .authorization_wrapper .signin_info p,
-.authorization_container .authorization_wrapper .signin_info a{
-    font-size: 0.9rem;
-    line-height: 25px;
-}
