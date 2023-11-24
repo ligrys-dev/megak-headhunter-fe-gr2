@@ -1,9 +1,9 @@
 import React from "react";
-import {Btn} from "../common/Btn/Btn";
-import './LogIn.css';
 import {Input} from "../common/Input/Input";
+import {Btn} from "../common/Btn/Btn";
+import './SignIn.css';
 
-export const LogIn = () => {
+export const SignIn = () => {
     return (
         <div className="authorization_container">
             <div className="authorization_wrapper">
@@ -11,12 +11,13 @@ export const LogIn = () => {
                 <form>
                     <Input type="text" placeholder="E-mail"/>
                     <Input type="password" placeholder="Hasło"/>
-                    <a href="#">Zapomniałeś hasła?</a>
-                    <div className="go_to_registration">
-                        <p>Nie masz konta?</p><a href="/signin">Zarejestruj się</a>
-                        <Btn text="Zaloguj się"></Btn>
-                    </div>
+                    <Input type="password" placeholder="Powtórz hasło"/>
+                    <Btn text="Zarejestruj się"></Btn>
                 </form>
+                <div className="signin_info">
+                    <p>Poprawnie zarejestrowano użytkownika. - ! Do zrobienia !</p>
+                    <a href="/">Przejdz do strony logowania</a>
+                </div>
             </div>
         </div>
     )
