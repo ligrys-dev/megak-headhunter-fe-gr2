@@ -32,8 +32,7 @@ export const LogIn = () => {
                 body: JSON.stringify(form)
             });
             if (res.status === 400 || res.status === 500) {
-                const err = await res.json();
-                alert(`Błąd: ${err.message}`)
+                alert('Błędny login lub hasło.')
                 return;
             }
         } finally {
