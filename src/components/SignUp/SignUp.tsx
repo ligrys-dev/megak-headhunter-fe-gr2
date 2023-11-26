@@ -1,8 +1,10 @@
 import {Btn} from "../common/Btn/Btn";
-import './SignIn.css';
+import './SignUp.css';
 import {AuthorizationInfo} from "../common/AuthorizationInfo/AuthorizationInfo";
+import {FormEvent, useState} from "react";
+import {redirect} from "react-router-dom";
 
-export const SignIn = () => {
+export const SignUp = () => {
     return (
         <div className="authorization_container">
             <div className="authorization_wrapper">
