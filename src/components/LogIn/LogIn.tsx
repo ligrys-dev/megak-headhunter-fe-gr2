@@ -36,7 +36,7 @@ export const LogIn = () => {
     }
 
     if (loading){
-        redirect('/home')
+        redirect('http://localhost:5173/home')
     }
 
     return (
@@ -48,7 +48,7 @@ export const LogIn = () => {
                     <input type="password" placeholder="Hasło" onChange={e => updateForm('password', e.target.value)}/>
                     <a href="/reset-password">Zapomniałeś hasła?</a>
                     <div className="go_to_registration">
-                        <p>Nie masz konta?</p><a href="/signin">Zarejestruj się</a>
+                        <p>Nie masz konta?</p><a href="/signup">Zarejestruj się</a>
                         <Btn text="Zaloguj się"></Btn>
                     </div>
                 </form>
