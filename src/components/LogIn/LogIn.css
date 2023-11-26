@@ -1,0 +1,66 @@
+.authorization_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.authorization_container .authorization_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+
+.authorization_container .authorization_wrapper img {
+    margin-bottom: 25px;
+    width: 110px;
+}
+
+.authorization_container .authorization_wrapper form {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    width: 100%;
+}
+
+.authorization_container .authorization_wrapper form input {
+    margin: 7px 0;
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    background-color: var(--input_color);
+    font-size: 0.9rem;
+}
+
+.authorization_container .authorization_wrapper form a {
+    margin: 10px 0;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.7px;
+}
+
+.authorization_container .authorization_wrapper form .go_to_registration {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.authorization_container .authorization_wrapper form .go_to_registration p {
+    margin: 10px 5px 10px 0;
+    display: inline-block;
+    font-size: 0.9rem;
+    letter-spacing: 0.7px;
+}
+
+.authorization_container .authorization_wrapper form .go_to_registration a {
+    text-decoration: underline;
+}
+
+.authorization_container .authorization_wrapper form .go_to_registration button {
+    margin-left: auto;
+}
