@@ -24,7 +24,6 @@ export const SignUp = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            setUser(true)
             const res = await fetch(`http://localhost:3001/user/signup`, {
                 // @TODO Return to the url
                 method: 'POST',
