@@ -6,8 +6,7 @@ import {Spinner} from "../common/Spinner/Spinner";
 import './SignUp.css';
 
 export const SignUp = () => {
-    const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState<boolean | null>(null);
+    const [loading, setLoading] = useState<boolean | null>(null);
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -38,8 +37,6 @@ export const SignUp = () => {
                 return;
             }
             const data = await res.json();
-            // @TODO insert mail from backend
-            setUser(data.email)
         } finally {
             setLoading(false);
         }
@@ -48,7 +45,8 @@ export const SignUp = () => {
     if (loading) {
         return <Spinner/>
     }
-    if (user) {
+
+    if (!loading) {
         redirect("http://localhost:5173")
     }
 
