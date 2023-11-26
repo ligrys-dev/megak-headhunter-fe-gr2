@@ -2,9 +2,11 @@ import {FormEvent, useState} from "react";
 import {Btn} from "../common/Btn/Btn";
 import {redirect} from "react-router-dom";
 import './LogIn.css';
+import {Spinner} from "../common/Spinner/Spinner";
 
 export const LogIn = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean | null>(null);
+    // @TODO Add type for form
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -19,24 +21,32 @@ export const LogIn = () => {
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        const res = await fetch(`http://localhost:3306/user/login`, {
-            // @TODO Return to the url
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(form)
-        });
-        const data = await res.json();
-        if (data) {
-            setLoading(true)
-        } else {
-            alert("Błędny login lub hasło!");
+        setLoading(true);
+        try {
+            const res = await fetch(`http://localhost:3306/user/login`, {
+                // @TODO Return to the url
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(form)
+            });
+            if (res.status === 400 || res.status === 500) {
+                const err = await res.json();
+                alert(`Błąd: ${err.message}`)
+                return;
+            }
+        } finally {
+            setLoading(false);
         }
+
+    }
+    if (loading) {
+        return <Spinner/>
     }
 
-    if (loading){
-        redirect('http://localhost:5173/home')
+    if (!loading) {
+        redirect("http://localhost:5173/home")
     }
 
     return (
