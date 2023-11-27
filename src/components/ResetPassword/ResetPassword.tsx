@@ -1,14 +1,14 @@
 import {Btn} from "../common/Btn/Btn";
 import {AuthorizationInfo} from "../common/AuthorizationInfo/AuthorizationInfo";
-import './ResetPassword.css';
-import {FormEvent, useState} from "react";
+import {FormEvent, useRef, useState} from "react";
 import {Spinner} from "../common/Spinner/Spinner";
-import {redirect} from "react-router-dom";
+import './ResetPassword.css';
 
 export const ResetPassword = () => {
     const [loading, setLoading] = useState<boolean | null>(null);
     // @TODO Add type for form
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const text = useRef('')
 
     const onSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -30,8 +30,13 @@ export const ResetPassword = () => {
             setLoading(false);
         }
     }
+
     if (loading) {
         return <Spinner/>
+    }
+
+    if (loading === false) {
+        text.current = 'Wysłano wiadomość. Sprawdź e-mail.'
     }
 
     return (
@@ -42,7 +47,7 @@ export const ResetPassword = () => {
                     <input type="text" placeholder="E-mail" onChange={e => setEmail(e.target.value)}/>
                     <Btn text="Wyślij wiadomość"></Btn>
                 </form>
-                <AuthorizationInfo text="Wysłano e-mail. Sprawdz skrzynkę odbiorczą. - !!Do zrobiania!!"/>
+                <AuthorizationInfo text={text.current}/>
             </div>
         </div>
     )
