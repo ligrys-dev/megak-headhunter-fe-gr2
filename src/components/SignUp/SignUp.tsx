@@ -1,7 +1,6 @@
 import {Btn} from "../common/Btn/Btn";
 import {AuthorizationInfo} from "../common/AuthorizationInfo/AuthorizationInfo";
-import {FormEvent, useState} from "react";
-import {redirect} from "react-router-dom";
+import {FormEvent, useRef, useState} from "react";
 import {Spinner} from "../common/Spinner/Spinner";
 import './SignUp.css';
 
@@ -12,6 +11,8 @@ export const SignUp = () => {
         password: '',
         repeatedPassword: ''
     });
+    const text = useRef('');
+
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
             ...form,
@@ -36,18 +37,17 @@ export const SignUp = () => {
                 alert(`Błąd: ${err.message}`)
                 return;
             }
-            const data = await res.json();
         } finally {
             setLoading(false);
         }
-
     }
+
     if (loading) {
         return <Spinner/>
     }
 
-    if (!loading) {
-        redirect("http://localhost:5173")
+    if (loading === false) {
+        text.current = 'Poprawnie dodano użytkownika. Przejdz do strony głównej.'
     }
 
     return (
@@ -57,10 +57,11 @@ export const SignUp = () => {
                 <form onSubmit={onSubmit}>
                     <input type="text" placeholder="E-mail" onChange={e => updateForm('email', e.target.value)}/>
                     <input type="password" placeholder="Hasło" onChange={e => updateForm('password', e.target.value)}/>
-                    <input type="password" placeholder="Powtórz hasło" onChange={e => updateForm('repeatedPassword', e.target.value)}/>
+                    <input type="password" placeholder="Powtórz hasło"
+                           onChange={e => updateForm('repeatedPassword', e.target.value)}/>
                     <Btn text="Zarejestruj się"></Btn>
                 </form>
-                <AuthorizationInfo text="Poprawnie dodano użytkownika. - !! Do zrobienia !!"/>
+                <AuthorizationInfo text={text.current}/>
             </div>
         </div>
     )
