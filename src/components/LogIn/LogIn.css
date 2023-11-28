@@ -9,12 +9,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     width: 20%;
 }
 
 .authorization_container .authorization_wrapper img {
-    margin-bottom: 25px;
+    margin: 25px auto;
     width: 110px;
 }
 
