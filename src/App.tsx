@@ -1,11 +1,10 @@
-
 import {LogIn} from "./components/LogIn/LogIn";
 import {Route, Routes} from "react-router-dom";
 import {SignUp} from "./components/SignUp/SignUp";
 import {ResetPassword} from "./components/ResetPassword/ResetPassword";
 import {AdminPanel} from "./components/AdminPanel/AdminPanel.tsx";
-import './App.css';
 import {StudentPanel} from "./components/StudentPanel/StudentPanel";
+import './App.css';
 
 function App() {
     return (
