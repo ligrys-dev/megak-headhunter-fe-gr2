@@ -14,7 +14,7 @@
 }
 
 .authorization_container .authorization_wrapper img {
-    margin: 25px auto;
+    margin: 0 auto 25px;
     width: 110px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .authorization_container .authorization_wrapper form input {
-    margin: 7px 0;
+    margin: 5px 0 10px;
     padding: 10px 15px;
     width: 100%;
     border: none;
@@ -43,24 +43,60 @@
     letter-spacing: 0.7px;
 }
 
-.authorization_container .authorization_wrapper form .go_to_registration {
-    margin: 20px 0;
+.authorization_container .authorization_wrapper form .registration_and_btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
+
+}
+
+.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration {
     display: flex;
     justify-content: flex-start;
 }
 
-.authorization_container .authorization_wrapper form .go_to_registration p {
+.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration p {
     margin: 10px 5px 10px 0;
     display: inline-block;
     font-size: 0.9rem;
     letter-spacing: 0.7px;
 }
 
-.authorization_container .authorization_wrapper form .go_to_registration a {
+.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration a {
     text-decoration: underline;
 }
 
-.authorization_container .authorization_wrapper form .go_to_registration button {
-    margin-left: auto;
+@media (max-width: 1440px) {
+    .authorization_container .authorization_wrapper {
+        width: 30%;
+    }
+}
+
+@media (max-width: 1160px) {
+    .authorization_container .authorization_wrapper {
+        width: 40%;
+    }
+}
+
+@media (max-width: 850px){
+    .authorization_container .authorization_wrapper {
+        width: 55%;
+    }
+}
+
+@media (max-width: 640px) {
+    .authorization_container .authorization_wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px){
+    .authorization_container .authorization_wrapper form .registration_and_btn {
+        flex-direction: column;
+    }
+
+    .authorization_container .authorization_wrapper form .registration_and_btn button {
+        margin: 15px 0 0 auto;
+    }
 }
