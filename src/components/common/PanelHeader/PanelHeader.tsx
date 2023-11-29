@@ -5,7 +5,7 @@ interface Props {
     lastName: string;
     urlAccount: string;
     urlLogOut: string;
-    userGitHub: string;
+    githubUsername: string;
 }
 
 export const PanelHeader = (props: Props) => {
@@ -13,7 +13,7 @@ export const PanelHeader = (props: Props) => {
         <div className="panel_header">
             <img src="/assets/megak.png" alt="MegaK logo"/>
             <div className="user_account">
-                <img src={props.userGitHub ? `https://github.com/${props.userGitHub}.png` : "/assets/user.png"} alt="Default user"/>
+                <img src={props.githubUsername ? `https://github.com/${props.githubUsername}.png` : "/assets/user.png"} alt="Default user"/>
                 <p>{props.name} {props.lastName}</p>
                 <div className="dropdown_menu">
                     <a href="#"><img src="/assets/arrow.png" alt="Arrow down"/></a>
