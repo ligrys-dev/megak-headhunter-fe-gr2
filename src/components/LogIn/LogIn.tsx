@@ -1,8 +1,8 @@
 import {FormEvent, useState} from "react";
 import {Btn} from "../common/Btn/Btn";
 import {redirect} from "react-router-dom";
-import './LogIn.css';
 import {Spinner} from "../common/Spinner/Spinner";
+import './LogIn.css';
 
 export const LogIn = () => {
     const [loading, setLoading] = useState<boolean | null>(null);
@@ -38,8 +38,8 @@ export const LogIn = () => {
         } finally {
             setLoading(false);
         }
-
     }
+
     if (loading) {
         return <Spinner/>
     }
@@ -56,8 +56,11 @@ export const LogIn = () => {
                     <input type="email" placeholder="E-mail" onChange={e => updateForm('email', e.target.value)}/>
                     <input type="password" placeholder="Hasło" onChange={e => updateForm('password', e.target.value)}/>
                     <a href="/reset-password">Zapomniałeś hasła?</a>
-                    <div className="go_to_registration">
-                        <p>Nie masz konta?</p><a href="/signup">Zarejestruj się</a>
+                    <div className="registration_and_btn">
+                        <div className="go_to_registration">
+                            <p>Nie masz konta?</p>
+                            <a href="/signup">Zarejestruj się</a>
+                        </div>
                         <Btn text="Zaloguj się"></Btn>
                     </div>
                 </form>
