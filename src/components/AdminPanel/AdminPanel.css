@@ -13,6 +13,7 @@
 .form-option:hover {
     color: #34db3c;
 }
+
 .form-option.selected {
     color: #34db3c;
 }

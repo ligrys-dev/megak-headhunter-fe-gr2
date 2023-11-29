@@ -1,4 +1,4 @@
-import React from "react";
+
 import './AuthorizationInfo.css';
 
 interface Props {
