@@ -38,8 +38,8 @@ export const LogIn = () => {
         } finally {
             setLoading(false);
         }
-
     }
+
     if (loading) {
         return <Spinner/>
     }
@@ -56,8 +56,11 @@ export const LogIn = () => {
                     <input type="email" placeholder="E-mail" onChange={e => updateForm('email', e.target.value)}/>
                     <input type="password" placeholder="Hasło" onChange={e => updateForm('password', e.target.value)}/>
                     <a href="/reset-password">Zapomniałeś hasła?</a>
-                    <div className="go_to_registration">
-                        <p>Nie masz konta?</p><a href="/signup">Zarejestruj się</a>
+                    <div className="registration_and_btn">
+                        <div className="go_to_registration">
+                            <p>Nie masz konta?</p>
+                            <a href="/signup">Zarejestruj się</a>
+                        </div>
                         <Btn text="Zaloguj się"></Btn>
                     </div>
                 </form>
