@@ -15,8 +15,8 @@
 }
 
 .panel_header .user_account img {
-    width: 27px;
-    height: 35px;
+    width: auto;
+    max-height: 40px;
 }
 
 .panel_header .user_account p {
