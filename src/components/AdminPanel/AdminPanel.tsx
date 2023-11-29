@@ -24,8 +24,8 @@ export const AdminPanel = () => {
 
     return (
         <>
-            <div className={'admin-panel'}>
-                <h1>Admin Panel</h1>
+            <div className='admin-panel'>
+                <h1>Panel Admina</h1>
                 <Btn text='Wyloguj'/>
             </div>
             <p className={`form-option ${selectedForm === 'kursant' ? 'selected' : ''}`}
