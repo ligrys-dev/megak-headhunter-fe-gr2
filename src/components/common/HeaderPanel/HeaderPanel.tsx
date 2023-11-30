@@ -1,4 +1,4 @@
-import './PanelHeader.css';
+import './HeaderPanel.css';
 
 interface Props {
     name: string;
@@ -8,7 +8,7 @@ interface Props {
     githubUsername: string;
 }
 
-export const PanelHeader = (props: Props) => {
+export const HeaderPanel = (props: Props) => {
     return (
         <div className="panel_header">
             <img src="/assets/megak.png" alt="MegaK logo"/>
