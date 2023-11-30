@@ -1,37 +1,26 @@
 import {useState} from 'react';
-import {PanelHeader} from "../common/PanelHeader/PanelHeader";
+import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
+import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
 import './StudentPanel.css';
-import {ContractType, NewStudentEntity, TypeWork} from "types";
 
 export const StudentPanel = () => {
-    const [user, setUser] =useState<NewStudentEntity>({
-        email: 'acb@abc.pl',
-        tel: 123456789,
+    const bookmarks = [
+        ['studentData', 'Dane kursanta'],
+        ['editStudentData', 'Edycja danych'],
+        ['notification', 'Powiadomienia'],
+];
+    const [user, setUser] =useState({
         firstName: 'Student',
         lastName: 'Testowy',
-        avatar: null,
-        githubUsername: '',
-        portfolioUrls: [''],
-        projectUrls: [''],
-        bio: '',
-        expectedTypeWork: TypeWork.DoesNotMatter,
-        targetWorkCity: '',
-        expectedContractType: ContractType.CONTRACT,
-        expectedSalary: null,
-        canTakeApprenticeship: false,
-        monthsOfCommercialExp: 0,
-        education: '',
-        workExperience: null,
-        courses: null
+        githubUsername: ''
     })
 
     return (
-        <>
             <div className="student_panel">
-                <PanelHeader name={user.firstName} lastName={user.lastName}  urlAccount="/student1" urlLogOut="/logout1" githubUsername={user.githubUsername}/>
+                <HeaderPanel name={user.firstName} lastName={user.lastName} urlAccount="/student1" urlLogOut="/logout1" githubUsername={user.githubUsername}/>
                 <div className="panel_main">
+                    <BookmarksPanel bookmarks={bookmarks}/>
                 </div>
             </div>
-        </>
     );
 };
