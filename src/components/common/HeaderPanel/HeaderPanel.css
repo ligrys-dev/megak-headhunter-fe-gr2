@@ -1,7 +1,9 @@
 .panel_header {
     margin: 0 10px 30px;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
+    background-color: var(--background_color);
 }
 
 .panel_header img {
