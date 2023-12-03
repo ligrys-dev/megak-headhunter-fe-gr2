@@ -5,9 +5,11 @@ import {HRForm} from "../../AdminPanel/HRForm";
 import {EditStudentData} from "../../StudentPanel/EditStudentData";
 import {Notification} from "../../StudentPanel/Notification";
 import './BookmarksPanel.css';
+import {StudentProfileInterface} from "types";
 
 interface Props {
-    bookmarks: string[][]
+    bookmarks: string[][];
+    user: StudentProfileInterface
 }
 
 export const BookmarksPanel = (props: Props) => {
@@ -15,13 +17,12 @@ export const BookmarksPanel = (props: Props) => {
 
     const handleBookmarkSelection = (bookmark: string) => {
         setSelectedBookmark(bookmark);
-        console.log(bookmark)
     };
 
     const renderBookmark = () => {
         switch (selectedBookmark) {
             case 'studentData':
-                return <StudentData/>;
+                return <StudentData user={props.user}/>;
             case 'editStudentData':
                 return <EditStudentData/>;
             case 'notification':
@@ -38,7 +39,7 @@ export const BookmarksPanel = (props: Props) => {
     return (
             <div className="bookmarks_panel">
                 <div className="bookmarks">
-                    {props.bookmarks.map(bookmark => <p key={bookmark[0]}
+                    {props.bookmarks.map(bookmark => <p className={selectedBookmark === bookmark[0] ? 'active' : ''} key={bookmark[0]}
                                                         onClick={() => handleBookmarkSelection(`${bookmark[0]}`)}>{bookmark[1]}</p>)}
                 </div>
                 {renderBookmark()}
