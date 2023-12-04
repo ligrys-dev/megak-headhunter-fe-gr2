@@ -42,3 +42,10 @@
     font-weight: bold;
     font-size: 1rem;
 }
+
+@media (max-width: 425px) {
+    .education-experience {
+        width: 100%;
+
+    }
+}
