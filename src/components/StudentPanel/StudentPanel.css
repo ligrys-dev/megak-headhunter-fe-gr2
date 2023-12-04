@@ -1,9 +1,8 @@
 .student_panel {
-    margin: 20px auto 0;
+    margin: 0 auto;
     max-width: 1440px;
 }
 
 .student_panel .panel_main {
-    height: 100vh;
-    background-color: var(--input_color);
+    min-height: 100vh;
 }
