@@ -11,17 +11,27 @@ interface Student {
     teamProjectDegree: string;
 }
 
+interface FailedStudent {
+    email: string;
+    errorDetails: string[];
+}
+
+interface SuccessfulStudent {
+    email: string;
+}
+
 export const StudentImport = () => {
     const [data, setData] = useState<Student[]>([]);
     const [columnArray, setColumnArray] = useState<string[]>([]);
     const [values, setValues] = useState<string[][]>([]);
     const [infoAfterSuccessfulDataSubmission, setInfoAfterSuccessfulDataSubmission] = useState(false);
     const [file, setFile] = useState<File | null>(null); // Dodano typ File
+    const [resInfo, setResInfo] = useState('');
+    const [addedEmails, setAddedEmails] = useState([]);
 
     const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
         setInfoAfterSuccessfulDataSubmission(false);
         if (event.target.files) {
-            console.log('Selected File:', event.target.files[0]);
             setFile(event.target.files[0]);
             Papa.parse(event.target.files[0], {
                 header: true,
@@ -51,9 +61,6 @@ export const StudentImport = () => {
             return;
         }
 
-        console.log(data, 'data');
-
-        // START Validation of data in csv file
         const expectedKeys = ['email', 'courseCompletion', 'courseEngagement', 'projectDegree', 'teamProjectDegree', 'bonusProjectUrls'];
 
         const isDataValid = data.every((student) => {
@@ -64,8 +71,6 @@ export const StudentImport = () => {
         if (!isDataValid) {
             alert('Niepoprawne dane. Sprawdź, czy dane w pliku .csv mają poprawne klucze. Oczekiwane klucze to: email, courseCompletion, courseEngagement, projectDegree, teamProjectDegree i bonusProjectUrls.');
             return;
-        } else {
-            console.log('nagłówki sa ok')
         }
 
         const allEmailsValid = data.every((student) => student.email.includes('@'));
@@ -92,25 +97,31 @@ export const StudentImport = () => {
             alert('Niepoprawne dane. Upewnij się, czy dane w pliku .csv są poprawne. Czy nazwy kolumn to: email, courseCompletion, courseEngagements, projectDegree, teamProjectDegree i bonusProjectUrls? Sprawdź, czy liczby w odpowiednich polach są z zakresu 0-5. Załaduj ponownie plik .csv.')
             return;
         }
-        // END Validation of data in csv file
 
         // utworzenie pliku .csv do wysłania na backend
         const formData = new FormData();
         formData.append('file', file);
-        console.log(formData, 'form data');
 
         try {
-            const res = await fetch(`http://localhost:3001/student-import/upload`, {
+            const res = await fetch(`http://localhost:3001/import/students`, {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,
             });
 
-            // console.log(file);
-
             const responseFromServer = await res.json();
 
             if (res.ok) {
+                const successfulEmails = responseFromServer.successfulEmails.map((student: SuccessfulStudent) => student.email).join(', ');
+                setAddedEmails(successfulEmails);
+
+                const failedEmailsText = responseFromServer.failedEmails.map((failedStudent: FailedStudent) => {
+                    const email = failedStudent.email;
+                    const errorReason = failedStudent.errorDetails[0];
+                    return `${email}: ${errorReason}`;
+                }).join(', ');
+
+                setResInfo(`Studenci niedodani do bazy danych: ${failedEmailsText}`);
                 setData([]);
                 setColumnArray([]);
                 setValues([]);
@@ -122,23 +133,6 @@ export const StudentImport = () => {
             console.error('Błąd podczas wysyłania danych:', error);
         }
 
-        /**  Kod w razie, gdyby nie udalo sie odebrać i przerobić pliku csv po stronie backendu,
-         *   wtedy można po prostu wysłać gotowego JSON'a - opcja do przedystkuwoania
-         *   zeby to testowac nalezy odkomentowac ponizszy kod i zakomentowac całego try catcha w powyższym
-         *
-         *
-         *    const res = await fetch(`http://localhost:3001/student-import/upload`, {
-         *             method: 'POST',
-         *             credentials: "include",
-         *             headers: {
-         *                 'Content-type': 'application/json'
-         *             },
-         *             body: JSON.stringify(data),
-         *         });
-         *
-         *         const responseFromServer = await res.json();
-         *
-         */
     };
 
     return (
@@ -185,7 +179,9 @@ export const StudentImport = () => {
                 {data.length > 0 && <button onClick={handleSendingData}>Wyślij dane</button>}
                 {infoAfterSuccessfulDataSubmission && (
                     <p>
-                        Lista studentów została dodana do bazy danych, oraz zostały wysłane emaile z linkiem do rejestracji.
+                        Studenci dodani do bazy danych: {addedEmails}
+                        {<br/>}
+                        {resInfo}
                     </p>
                 )}
             </div>
