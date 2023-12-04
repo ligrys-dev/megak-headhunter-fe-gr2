@@ -42,7 +42,7 @@
     margin-top: 20px;
     width: 200px;
     position: absolute;
-    right: -10px;
+    right: 30px;
 }
 
 .panel_header .user_account .dropdown_menu ul li {
@@ -72,6 +72,8 @@
 
 @media (max-width: 425px) {
     .panel_header {
-        padding: 20px 10px 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
     }
 }
