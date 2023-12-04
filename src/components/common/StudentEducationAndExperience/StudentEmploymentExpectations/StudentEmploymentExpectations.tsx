@@ -5,7 +5,7 @@ interface Props {
     user: StudentProfileInterface;
 }
 
-export const StudentEmploymentExpectations = (props:Props) => {
+export const StudentEmploymentExpectations = (props: Props) => {
     const {
         monthsOfCommercialExp,
         expectedContractType,
@@ -62,29 +62,33 @@ export const StudentEmploymentExpectations = (props:Props) => {
         <>
             <h2>Oczekiwania w stosunku do zatrudnienia</h2>
             <div className="employment-expectations">
-                <div className="place-of-work">
-                    <h3>Preferowane miejse pracy</h3>
-                    <p>{checkTypeOfWork()}</p>
+                <div className="employment-expectations-left-side">
+                    <div className="place-of-work">
+                        <h3>Preferowane miejse pracy</h3>
+                        <p>{checkTypeOfWork()}</p>
+                    </div>
+                    <div className="city-of-work">
+                        <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
+                        <p>{targetWorkCity}</p>
+                    </div>
+                    <div className="type-of-contract">
+                        <h3>Oczekiwany typ kontraktu</h3>
+                        <p>{checkTypeOfContract()}</p>
+                    </div>
                 </div>
-                <div className="city-of-work">
-                    <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
-                    <p>{targetWorkCity}</p>
-                </div>
-                <div className="type-of-contract">
-                    <h3>Oczekiwany typ kontraktu</h3>
-                    <p>{checkTypeOfContract()}</p>
-                </div>
-                <div className="place-of-work">
-                    <h3>Oczekiwane wynagrodzenie netto miesięcznie</h3>
-                    <p>{expectedSalary ? `${expectedSalary} zł` : 'Brak danych'}</p>
-                </div>
-                <div className="can-take-apprenticeship">
-                    <h3>Zgod na odbycie bezpłatnych praktyk/stażu na początek</h3>
-                    <p>{canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
-                </div>
-                <div className="months-of-commercial-exp">
-                    <h3>Komercyjne doświadczenie w programowaniu</h3>
-                    <p>{checkMonthsOfCommercialExp()}</p>
+                <div className="employment-expectations-right-side">
+                    <div className="place-of-work">
+                        <h3>Oczekiwane wynagrodzenie netto miesięcznie</h3>
+                        <p>{expectedSalary ? `${expectedSalary} zł` : 'Brak danych'}</p>
+                    </div>
+                    <div className="can-take-apprenticeship">
+                        <h3>Zgod na odbycie bezpłatnych praktyk/stażu na początek</h3>
+                        <p>{canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
+                    </div>
+                    <div className="months-of-commercial-exp">
+                        <h3>Komercyjne doświadczenie w programowaniu</h3>
+                        <p>{checkMonthsOfCommercialExp()}</p>
+                    </div>
                 </div>
             </div>
         </>

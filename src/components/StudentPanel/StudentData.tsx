@@ -1,5 +1,5 @@
 import {StudentPersonalData} from "../common/StudentPersonalData/StudentPersonalData";
-import {StudentEmploymentExpectations} from "../common/StudentEducationAndExperience/StudentmploymentExpectations/StudentEmploymentExpectations";
+import {StudentEmploymentExpectations} from "../common/StudentEducationAndExperience/StudentEmploymentExpectations/StudentEmploymentExpectations";
 import {StudentEducation} from "../common/StudentEducationAndExperience/StudentEducation/StudentEducation";
 import {StudentExperience} from "../common/StudentEducationAndExperience/StudentExperience/StudentExperience";
 import {StudentProfileInterface} from "types";
