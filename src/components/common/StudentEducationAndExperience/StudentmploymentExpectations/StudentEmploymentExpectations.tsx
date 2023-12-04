@@ -1,11 +1,11 @@
 import {StudentProfileInterface} from "types";
-import './EmploymentExpectations.css';
+import './StudentEmploymentExpectations.css';
 
 interface Props {
     user: StudentProfileInterface;
 }
 
-export const EmploymentExpectations = (props:Props) => {
+export const StudentEmploymentExpectations = (props:Props) => {
     const {
         monthsOfCommercialExp,
         expectedContractType,
