@@ -72,13 +72,47 @@
 }
 
 .student-personal-info button {
-    margin-bottom: 10px;
+    margin: 0 10% 10px;
     width: 80%;
+}
+
+@media (max-width: 1024px) {
+    .student-personal-info {
+        width: 100%;
+        flex-direction: row;
+        border-bottom: 3px solid var(--background_color);
+    }
+
+    .student-personal-info .student-personal-info-left-side,
+    .student-personal-info .student-personal-info-right-side{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+       width: 40%;
+    }
+
+    .student-personal-info .student-personal-info-right-side {
+        width: 60%;
+    }
+
+    .student-personal-info button {
+        width: 50%;
+    }
 }
 
 @media (max-width: 425px) {
     .student-personal-info {
+        flex-direction: column;
         margin: 0 ;
+    }
+
+    .student-personal-info .student-personal-info-left-side,
+    .student-personal-info .student-personal-info-right-side{
         width: 100%;
+    }
+
+    .student-personal-info button {
+        width: 80%;
     }
 }

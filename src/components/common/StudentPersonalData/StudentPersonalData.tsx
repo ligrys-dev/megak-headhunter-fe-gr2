@@ -14,9 +14,9 @@ export const StudentPersonalData = (props: Props) => {
             case 0:
                 return 'Dostępny';
             case 1:
-                return  'Do rozmowy';
+                return 'Do rozmowy';
             case 2:
-                return  'Zatrudniony';
+                return 'Zatrudniony';
             default:
                 return null;
         }
@@ -24,28 +24,32 @@ export const StudentPersonalData = (props: Props) => {
 
     return (
         <div className="student-personal-info">
-            <img id="user-image"
-                 src={githubUsername ? `https://github.com/${githubUsername}.png` : "/assets/user.png"}
-                 alt=""/>
-            <p id="user-name">{firstName} {lastName}</p>
-            <div className="github-info">
-                <img src="/assets/github.png" alt="GitHub logo"/>
-                <p>{githubUsername ? githubUsername : 'Brak profilu'}</p>
+            <div className="student-personal-info-left-side">
+                <img id="user-image"
+                     src={githubUsername ? `https://github.com/${githubUsername}.png` : "/assets/user.png"}
+                     alt=""/>
+                <p id="user-name">{firstName} {lastName}</p>
+                <div className="github-info">
+                    <img src="/assets/github.png" alt="GitHub logo"/>
+                    <p>{githubUsername ? githubUsername : 'Brak profilu'}</p>
+                </div>
+                <div className="phone-info">
+                    <img src="/assets/phone.png" alt="Phone image"/>
+                    <p>{tel ? tel : 'Brak numeru'}</p>
+                </div>
+                <div className="email-info">
+                    <img src="/assets/envelope.png" alt="Envelope image"/>
+                    <p>{initialData.email}</p>
+                </div>
             </div>
-            <div className="phone-info">
-                <img src="/assets/phone.png" alt="Phone image"/>
-                <p>{tel ? tel : 'Brak numeru'}</p>
+            <div className="student-personal-info-right-side">
+                <div className="about">
+                    <p>O mnie</p>
+                    <p>{bio}</p>
+                </div>
+                <Btn text="Brak zainteresowania"></Btn>
+                <Btn text={checkStatus()}></Btn>
             </div>
-            <div className="email-info">
-                <img src="/assets/envelope.png" alt="Envelope image"/>
-                <p>{initialData.email}</p>
-            </div>
-            <div className="about">
-                <p>O mnie</p>
-                <p>{bio}</p>
-            </div>
-            <Btn text="Brak zainteresowania"></Btn>
-            <Btn text={checkStatus()}></Btn>
         </div>
     )
 }
