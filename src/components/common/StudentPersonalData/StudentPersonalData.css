@@ -1,0 +1,76 @@
+.student-personal-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 40px;
+    width: 20vw;
+    background-color: var(--input_color);
+}
+
+.student-personal-info img#user-image {
+    width: auto;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.student-personal-info p#user-name {
+    padding: 20px 0 5px;
+    font-size: 1.4rem;
+}
+
+.student-personal-info .github-info,
+.student-personal-info .phone-info,
+.student-personal-info .email-info {
+    display: flex;
+    padding: 5px;
+}
+
+.student-personal-info .github-info {
+    padding-bottom: 13px;
+}
+
+.student-personal-info .github-info img {
+    width: auto;
+    height: 30px;
+}
+
+.student-personal-info .github-info p {
+    padding-left: 10px;
+    color: var(--github_color);
+    line-height: 30px;
+    font-size: 1.1rem;
+}
+
+.student-personal-info .phone-info img,
+.student-personal-info .email-info img{
+    width: auto;
+    height: 25px;
+}
+
+.student-personal-info .phone-info p,
+.student-personal-info .email-info p{
+    padding-left: 10px;
+    line-height: 25px;
+    font-size: 1rem;
+}
+
+.student-personal-info .about {
+    padding: 30px;
+}
+
+.student-personal-info .about p:nth-child(1) {
+    color: var(--icons_color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.student-personal-info .about p {
+    line-height: 25px;
+    font-size: 1rem;
+}
+
+.student-personal-info button {
+    margin-bottom: 10px;
+    width: 80%;
+}
