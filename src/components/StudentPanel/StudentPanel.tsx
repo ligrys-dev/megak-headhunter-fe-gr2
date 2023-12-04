@@ -30,7 +30,7 @@ export const StudentPanel = () => {
         initialData: userInitial,
         firstName: 'Student',
         lastName: 'Testowy',
-        githubUsername: 'AnetaPy',
+        githubUsername: '',
         portfolioUrls: ['Linki1', 'Link2', 'Link3'],
         projectUrls: ['Linki4', 'Link5', 'Link6'],
         bio: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquam atque commodi corporis delectus dolor ducimus earum eos est eum ex facere fuga hic impedit incidunt, inventore',
