@@ -1,7 +1,7 @@
 .bookmarks_panel .bookmarks {
     padding: 22px 0;
     background-color: var(--input_color);
-    border-bottom: 2px solid var(--background_color);
+    border-bottom: 3px solid var(--background_color);
 }
 
 .bookmarks_panel .bookmarks p {
