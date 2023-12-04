@@ -63,3 +63,15 @@
 .panel_header .user_account .dropdown_menu a:focus + ul {
     display: block;
 }
+
+@media (max-width: 1440px) {
+    .panel_header {
+        padding: 30px 30px 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .panel_header {
+        padding: 20px 10px 0;
+    }
+}
