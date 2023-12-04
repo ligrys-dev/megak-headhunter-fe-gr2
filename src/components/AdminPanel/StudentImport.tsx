@@ -112,7 +112,7 @@ export const StudentImport = () => {
             const responseFromServer = await res.json();
 
             if (res.ok) {
-                const successfulEmails = responseFromServer.successfulEmails.map((student: SuccessfulStudent) => student.email).join(', ');
+                const successfulEmails = responseFromServer.successfulEmails.map((student: SuccessfulStudent) => student).join(', ');
                 setAddedEmails(successfulEmails);
 
                 const failedEmailsText = responseFromServer.failedEmails.map((failedStudent: FailedStudent) => {
