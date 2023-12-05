@@ -21,8 +21,7 @@
 .authorization_container .authorization_wrapper form {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -33,6 +32,7 @@
     border: none;
     background-color: var(--input_color);
     font-size: 0.9rem;
+    color: var(--font_color);
 }
 
 .authorization_container .authorization_wrapper form a {
@@ -43,28 +43,9 @@
     letter-spacing: 0.7px;
 }
 
-.authorization_container .authorization_wrapper form .registration_and_btn {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
-}
-
-.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration p {
-    margin: 10px 5px 10px 0;
-    display: inline-block;
-    font-size: 0.9rem;
-    letter-spacing: 0.7px;
-}
-
-.authorization_container .authorization_wrapper form .registration_and_btn .go_to_registration a {
-    text-decoration: underline;
+.authorization_container .authorization_wrapper form button {
+    width: 50%;
+    margin-left: auto;
 }
 
 @media (max-width: 1440px) {
@@ -92,11 +73,8 @@
 }
 
 @media (max-width: 425px){
-    .authorization_container .authorization_wrapper form .registration_and_btn {
-        flex-direction: column;
-    }
-
-    .authorization_container .authorization_wrapper form .registration_and_btn button {
+    .authorization_container .authorization_wrapper form  button {
         margin: 15px 0 0 auto;
+        width: 60%;
     }
 }
