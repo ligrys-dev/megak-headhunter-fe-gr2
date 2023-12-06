@@ -6,7 +6,7 @@ interface Props {
     user: StudentProfileInterface
 }
 
-export const StudentPersonalData = (props: Props) => {
+export const EditStudentPersonalData = (props: Props) => {
     const {tel, githubUsername, firstName, initialData, bio, lastName, status} = props.user;
 
     const checkStatus = () => {

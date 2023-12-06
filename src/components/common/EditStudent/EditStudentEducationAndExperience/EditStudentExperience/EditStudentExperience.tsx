@@ -5,7 +5,7 @@ interface Props {
     user: StudentProfileInterface
 }
 
-export const StudentExperience = (props: Props) => {
+export const EditStudentExperience = (props: Props) => {
     const {workExperience, portfolioUrls, projectUrls, initialData} = props.user;
 
     const setPortfolioLinks = (portfolioUrls) => {

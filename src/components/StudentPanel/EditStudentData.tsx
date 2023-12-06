@@ -1,9 +1,10 @@
-import {StudentPersonalData} from "../common/StudentPersonalData/StudentPersonalData";
-import {StudentEmploymentExpectations} from "../common/StudentEducationAndExperience/StudentEmploymentExpectations/StudentEmploymentExpectations";
-import {StudentEducation} from "../common/StudentEducationAndExperience/StudentEducation/StudentEducation";
-import {StudentExperience} from "../common/StudentEducationAndExperience/StudentExperience/StudentExperience";
+import {EditStudentPersonalData} from "../common/EditStudent/EditStudentPersonalData/EditStudentPersonalData";
+import { EditStudentEducation } from "../common/EditStudent/EditStudentEducationAndExperience/EditStudentEducation/EditStudentEducation";
+import { EditStudentEmploymentExpectations } from "../common/EditStudent/EditStudentEducationAndExperience/EditStudentEmploymentExpectations/EditStudentEmploymentExpectations";
+import { EditStudentExperience } from "../common/EditStudent/EditStudentEducationAndExperience/EditStudentExperience/EditStudentExperience";
 import {StudentProfileInterface} from "types";
 import './StudentData.css';
+
 
 interface Props {
     user: StudentProfileInterface
@@ -12,11 +13,11 @@ interface Props {
 export const EditStudentData = (props: Props) => {
     return (
         <div className="student-data">
-            <StudentPersonalData user={props.user}/>
+            <EditStudentPersonalData user={props.user}/>
             <div className="education-experience">
-                <StudentEmploymentExpectations user={props.user}/>
-                <StudentEducation user={props.user}/>
-                <StudentExperience user={props.user}/>
+                <EditStudentEmploymentExpectations user={props.user}/>
+                <EditStudentEducation user={props.user}/>
+                <EditStudentExperience user={props.user}/>
             </div>
         </div>
     )

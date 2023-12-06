@@ -5,7 +5,7 @@ interface Props {
     user: StudentProfileInterface
 }
 
-export const StudentEducation = (props: Props) => {
+export const EditStudentEducation = (props: Props) => {
     const {education, courses} = props.user;
     return (
         <div className="student-education">

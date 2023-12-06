@@ -5,7 +5,7 @@ interface Props {
     user: StudentProfileInterface;
 }
 
-export const StudentEmploymentExpectations = (props: Props) => {
+export const EditStudentEmploymentExpectations = (props: Props) => {
     const {
         monthsOfCommercialExp,
         expectedContractType,
