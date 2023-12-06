@@ -24,7 +24,7 @@ export const BookmarksPanel = (props: Props) => {
             case 'studentData':
                 return <StudentData user={props.user}/>;
             case 'editStudentData':
-                return <EditStudentData/>;
+                return <EditStudentData user={props.user}/>;
             case 'notification':
                 return <Notification/>;
             case 'kursant':
