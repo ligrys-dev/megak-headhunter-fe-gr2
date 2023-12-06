@@ -7,7 +7,7 @@ interface Props {
     name: string;
     lastName: string;
     urlAccount: string;
-    githubUsername: string;
+    avatar?: string;
 }
 
 export const HeaderPanel = (props: Props) => {
@@ -42,7 +42,7 @@ export const HeaderPanel = (props: Props) => {
         <div className="panel_header">
             <img src="/assets/megak.png" alt="MegaK logo"/>
             <div className="user_account">
-                <img src={props.githubUsername ? `https://github.com/${props.githubUsername}.png` : "/assets/user.png"}
+                <img src={props.avatar ? `https://github.com/${props.avatar}.png` : "/assets/user.png"}
                      alt="Default user"/>
                 <p>{props.name} {props.lastName}</p>
                 <div className="dropdown_menu">
