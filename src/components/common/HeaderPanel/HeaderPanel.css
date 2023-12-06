@@ -43,17 +43,20 @@
     width: 200px;
     position: absolute;
     right: 30px;
+    background-color: var(--background_color);
+
 }
 
 .panel_header .user_account .dropdown_menu ul li {
     margin: 3px;
-    padding: 10px 20px;
+    padding: 12px 25px;
     list-style: none;
     cursor: pointer;
 }
 
 .panel_header .user_account .dropdown_menu ul li:hover {
-    background-color: var(--input_color);
+    background-color: #3b3d3d;
+
 }
 
 .panel_header .user_account .dropdown_menu ul li a {
