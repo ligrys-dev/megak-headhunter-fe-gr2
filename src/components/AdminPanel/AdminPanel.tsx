@@ -1,11 +1,16 @@
 import {useState} from 'react';
-import {Btn} from "../common/Btn/Btn";
 import {StudentImport} from "./StudentImport.tsx";
 import {HRForm} from "./HRForm.tsx";
+import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
+import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
 import './AdminPanel.css';
 
 export const AdminPanel = () => {
     const [selectedForm, setSelectedForm] = useState<string | null>(null);
+    const bookmarks = [
+        ['addStudents', 'Dodaj kursantów'],
+        ['addHR', 'Dodaj HR'],
+    ];
 
     const handleFormSelection = (formType: string) => {
         setSelectedForm(formType);
@@ -23,16 +28,16 @@ export const AdminPanel = () => {
     };
 
     return (
-        <>
-            <div className='admin-panel'>
-                <h1>Panel Admina</h1>
-                <Btn text='Wyloguj'/>
+        <div className='admin_panel'>
+            <HeaderPanel name="Admin" lastName="admin@admin.com" urlAccount="/student"/>
+            <div className="panel_main">
+                <BookmarksPanel bookmarks={bookmarks}/>
+                {/*<p className={`form-option ${selectedForm === 'kursant' ? 'selected' : ''}`}*/}
+                {/*   onClick={() => handleFormSelection('kursant')}>Dodaj Kursantów</p>*/}
+                {/*<p className={`form-option ${selectedForm === 'hr' ? 'selected' : ''}`}*/}
+                {/*   onClick={() => handleFormSelection('hr')}>Dodaj HR</p>*/}
+                {renderForm()}
             </div>
-            <p className={`form-option ${selectedForm === 'kursant' ? 'selected' : ''}`}
-               onClick={() => handleFormSelection('kursant')}>Dodaj Kursantów</p>
-            <p className={`form-option ${selectedForm === 'hr' ? 'selected' : ''}`}
-               onClick={() => handleFormSelection('hr')}>Dodaj HR</p>
-            {renderForm()}
-        </>
+        </div>
     );
 };

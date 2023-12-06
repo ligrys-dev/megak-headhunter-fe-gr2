@@ -1,19 +1,29 @@
-.admin-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/*.admin-panel {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*}*/
+
+/*.form-option {*/
+/*    cursor: pointer;*/
+/*    padding: 8px;*/
+/*    display: inline-block;*/
+/*}*/
+
+/*.form-option:hover {*/
+/*    color: #34db3c;*/
+/*}*/
+
+/*.form-option.selected {*/
+/*    color: #34db3c;*/
+/*}*/
+
+.admin_panel {
+    margin: 0 auto;
+    max-width: 1440px;
+    min-height: 100vh;
+
 }
 
-.form-option {
-    cursor: pointer;
-    padding: 8px;
-    display: inline-block;
-}
-
-.form-option:hover {
-    color: #34db3c;
-}
-
-.form-option.selected {
-    color: #34db3c;
+.student_panel .panel_main {
 }
