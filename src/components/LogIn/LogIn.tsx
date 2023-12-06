@@ -38,23 +38,21 @@ export const LogIn = () => {
             body: JSON.stringify(form)
         });
         const data = await res.json();
-        console.log(data)
         if (res.status === 400 || res.status === 401 || res.status === 404 || res.status === 500) {
             alert('Błędny login lub hasło.');
             return;
         } else {
-            setLoading(true);
             setResponse(data);
-            localStorage.setItem('userId', data.id);
-            localStorage.setItem('userRole', data.role);
+            setLoading(true);
         }
     }
 
     if (loading) {
+        localStorage.setItem('userId', response?.id);
+        localStorage.setItem('userRole', response?.role);
         if (response?.role === 1) {
             return <Navigate replace to="/admin" />;
         } else if (response?.role === 2) {
-            console.log('student')
             return <Navigate replace to="/student" />;
         } else if (response?.role === 2) {
             return <Navigate replace to="/hr" />;
