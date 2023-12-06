@@ -20,7 +20,7 @@
 }
 
 .education-experience .employment-expectations .employment-expectations-left-side div,
-.education-experience .employment-expectations .employment-expectations-right-side div{
+.education-experience .employment-expectations .employment-expectations-right-side div {
     padding: 20px 15px;
     width: 34%;
 }
@@ -44,6 +44,12 @@
 .education-experience .employment-expectations p {
     font-weight: bold;
     font-size: 1rem;
+}
+
+@media (max-width: 1439px) {
+    .education-experience .employment-expectations h3 {
+        height: 80px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -84,7 +90,7 @@
     .education-experience .employment-expectations .employment-expectations-left-side div,
     .education-experience .employment-expectations .employment-expectations-right-side div,
     .education-experience .employment-expectations .employment-expectations-right-side div:nth-child(2),
-    .education-experience .employment-expectations .employment-expectations-right-side div:nth-child(3){
+    .education-experience .employment-expectations .employment-expectations-right-side div:nth-child(3) {
         padding: 20px;
         width: 100%;
         border-bottom: 2px solid var(--input_color);
