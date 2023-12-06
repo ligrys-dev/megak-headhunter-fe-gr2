@@ -1,21 +1,21 @@
 import {FormEvent, useState} from "react";
 import {Btn} from "../common/Btn/Btn";
+import {Navigate} from "react-router-dom";
 import './LogIn.css';
-
 
 interface formType {
     email: string;
     password: string;
 }
 
-interface dataType {
+interface UserResponse {
     id: string;
     role: number;
 }
 
 export const LogIn = () => {
     const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState<dataType | null>(null)
+    const [response, setResponse] = useState<UserResponse | null>(null);
     const [form, setForm] = useState<formType>({
         email: '',
         password: '',
@@ -43,19 +43,21 @@ export const LogIn = () => {
             alert('Błędny login lub hasło.');
             return;
         } else {
-            setResponse(data);
             setLoading(true);
+            setResponse(data);
+            localStorage.setItem('userId', data.id);
+            localStorage.setItem('userRole', data.role);
         }
     }
 
     if (loading) {
-        console.log(response?.role)
         if (response?.role === 1) {
-            console.log('admin')
+            return <Navigate replace to="/admin" />;
         } else if (response?.role === 2) {
             console.log('student')
+            return <Navigate replace to="/student" />;
         } else if (response?.role === 2) {
-            console.log('hr')
+            return <Navigate replace to="/hr" />;
         }
     }
 
