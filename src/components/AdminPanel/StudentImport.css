@@ -7,6 +7,7 @@
     font-size: 1rem;
     cursor: pointer;
     background-color: #d0d0d0;
+    color: var(--background_color);
 }
 
 .student-import-container .table-container {
