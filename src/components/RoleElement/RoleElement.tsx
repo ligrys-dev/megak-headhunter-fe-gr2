@@ -1,7 +1,7 @@
 import {Role} from "types";
 import {NoAccess} from "../common/NoAccess/NoAccess";
 
-const CURRENT_USER = Role.STUDENT;
+const CURRENT_USER = Number(localStorage.getItem('userRole'));
 
 export const AdminElement = ({children}) => {
     if (CURRENT_USER === Role.ADMIN) {
