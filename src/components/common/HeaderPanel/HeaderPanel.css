@@ -44,23 +44,32 @@
     position: absolute;
     right: 30px;
     background-color: var(--background_color);
-
 }
 
 .panel_header .user_account .dropdown_menu ul li {
     margin: 3px;
-    padding: 12px 25px;
+    padding: 12px 0 12px 25px ;
     list-style: none;
     cursor: pointer;
 }
 
 .panel_header .user_account .dropdown_menu ul li:hover {
     background-color: #3b3d3d;
-
 }
 
 .panel_header .user_account .dropdown_menu ul li a {
+    display: block;
+    width: 100%;
     text-decoration: none;
+}
+
+.panel_header .user_account .dropdown_menu ul li button {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    font-size: 1rem;
 }
 
 .panel_header .user_account .dropdown_menu ul.show {
