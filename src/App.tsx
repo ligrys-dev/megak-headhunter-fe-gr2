@@ -10,13 +10,13 @@ import './App.css';
 function App() {
     return (
         <div className="app-container">
-            <Routes>
-                <Route path="/" element={<LogIn/>}/>
-                <Route path="/reset-password" element={<ResetPassword/>}/>
-                <Route path="/admin" element={<AdminElement><AdminPanel/></AdminElement>}/>
-                <Route path="/student" element={<StudentElement><StudentPanel/></StudentElement>}/>
-                <Route path="/hr" element={<HRElement><HRPanel/></HRElement>}/>
-            </Routes>
+                <Routes>
+                    <Route path="/" element={<LogIn/>}/>
+                    <Route path="/reset-password" element={<ResetPassword/>}/>
+                    <Route path="/admin" element={<AdminElement><AdminPanel/></AdminElement>}/>
+                    <Route path="/student" element={<StudentElement><StudentPanel/></StudentElement>}/>
+                    <Route path="/hr" element={<HRElement><HRPanel/></HRElement>}/>
+                </Routes>
         </div>
     )
 }
