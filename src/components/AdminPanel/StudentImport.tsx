@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import {useState, ChangeEvent} from 'react';
 import Papa from 'papaparse';
 import './StudentImport.css';
 
@@ -76,7 +76,7 @@ export const StudentImport = () => {
         const allEmailsValid = data.every((student) => student.email.includes('@'));
 
         if (!allEmailsValid) {
-            alert('Nieprawidłowy format e-maila! Sprawdź, czy wszystkie e-maile zawierają znak "@". Popraw emaile studentów w pliku .csv i ponownie zaladuj plik.');
+            alert('Nieprawidłowy format e-maila! Sprawdź, czy wszystkie e-maile zawierają znak "@". Popraw e-maile studentów w pliku .csv i ponownie załaduj plik.');
             return;
         }
 
@@ -121,7 +121,7 @@ export const StudentImport = () => {
                     return `${email}: ${errorReason}`;
                 }).join(', ');
 
-                setResInfo(`Studenci niedodani do bazy danych: ${failedEmailsText}`);
+                setResInfo(`Do bazy danych nie dodano studentów: ${failedEmailsText}`);
                 setData([]);
                 setColumnArray([]);
                 setValues([]);
@@ -136,8 +136,8 @@ export const StudentImport = () => {
     };
 
     return (
-        <>
-            <p className='admin-panel-p'>Import listy Studentów. Wybierz plik z rozszerzeniem .csv </p>
+        <div className="student-import-container">
+            <p>Aby dodać listę kursantów wybierz plik z rozszerzeniem .csv </p>
             <div>
                 <input
                     className='file-input'
@@ -145,14 +145,11 @@ export const StudentImport = () => {
                     name='file'
                     accept='.csv'
                     onChange={handleFile}
-                    style={{ display: 'block', margin: '10px auto' }}
+                    style={{display: 'block', margin: '10px auto'}}
                     title='Przeglądaj'
                     placeholder='Brak wybranego pliku'
                 />
             </div>
-
-            <br />
-
             <div className='table-container'>
                 <table className='table'>
                     <thead>
@@ -178,13 +175,16 @@ export const StudentImport = () => {
                 </table>
                 {data.length > 0 && <button onClick={handleSendingData}>Wyślij dane</button>}
                 {infoAfterSuccessfulDataSubmission && (
-                    <p>
-                        Studenci dodani do bazy danych: {addedEmails}
-                        {<br/>}
-                        {resInfo}
-                    </p>
+                    <div>
+                        <p>
+                            Studenci dodani do bazy danych: {addedEmails}
+                        </p>
+                        <p>
+                            {resInfo}
+                        </p>
+                    </div>
                 )}
             </div>
-        </>
+        </div>
     );
 };

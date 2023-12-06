@@ -9,7 +9,7 @@ import {StudentProfileInterface} from "types";
 
 interface Props {
     bookmarks: string[][];
-    user: StudentProfileInterface
+    user?: StudentProfileInterface
 }
 
 export const BookmarksPanel = (props: Props) => {
@@ -27,9 +27,9 @@ export const BookmarksPanel = (props: Props) => {
                 return <EditStudentData/>;
             case 'notification':
                 return <Notification/>;
-            case 'kursant':
+            case 'addStudents':
                 return <StudentImport/>;
-            case 'hr':
+            case 'addHR':
                 return <HRForm/>;
             default:
                 return null;
