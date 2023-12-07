@@ -1,18 +1,21 @@
+import { useContext } from 'react';
 import './EditStudentEducation.css';
-import {StudentProfileInterface} from "types";
+import { EditStudentDataContext } from 'src/context/EditStudentDataContext';
 
 interface Props {
-    user: StudentProfileInterface
+    onChange: Function;
 }
 
 export const EditStudentEducation = (props: Props) => {
-    const {education, courses} = props.user;
+    const {form, setForm} = useContext(EditStudentDataContext)
+
+ 
     return (
         <div className="student-education">
             <h2>Edukacja</h2>
-                <textarea>{education ? education : 'Brak danych'}</textarea>
+                <textarea value={form.education ? form.education : 'Brak danych'} onChange = {e => props.onChange('education', e.target.value)}></textarea>
             <h2>Kursy</h2>
-                <textarea>{courses ? courses : 'Brak danych'}</textarea>
+                <textarea value = {form.courses ? form.courses : 'Brak danych'} onChange = {e => props.onChange('courses', e.target.value)}></textarea>
         </div>
     )
 }

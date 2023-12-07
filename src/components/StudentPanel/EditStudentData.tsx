@@ -21,12 +21,12 @@ export const EditStudentData = (props: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleChange = (key: string, value: any
-         //TODO: ustawić typy
-         ) => {setForm(userData => ({
-            ...userData,
-            [key]: value,
-        }))
-    }
+        //TODO: ustawić typy
+        ) => {setForm(userData => ({
+           ...userData,
+           [key]: value,
+       }))
+   }
 
     const submitForm = async (e: FormEvent) => {
         e.preventDefault()
@@ -66,10 +66,11 @@ export const EditStudentData = (props: Props) => {
             <EditStudentPersonalData user={props.user}/>
             <div className="education-experience">
                 <EditStudentEmploymentExpectations user={props.user}/>
-                <EditStudentEducation user={props.user}/>
+                <EditStudentEducation onChange = {handleChange}/>
                 <EditStudentExperience user={props.user}/>
             </div>
         </div>
+        <button type="submit"> Zapisz dane</button>
         </form>
         </EditStudentDataContext.Provider>
     )
