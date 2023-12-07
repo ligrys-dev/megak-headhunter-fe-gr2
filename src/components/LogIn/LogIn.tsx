@@ -46,14 +46,11 @@ export const LogIn = () => {
         } else {
             setResponse(data);
             setLoading(true);
-            user.setUser(data)
+            user.setUser(data);
         }
     }
 
     if (loading) {
-        console.log(response)
-        localStorage.setItem('userId', response?.id);
-        localStorage.setItem('userRole', response?.role);
         if (response?.role === 1) {
             return <Navigate replace to="/admin" />;
         } else if (response?.role === 2) {
