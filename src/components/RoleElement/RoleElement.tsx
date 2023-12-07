@@ -1,28 +1,26 @@
 import {Role} from "types";
 import {NoAccess} from "../common/NoAccess/NoAccess";
 
-const CURRENT_USER = Number(localStorage.getItem('userRole'));
-
-export const AdminElement = ({children}) => {
-    if (CURRENT_USER === Role.ADMIN) {
+export const AdminElement = ({role, children}) => {
+    if (role === Role.ADMIN) {
         return<>{children}</>
     } else {
-        return <NoAccess role={CURRENT_USER}/>
+        return <NoAccess role={role}/>
     }
 }
 
-export const StudentElement = ({children}) => {
-    if (CURRENT_USER === Role.STUDENT) {
+export const StudentElement = ({role, children}) => {
+    if (role === Role.STUDENT) {
         return<>{children}</>
     } else {
-        return <NoAccess role={CURRENT_USER}/>
+        return <NoAccess role={role}/>
     }
 }
 
-export const HRElement = ({children}) => {
-    if (CURRENT_USER === Role.HR) {
+export const HRElement = ({role, children}) => {
+    if (role === Role.HR) {
         return<>{children}</>
     } else {
-        return <NoAccess role={CURRENT_USER}/>
+        return <NoAccess role={role}/>
     }
 }
