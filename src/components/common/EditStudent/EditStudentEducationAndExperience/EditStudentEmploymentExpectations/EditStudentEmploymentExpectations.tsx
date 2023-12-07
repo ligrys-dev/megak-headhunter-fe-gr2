@@ -65,7 +65,10 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-left-side">
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
-                        <select>{checkTypeOfWork()}</select>
+                        <select>
+                            
+                            <option value=""></option>
+                            </select>
                     </div>
                     <div className="city-of-work">
                         <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
