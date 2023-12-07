@@ -65,7 +65,7 @@ export const EditStudentData = (props: Props) => {
         <div className="student-data">
             <EditStudentPersonalData user={props.user}/>
             <div className="education-experience">
-                <EditStudentEmploymentExpectations user={props.user}/>
+                <EditStudentEmploymentExpectations onChange={handleChange}/>
                 <EditStudentEducation onChange = {handleChange}/>
                 <EditStudentExperience user={props.user}/>
             </div>

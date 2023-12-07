@@ -63,17 +63,16 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
                         <select onChange={e => props.onChange('expectedTypeWork', e.target.value)} defaultValue={form.expectedTypeWork}>
-                            <option value='Biuro'>Biuro</option>
-                            <option value='Gotowość do przeprowadzki'>Gotowość do przeprowadzki</option>
-                            <option value='Zdalnie'>Zdalnie</option>
-                            <option value='Hybrydowo'>Hybrydowo</option>
-                            <option value='Brak preferencji'>Brak preferencji</option>
+                            <option value={0}>Biuro</option>
+                            <option value={1}>Gotowość do przeprowadzki</option>
+                            <option value={2}>Zdalnie</option>
+                            <option value={3}>Hybrydowo</option>
+                            <option value={4}>Brak preferencji</option>
                             </select>
-                            {/* TODO: dokończyć bo nie działa */}
                     </div>
                     <div className="city-of-work">
                         <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
-                        <input value={form.targetWorkCity}></input>
+                        <input value={form.targetWorkCity} onChange={e => props.onChange('targetWorkCity', e.target.value)}></input>
                     </div>
                     <div className="type-of-contract">
                         <h3>Oczekiwany typ kontraktu</h3>
