@@ -49,7 +49,7 @@ export const StudentPanel = () => {
     return (
         <div className="student_panel">
             <HeaderPanel name={user?.firstName} lastName={user?.lastName} urlAccount="/student"
-                         githubUsername={user?.githubUsername}/>
+                         avatar={user?.githubUsername}/>
             <div className="panel_main">
                 <BookmarksPanel user={user} bookmarks={bookmarks}/>
             </div>

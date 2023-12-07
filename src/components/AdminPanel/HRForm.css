@@ -1,22 +1,55 @@
+.hr-import-container {
+    margin-top: 30px;
+}
 
-form {
+.hr-import-container h2 {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hr-import-container form {
     display: flex;
     flex-direction: column;
-    max-width: 450px;
+    max-width: 30%;
     margin: 20px auto;
 }
 
-label {
+.hr-import-container form label {
     margin-bottom: 8px;
+    font-size: 1.2rem;
 }
 
-input {
-    margin-bottom: 16px;
+.hr-import-container form input {
+    display: block;
+    margin: 7px 0;
     padding: 8px;
-    background-color: white;
-    color: black;
+    background-color: var(--input_color);
+    border: 2px solid var(--input_font_color);
+    width: 100%;
+    font-size: 1.1rem;
 }
 
-button {
-    margin-top: 16px;
+.hr-import-container form button {
+    margin: 16px auto;
+    width: 50%;
+}
+
+@media (max-width: 1024px) {
+    .hr-import-container form {
+        max-width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hr-import-container form {
+        max-width: 50%;
+
+    }
+}
+
+@media (max-width: 425px) {
+    .hr-import-container form {
+        max-width: 80%;
+
+    }
 }

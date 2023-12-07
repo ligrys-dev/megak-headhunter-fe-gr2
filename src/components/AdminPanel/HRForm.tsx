@@ -37,7 +37,7 @@ export const HRForm = () => {
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
         // Jeśli to pole to maxReservedStudents, skonwertuj wartość na liczbę
         const newValue = name === 'maxReservedStudents' ? parseInt(value, 10) : value;
@@ -79,10 +79,10 @@ export const HRForm = () => {
                 });
 
                 if (res.ok) {
-                    console.log('Pomyślnie wysłano dane na backend.');
+                    console.log('Pomyślnie wysłano dane do bazy danych.');
                 } else {
                     const errorData = await res.json();
-                    console.error('Błąd podczas wysyłania danych', errorData.message);
+                    console.error('Błąd podczas wysyłania danych:', errorData.message);
                 }
             } catch (error) {
                 console.error('Błąd podczas wysyłania danych:', error);
@@ -90,54 +90,57 @@ export const HRForm = () => {
         }
     };
 
-
     return (
-        <>
+        <div className="hr-import-container">
+            <h2>Dodaj rekrutera</h2>
             <form onSubmit={handleSubmit}>
                 <label>
+                    Email
                     <input
                         type='text'
                         name='email'
                         value={formData.email}
                         onChange={handleInputChange}
                     />
-                    : Email
                     {formErrors.email && <p className='error-message'>{formErrors.email}</p>}
                 </label>
                 <br/>
 
                 <label>
+                    Imię i nazwisko
                     <input
                         type='text'
                         name='fullName'
                         value={formData.fullName}
                         onChange={handleInputChange}
                     />
-                    : Imię i nazwisko
+
                     {formErrors.fullName && <p className='error-message'>{formErrors.fullName}</p>}
                 </label>
                 <br/>
 
                 <label>
+                    Nazwa firmy
                     <input
                         type='text'
                         name='company'
                         value={formData.company}
                         onChange={handleInputChange}
                     />
-                    : Nazwa firmy
                     {formErrors.company && <p className='error-message'>{formErrors.company}</p>}
                 </label>
                 <br/>
 
                 <label>
+                    Maksymalna liczba osób do dodania
                     <input
-                        type='text'
+                        type='number'
+                        min={1}
+                        max={999}
                         name='maxReservedStudents'
                         value={formData.maxReservedStudents}
                         onChange={handleInputChange}
                     />
-                    : Maksymalna liczba osób do dodania
                     {formErrors.maxReservedStudents && (
                         <p className='error-message'>{formErrors.maxReservedStudents}</p>
                     )}
@@ -146,6 +149,6 @@ export const HRForm = () => {
 
                 <button type='submit'>Dodaj HR</button>
             </form>
-        </>
+        </div>
     );
 };

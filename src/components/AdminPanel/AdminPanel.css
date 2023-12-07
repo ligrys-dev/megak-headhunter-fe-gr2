@@ -1,19 +1,6 @@
-.admin-panel {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+.admin_panel {
+    margin: 0 auto;
+    max-width: 1440px;
+    min-height: 100vh;
 
-.form-option {
-    cursor: pointer;
-    padding: 8px;
-    display: inline-block;
-}
-
-.form-option:hover {
-    color: #34db3c;
-}
-
-.form-option.selected {
-    color: #34db3c;
 }
