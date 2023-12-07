@@ -16,6 +16,12 @@ export const HRForm = () => {
         maxReservedStudents: '',
     });
 
+    const [submissionSuccess, setSubmissionSuccess] = useState(false);
+    const [submissionFail, setSubmissionFail] = useState(false);
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+
+
     const validateEmail = (email: string) => {
         // Prosta walidacja adresu e-mail (zawiera @)
         return email.includes('@');
@@ -65,10 +71,6 @@ export const HRForm = () => {
         // Jeśli nie ma błędów, można wysłać dane
         if (!Object.values(errors).some((error) => error !== '')) {
 
-
-            console.log(formData.maxReservedStudents, typeof formData.maxReservedStudents)
-            const data = JSON.stringify(formData);
-            console.log(data, 'data');
             try {
                 const res = await fetch('http://localhost:3001/user/recruiter', {
                     method: 'POST',
@@ -78,11 +80,29 @@ export const HRForm = () => {
                     body: JSON.stringify(formData),
                 });
 
+                setEmail(formData.email);
+
                 if (res.ok) {
-                    console.log('Pomyślnie wysłano dane do bazy danych.');
+                    setSubmissionSuccess(true);
+
+                    setFormData({
+                        email: '',
+                        fullName: '',
+                        company: '',
+                        maxReservedStudents: 0,
+                    });
+
                 } else {
                     const errorData = await res.json();
-                    console.error('Błąd podczas wysyłania danych:', errorData.message);
+                    setError(errorData.message);
+                    setSubmissionFail(true);
+                    console.error('Błąd zatwierdzenia dancyh przez backend', errorData.message);
+                    // setFormData({
+                    //     email: '',
+                    //     fullName: '',
+                    //     company: '',
+                    //     maxReservedStudents: 0,
+                    // });
                 }
             } catch (error) {
                 console.error('Błąd podczas wysyłania danych:', error);
@@ -93,6 +113,8 @@ export const HRForm = () => {
     return (
         <div className="hr-import-container">
             <h2>Dodaj rekrutera</h2>
+            {submissionSuccess && <p className="success-message">Użytkownik HR {email}, został dodany prawidłowo do bazy danych.</p>}
+            {submissionFail && <p className="fail-message">Użytkownik HR {email}, <span>nie</span> został dodany do bazy danych ({error}).</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Email
