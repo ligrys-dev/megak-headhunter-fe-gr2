@@ -1,22 +1,19 @@
 import {StudentProfileInterface} from "types";
 import './EditStudentEmploymentExpectations.css';
+import { EditStudentDataContext } from "src/context/EditStudentDataContext";
+import { useContext } from 'react';
 
 interface Props {
-    user: StudentProfileInterface;
+    onChange: Function;
 }
 
 export const EditStudentEmploymentExpectations = (props: Props) => {
-    const {
-        monthsOfCommercialExp,
-        expectedContractType,
-        targetWorkCity,
-        canTakeApprenticeship,
-        expectedSalary,
-        expectedTypeWork,
+    const {form, setForm} = useContext(EditStudentDataContext);
+    
 
-    } = props.user;
+
     const checkTypeOfWork = () => {
-        switch (expectedTypeWork) {
+        switch (form.expectedTypeWork) {
             case 0:
                 return 'Biuro';
             case 1:
@@ -33,7 +30,7 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
     }
 
     const checkTypeOfContract = () => {
-        switch (expectedContractType) {
+        switch (form.expectedContractType) {
             case 0:
                 return 'Umowa o prace';
             case 1:
@@ -49,12 +46,12 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
 
     const checkMonthsOfCommercialExp = () => {
         const arrayOfMonths = [2, 3, 4];
-        if (monthsOfCommercialExp === 1) {
+        if (form.monthsOfCommercialExp === 1) {
             return '1 miesiąc'
-        } else if (arrayOfMonths.includes(monthsOfCommercialExp)) {
-            return `${monthsOfCommercialExp} miesiące`
+        } else if (arrayOfMonths.includes(form.monthsOfCommercialExp)) {
+            return `${form.monthsOfCommercialExp} miesiące`
         } else {
-            return `${monthsOfCommercialExp} miesięcy`
+            return `${form.monthsOfCommercialExp} miesięcy`
         }
     }
 
@@ -65,14 +62,18 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-left-side">
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
-                        <select>
-                            
-                            <option value=""></option>
+                        <select onChange={e => props.onChange('expectedTypeWork', e.target.value)} defaultValue={form.expectedTypeWork}>
+                            <option value='Biuro'>Biuro</option>
+                            <option value='Gotowość do przeprowadzki'>Gotowość do przeprowadzki</option>
+                            <option value='Zdalnie'>Zdalnie</option>
+                            <option value='Hybrydowo'>Hybrydowo</option>
+                            <option value='Brak preferencji'>Brak preferencji</option>
                             </select>
+                            {/* TODO: dokończyć bo nie działa */}
                     </div>
                     <div className="city-of-work">
                         <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
-                        <p>{targetWorkCity}</p>
+                        <input value={form.targetWorkCity}></input>
                     </div>
                     <div className="type-of-contract">
                         <h3>Oczekiwany typ kontraktu</h3>
@@ -82,11 +83,11 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-right-side">
                     <div className="place-of-work">
                         <h3>Oczekiwane wynagrodzenie netto miesięcznie</h3>
-                        <p>{expectedSalary ? `${expectedSalary} zł` : 'Brak danych'}</p>
+                        <p>{form.expectedSalary ? `${form.expectedSalary} zł` : 'Brak danych'}</p>
                     </div>
                     <div className="can-take-apprenticeship">
                         <h3>Zgod na odbycie bezpłatnych praktyk/stażu na początek</h3>
-                        <p>{canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
+                        <p>{form.canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
                     </div>
                     <div className="months-of-commercial-exp">
                         <h3>Komercyjne doświadczenie w programowaniu</h3>

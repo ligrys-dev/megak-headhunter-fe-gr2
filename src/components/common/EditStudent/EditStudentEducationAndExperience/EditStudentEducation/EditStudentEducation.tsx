@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const EditStudentEducation = (props: Props) => {
-    const {form, setForm} = useContext(EditStudentDataContext)
+    const {form} = useContext(EditStudentDataContext)
 
  
     return (
