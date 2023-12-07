@@ -34,7 +34,7 @@ export const EditStudentData = (props: Props) => {
         setLoading(true)
 
         try {
-            const res = fetch(`http://localhost:3001/student/${form.id
+            const res = await fetch(`http://localhost:3001/student/${form.id
         }`, {
             method: 'PATCH',
             headers: {
@@ -61,7 +61,7 @@ export const EditStudentData = (props: Props) => {
 
     return (
         <EditStudentDataContext.Provider value={{form, setForm}}>
-        <form>    
+        <form onSubmit={submitForm}>    
         <div className="student-data">
             <EditStudentPersonalData user={props.user}/>
             <div className="education-experience">
