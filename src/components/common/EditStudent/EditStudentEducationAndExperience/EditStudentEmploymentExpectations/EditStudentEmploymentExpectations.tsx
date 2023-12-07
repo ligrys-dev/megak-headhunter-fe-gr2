@@ -1,5 +1,5 @@
 import {StudentProfileInterface} from "types";
-import './StudentEmploymentExpectations.css';
+import './EditStudentEmploymentExpectations.css';
 
 interface Props {
     user: StudentProfileInterface;
@@ -65,7 +65,7 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-left-side">
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
-                        <p>{checkTypeOfWork()}</p>
+                        <select>{checkTypeOfWork()}</select>
                     </div>
                     <div className="city-of-work">
                         <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>

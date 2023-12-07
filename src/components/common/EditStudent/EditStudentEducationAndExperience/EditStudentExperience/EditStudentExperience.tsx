@@ -1,5 +1,5 @@
 import {StudentProfileInterface} from "types";
-import './StudentExperience.css';
+import './EditStudentExperience.css';
 
 interface Props {
     user: StudentProfileInterface

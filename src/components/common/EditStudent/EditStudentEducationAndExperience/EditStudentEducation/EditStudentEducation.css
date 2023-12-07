@@ -4,7 +4,13 @@
     background-color: var(--input_color);
 }
 
-.student-education p {
+.student-education textarea {
     padding: 15px 25px;
     font-size: 1rem;
+    width: 100%;
+}
+
+form {
+    margin: 0px;
+    max-width: 100%;
 }

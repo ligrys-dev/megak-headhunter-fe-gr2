@@ -1,6 +1,6 @@
 import {StudentProfileInterface} from "types";
 import {Btn} from "../../Btn/Btn";
-import './StudentPersonalData.css';
+import './EditStudentPersonalData.css';
 
 interface Props {
     user: StudentProfileInterface

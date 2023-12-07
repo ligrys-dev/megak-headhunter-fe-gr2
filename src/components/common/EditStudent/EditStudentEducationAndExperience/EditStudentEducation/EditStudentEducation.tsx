@@ -1,4 +1,4 @@
-import './StudentEducation.css';
+import './EditStudentEducation.css';
 import {StudentProfileInterface} from "types";
 
 interface Props {
@@ -10,9 +10,13 @@ export const EditStudentEducation = (props: Props) => {
     return (
         <div className="student-education">
             <h2>Edukacja</h2>
-            <p>{education ? education : 'Brak danych'}</p>
+            <form>
+                <textarea>{education ? education : 'Brak danych'}</textarea>
+            </form>
             <h2>Kursy</h2>
-            <p>{courses ? courses : 'Brak danych'}</p>
+            <form>
+                <textarea>{courses ? courses : 'Brak danych'}</textarea>
+            </form>
         </div>
     )
 }
