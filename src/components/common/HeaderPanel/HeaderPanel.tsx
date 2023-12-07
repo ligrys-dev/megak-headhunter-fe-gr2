@@ -48,7 +48,8 @@ export const HeaderPanel = (props: Props) => {
                 <div className="dropdown_menu">
                     <img onClick={showHideMenu} src="/assets/arrow.png" alt="Arrow down"/>
                     <ul className={toggleMenu ? "show" : ""}>
-                        <li><a href={props.urlAccount}>Konto</a></li>
+                        {/*<li><Link to={props.urlAccount}>Konto</Link></li>*/}
+                        {/*<li><a href={props.urlAccount}>Konto</a></li>*/}
                         <li><Btn onClick={logOut} text="Wyloguj"></Btn></li>
                     </ul>
                 </div>

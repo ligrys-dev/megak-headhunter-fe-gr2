@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {LogIn} from "./components/LogIn/LogIn";
 import {Route, Routes} from "react-router-dom";
 import {ResetPassword} from "./components/ResetPassword/ResetPassword";
@@ -15,16 +15,20 @@ interface userType {
 }
 
 function App() {
-    const [user, setUser] = useState<userType>('');
+    const [user, setUser] = useState<userType>({
+        id: '',
+        role: 4,
+    });
+
     return (
         <div className="app-container">
             <UserContext.Provider value={{user, setUser}}>
                 <Routes>
                     <Route path="/" element={<LogIn/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
-                    <Route path="/admin" element={<AdminElement role={user.role}><AdminPanel/></AdminElement>}/>
-                    <Route path="/student" element={<StudentElement role={user.role}><StudentPanel/></StudentElement>}/>
-                    <Route path="/hr" element={<HRElement role={user.role}><HRPanel/></HRElement>}/>
+                    <Route path="/admin" element={<AdminElement><AdminPanel/></AdminElement>}/>
+                    <Route path="/student" element={<StudentElement><StudentPanel/></StudentElement>}/>
+                    <Route path="/hr" element={<HRElement><HRPanel/></HRElement>}/>
                 </Routes>
             </UserContext.Provider>
         </div>
