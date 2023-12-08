@@ -35,6 +35,8 @@ export const HeaderPanel = (props: Props) => {
     }
 
     if (data) {
+        localStorage.removeItem('id');
+        localStorage.removeItem('role');
         return <Navigate replace to="/"/>;
     }
 
