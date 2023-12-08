@@ -2,7 +2,7 @@
     margin-top: 30px;
 }
 
-.hr-import-container h2 {
+.hr-import-container h2, p {
     margin-bottom: 30px;
     text-align: center;
 }
@@ -33,6 +33,12 @@
     margin: 16px auto;
     width: 50%;
 }
+
+span {
+    color: #e02735;
+}
+
+
 
 @media (max-width: 1024px) {
     .hr-import-container form {
