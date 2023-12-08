@@ -27,6 +27,7 @@ export const EditStudentExperience = (props: Props) => {
             <h2>Portfolio</h2>
             <div className="links-container">
                 {portfolioUrls ? setPortfolioLinks(portfolioUrls) : 'Brak danych'}
+                <button>Dodaj link</button>
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
