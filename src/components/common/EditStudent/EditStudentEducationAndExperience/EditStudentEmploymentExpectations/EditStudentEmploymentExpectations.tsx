@@ -62,7 +62,7 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-left-side">
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
-                        <select onChange={e => props.onChange('expectedTypeWork', e.target.value)} defaultValue={form.expectedTypeWork}>
+                        <select onChange={e => props.onChange('expectedTypeWork', e.target.value)} defaultValue={form.expectedTypeWork ? form.expectedTypeWork : 4}>
                             <option value={0}>Biuro</option>
                             <option value={1}>Gotowość do przeprowadzki</option>
                             <option value={2}>Zdalnie</option>
@@ -76,21 +76,28 @@ export const EditStudentEmploymentExpectations = (props: Props) => {
                     </div>
                     <div className="type-of-contract">
                         <h3>Oczekiwany typ kontraktu</h3>
-                        <p>{checkTypeOfContract()}</p>
+                        <select onChange={e => props.onChange('expectedContractType', e.target.value)} defaultValue={form.expectedContractType ? form.expectedContractType : 4}>
+                            <option value={0}>Umowa o prace</option>
+                            <option value={1}>B2B</option>
+                            <option value={2}>Umowa zlecenie/Umowa o dzieło</option>
+                            <option value={3}>Hybrydowo</option>
+                            <option value={4}>Brak preferencji</option>
+                        </select>
                     </div>
                 </div>
                 <div className="employment-expectations-right-side">
                     <div className="place-of-work">
                         <h3>Oczekiwane wynagrodzenie netto miesięcznie</h3>
-                        <p>{form.expectedSalary ? `${form.expectedSalary} zł` : 'Brak danych'}</p>
+                        <input onChange={e => props.onChange('expectedSalary', e.target.value)} value={form.expectedSalary ? form.expectedSalary : ''}></input>
                     </div>
                     <div className="can-take-apprenticeship">
                         <h3>Zgod na odbycie bezpłatnych praktyk/stażu na początek</h3>
-                        <p>{form.canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
+                        <input type="checkbox" checked={form.canTakeApprenticeship ? form.canTakeApprenticeship : false} onChange={e => props.onChange('canTakeApprenticeship', e.target.checked)}/>
                     </div>
                     <div className="months-of-commercial-exp">
                         <h3>Komercyjne doświadczenie w programowaniu</h3>
-                        <p>{checkMonthsOfCommercialExp()}</p>
+                        <p>Ilość miesięcy: </p>
+                        <input value={form.monthsOfCommercialExp} type = 'number' onChange={e => props.onChange('monthsOfCommercialExp', e.target.value)}></input>
                     </div>
                 </div>
             </div>

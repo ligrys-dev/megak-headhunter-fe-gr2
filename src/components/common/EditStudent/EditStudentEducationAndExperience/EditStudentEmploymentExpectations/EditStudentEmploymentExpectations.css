@@ -1,3 +1,11 @@
+select {
+    width: 80%;
+}
+
+input {
+    height: 25%;
+}
+
 .education-experience {
     width: 83vw;
     border-left: 3px solid var(--background_color);
