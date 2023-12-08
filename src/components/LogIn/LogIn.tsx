@@ -16,7 +16,6 @@ interface UserResponse {
 
 export const LogIn = () => {
     const user = useContext(UserContext);
-    const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState<UserResponse | null>(null);
     const [form, setForm] = useState<formType>({
         email: '',
@@ -45,18 +44,17 @@ export const LogIn = () => {
             return;
         } else {
             setResponse(data);
-            setLoading(true);
             user.setUser(data);
         }
     }
 
-    if (loading) {
+    if (user) {
         if (response?.role === 1) {
-            return <Navigate replace to="/admin" />;
+            return <Navigate replace to="/admin"/>;
         } else if (response?.role === 2) {
-            return <Navigate replace to="/student" />;
-        } else if (response?.role === 2) {
-            return <Navigate replace to="/hr" />;
+            return <Navigate replace to="/student"/>;
+        } else if (response?.role === 3) {
+            return <Navigate replace to="/hr"/>;
         }
     }
 
