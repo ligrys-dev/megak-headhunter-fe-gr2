@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {LogIn} from "./components/LogIn/LogIn";
 import {Route, Routes} from "react-router-dom";
 import {ResetPassword} from "./components/ResetPassword/ResetPassword";
@@ -10,7 +10,7 @@ import {UserContext} from "./context/context";
 import './App.css';
 
 interface userType {
-    id: string;
+    id: string | null;
     role: number;
 }
 
