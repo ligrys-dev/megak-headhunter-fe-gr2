@@ -1,12 +1,10 @@
 import {StudentProfileInterface} from "types";
 import './EditStudentExperience.css';
+import { EditStudentDataContext } from "src/context/EditStudentDataContext";
+import {useContext} from 'react';
 
-interface Props {
-    user: StudentProfileInterface
-}
-
-export const EditStudentExperience = (props: Props) => {
-    const {workExperience, portfolioUrls, projectUrls, initialData} = props.user;
+export const EditStudentExperience = () => {
+    const {form, setForm} = useContext(EditStudentDataContext);
 
     const setPortfolioLinks = (portfolioUrls) => {
         return (
@@ -23,19 +21,19 @@ export const EditStudentExperience = (props: Props) => {
     return (
         <div className="student-experience">
             <h2>Doświadczenie zawodowe</h2>
-            <p>{workExperience ? workExperience : 'Brak danych'}</p>
+            <p>{form.workExperience ? form.workExperience : 'Brak danych'}</p>
             <h2>Portfolio</h2>
             <div className="links-container">
-                {portfolioUrls ? setPortfolioLinks(portfolioUrls) : 'Brak danych'}
+                {form.portfolioUrls ? setPortfolioLinks(form.portfolioUrls) : 'Brak danych'}
                 <button>Dodaj link</button>
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
-                {initialData.bonusProjectUrls ? setPortfolioLinks(initialData.bonusProjectUrls) : 'Brak danych'}
+                {form.initialData.bonusProjectUrls ? setPortfolioLinks(form.initialData.bonusProjectUrls) : 'Brak danych'}
             </div>
             <h2>Projekt na zaliczenie</h2>
             <div className="links-container">
-                {projectUrls ? setPortfolioLinks(projectUrls) : 'Brak danych'}
+                {form.projectUrls ? setPortfolioLinks(form.projectUrls) : 'Brak danych'}
             </div>
         </div>
     )
