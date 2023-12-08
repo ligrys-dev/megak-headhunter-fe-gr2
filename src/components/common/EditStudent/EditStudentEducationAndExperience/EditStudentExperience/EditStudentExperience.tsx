@@ -2,8 +2,13 @@ import {StudentProfileInterface} from "types";
 import './EditStudentExperience.css';
 import { EditStudentDataContext } from "src/context/EditStudentDataContext";
 import {useContext} from 'react';
+import { AddLink } from "./AddLink";
 
-export const EditStudentExperience = () => {
+interface Props {
+    onChange: Function,
+}
+
+export const EditStudentExperience = (props: Props) => {
     const {form, setForm} = useContext(EditStudentDataContext);
 
     const setPortfolioLinks = (portfolioUrls) => {
@@ -25,7 +30,7 @@ export const EditStudentExperience = () => {
             <h2>Portfolio</h2>
             <div className="links-container">
                 {form.portfolioUrls ? setPortfolioLinks(form.portfolioUrls) : 'Brak danych'}
-                <button>Dodaj link</button>
+                <AddLink onChange = {props.onChange} key = 'portfolioUrls'></AddLink>
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
@@ -34,6 +39,7 @@ export const EditStudentExperience = () => {
             <h2>Projekt na zaliczenie</h2>
             <div className="links-container">
                 {form.projectUrls ? setPortfolioLinks(form.projectUrls) : 'Brak danych'}
+                <AddLink onChange={props.onChange} key='projectUrls'></AddLink>
             </div>
         </div>
     )
