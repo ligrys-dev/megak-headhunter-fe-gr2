@@ -35,7 +35,8 @@ export const HeaderPanel = (props: Props) => {
     }
 
     if (data) {
-        localStorage.removeItem('userRole')
+        localStorage.removeItem('id');
+        localStorage.removeItem('role');
         return <Navigate replace to="/"/>;
     }
 
@@ -49,7 +50,8 @@ export const HeaderPanel = (props: Props) => {
                 <div className="dropdown_menu">
                     <img onClick={showHideMenu} src="/assets/arrow.png" alt="Arrow down"/>
                     <ul className={toggleMenu ? "show" : ""}>
-                        <li><a href={props.urlAccount}>Konto</a></li>
+                        {/*<li><Link to={props.urlAccount}>Konto</Link></li>*/}
+                        {/*<li><a href={props.urlAccount}>Konto</a></li>*/}
                         <li><Btn onClick={logOut} text="Wyloguj"></Btn></li>
                     </ul>
                 </div>

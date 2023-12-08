@@ -1,6 +1,7 @@
-import {FormEvent, useState} from "react";
+import {FormEvent, useContext, useState} from "react";
 import {Btn} from "../common/Btn/Btn";
 import {Navigate} from "react-router-dom";
+import {UserContext} from "../../context/context";
 import './LogIn.css';
 
 interface formType {
@@ -14,7 +15,7 @@ interface UserResponse {
 }
 
 export const LogIn = () => {
-    const [loading, setLoading] = useState(false);
+    const user = useContext(UserContext);
     const [response, setResponse] = useState<UserResponse | null>(null);
     const [form, setForm] = useState<formType>({
         email: '',
@@ -43,19 +44,17 @@ export const LogIn = () => {
             return;
         } else {
             setResponse(data);
-            setLoading(true);
+            user.setUser(data);
         }
     }
 
-    if (loading) {
-        localStorage.setItem('userId', response?.id);
-        localStorage.setItem('userRole', response?.role);
+    if (user) {
         if (response?.role === 1) {
-            return <Navigate replace to="/admin" />;
+            return <Navigate replace to="/admin"/>;
         } else if (response?.role === 2) {
-            return <Navigate replace to="/student" />;
-        } else if (response?.role === 2) {
-            return <Navigate replace to="/hr" />;
+            return <Navigate replace to="/student"/>;
+        } else if (response?.role === 3) {
+            return <Navigate replace to="/hr"/>;
         }
     }
 
