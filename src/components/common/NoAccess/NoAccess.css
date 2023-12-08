@@ -1,5 +1,5 @@
 .no-access-container {
-    padding: 50px;
+    padding: 100px 50px 50px;
     height: 100vw;
     background-color: var(--background_color);
 }
