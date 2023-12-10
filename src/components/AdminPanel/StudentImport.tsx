@@ -26,7 +26,7 @@ export const StudentImport = () => {
     const [values, setValues] = useState<string[][]>([]);
     const [infoAfterSuccessfulDataSubmission, setInfoAfterSuccessfulDataSubmission] = useState(false);
     const [file, setFile] = useState<File | null>(null); // Dodano typ File
-    const [resInfo, setResInfo] = useState('');
+    const [resInfo, setResInfo] = useState([]);
     const [addedEmails, setAddedEmails] = useState([]);
 
     const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +98,7 @@ export const StudentImport = () => {
             return;
         }
 
-        // utworzenie pliku .csv do wysłania na backend
+        // Creating a .csv file to send to the backend
         const formData = new FormData();
         formData.append('file', file);
 
@@ -112,16 +112,20 @@ export const StudentImport = () => {
             const responseFromServer = await res.json();
 
             if (res.ok) {
-                const successfulEmails = responseFromServer.successfulEmails.map((student: SuccessfulStudent) => student).join(', ');
-                setAddedEmails(successfulEmails);
+                const successfulEmails = responseFromServer.successfulEmails;
+                if (successfulEmails.length === 0) {
+                    setAddedEmails(null)
+                } else {
+                    setAddedEmails(successfulEmails);
+                }
 
-                const failedEmailsText = responseFromServer.failedEmails.map((failedStudent: FailedStudent) => {
-                    const email = failedStudent.email;
-                    const errorReason = failedStudent.errorDetails[0];
-                    return `${email}: ${errorReason}`;
-                }).join(', ');
+                const failedEmailsText = responseFromServer.failedEmails;
+                if (failedEmailsText.length === 0) {
+                    setResInfo(null)
+                } else {
+                    setResInfo(failedEmailsText);
+                }
 
-                setResInfo(`Do bazy danych nie dodano studentów: ${failedEmailsText}`);
                 setData([]);
                 setColumnArray([]);
                 setValues([]);
@@ -130,7 +134,7 @@ export const StudentImport = () => {
                 alert(`Dane nie zostały zatwierdzone, ponieważ... ${responseFromServer.message}`);
             }
         } catch (error) {
-            console.error('Błąd podczas wysyłania danych:', error);
+            console.error('Błąd podczas wysyłania danych: ', error);
         }
 
     };
@@ -175,13 +179,27 @@ export const StudentImport = () => {
                 </table>
                 {data.length > 0 && <button onClick={handleSendingData}>Wyślij dane</button>}
                 {infoAfterSuccessfulDataSubmission && (
-                    <div>
-                        <p>
-                            Studenci dodani do bazy danych: {addedEmails}
-                        </p>
-                        <p>
-                            {resInfo}
-                        </p>
+                    <div className="result-of-import">
+                        {addedEmails ?
+                            <div className="added-emails"><p>Do bazy danych <strong>dodano</strong> studentów: </p>
+                                <ol>
+                                    {addedEmails.map((email: SuccessfulStudent) => <li key={email}>{email}</li>)}
+                                </ol>
+                            </div> : ''
+                        }
+
+                        {resInfo ?
+                            <div className="not-added-emails"><p>Do bazy danych <strong>nie dodano</strong> studentów:
+                            </p>
+                                <ol>
+                                    {resInfo.map((failedStudent: FailedStudent) => (
+                                        <li key={failedStudent.email}>
+                                            {failedStudent.email} - {failedStudent.errorDetails[0]}
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div> : ''
+                        }
                     </div>
                 )}
             </div>
