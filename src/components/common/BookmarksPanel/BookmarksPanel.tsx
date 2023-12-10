@@ -3,7 +3,6 @@ import {StudentData} from "../../StudentPanel/StudentData";
 import {StudentImport} from "../../AdminPanel/StudentImport";
 import {HRForm} from "../../AdminPanel/HRForm";
 import {EditStudentData} from "../../StudentPanel/EditStudentData";
-import {Notification} from "../../StudentPanel/Notification";
 import './BookmarksPanel.css';
 import {StudentProfileInterface} from "types";
 
@@ -25,8 +24,6 @@ export const BookmarksPanel = (props: Props) => {
                 return <StudentData user={props.user}/>;
             case 'editStudentData':
                 return <EditStudentData/>;
-            case 'notification':
-                return <Notification/>;
             case 'addStudents':
                 return <StudentImport/>;
             case 'addHR':

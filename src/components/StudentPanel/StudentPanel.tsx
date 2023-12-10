@@ -14,7 +14,6 @@ export const StudentPanel = () => {
     const bookmarks = [
         ['studentData', 'Dane kursanta'],
         ['editStudentData', 'Edycja danych'],
-        ['notification', 'Powiadomienia'],
     ];
 
     const [userInitial, setUserInitial] = useState<StudentInitialInterface | null>({
