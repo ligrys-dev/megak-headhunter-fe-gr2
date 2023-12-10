@@ -18,7 +18,7 @@ export const NoAccess = (props:Props) => {
     return (
         <div className="no-access-container">
             <h2>Nie masz dostępu!</h2>
-            <Link to={url}>Wróć do strony głównej</Link>
+            <Link to={url ? url : '/'}>Wróć do strony głównej</Link>
         </div>
     )
 }
