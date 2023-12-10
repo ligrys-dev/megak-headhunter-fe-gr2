@@ -7,6 +7,7 @@ import {StudentPanel} from "./components/StudentPanel/StudentPanel";
 import {HRPanel} from "./components/HRPanel/HRPanel";
 import {AdminElement, HRElement, StudentElement} from "./components/RoleElement/RoleElement";
 import {UserContext} from "./context/context";
+import {PageNotFound} from "./components/common/PageNotFound/PageNotFound";
 import './App.css';
 
 interface userType {
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/admin" element={<AdminElement><AdminPanel/></AdminElement>}/>
                     <Route path="/student" element={<StudentElement><StudentPanel/></StudentElement>}/>
                     <Route path="/hr" element={<HRElement><HRPanel/></HRElement>}/>
+                    <Route path="*" element={<PageNotFound/>} />
                 </Routes>
             </UserContext.Provider>
         </div>

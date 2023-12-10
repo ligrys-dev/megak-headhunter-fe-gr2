@@ -1,15 +1,15 @@
-.no-access-container {
+.page-not-found-container {
     padding: 100px 50px 50px;
     height: 100vw;
     background-color: var(--background_color);
 }
 
-.no-access-container h2 {
+.page-not-found-container h2 {
     text-align: center;
     font-size: 1.9rem;
 }
 
-.no-access-container a {
+.page-not-found-container a {
     padding-top: 20px;
     display: block;
     text-align: center;

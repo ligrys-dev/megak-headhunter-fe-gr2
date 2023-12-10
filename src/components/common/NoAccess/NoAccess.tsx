@@ -1,4 +1,5 @@
 import './NoAccess.css';
+import {Link} from "react-router-dom";
 
 interface Props {
     role: number;
@@ -17,7 +18,7 @@ export const NoAccess = (props:Props) => {
     return (
         <div className="no-access-container">
             <h2>Nie masz dostępu!</h2>
-            <a href={url}>Wróć do strony głównej</a>
+            <Link to={url}>Wróć do strony głównej</Link>
         </div>
     )
 }
