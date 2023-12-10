@@ -4,8 +4,10 @@ import {StudentImport} from "../../AdminPanel/StudentImport";
 import {HRForm} from "../../AdminPanel/HRForm";
 import {EditStudentData} from "../../StudentPanel/EditStudentData";
 import {Notification} from "../../StudentPanel/Notification";
-import './BookmarksPanel.css';
+import {StudentsToInterview} from "../../HRPanel/StudentsToInterview";
+import {AvailableStudents} from "../../HRPanel/AvailableStudents";
 import {StudentProfileInterface} from "types";
+import './BookmarksPanel.css';
 
 interface Props {
     bookmarks: string[][];
@@ -31,6 +33,10 @@ export const BookmarksPanel = (props: Props) => {
                 return <StudentImport/>;
             case 'addHR':
                 return <HRForm/>;
+            case 'availableStudents':
+                return <AvailableStudents/>;
+            case 'studentsToInterview':
+                return <StudentsToInterview/>;
             default:
                 return null;
         }

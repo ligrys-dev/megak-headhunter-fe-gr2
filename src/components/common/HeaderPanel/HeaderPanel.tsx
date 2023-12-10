@@ -5,7 +5,7 @@ import './HeaderPanel.css';
 
 interface Props {
     name: string;
-    lastName: string;
+    lastName?: string;
     urlAccount: string;
     avatar?: string;
 }
