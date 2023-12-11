@@ -1,3 +1,9 @@
+textarea {
+    font-size: medium;
+    width: 100%;
+    height: 100%;
+}
+
 .student-personal-info {
     display: flex;
     justify-content: flex-start;
@@ -36,7 +42,7 @@
     height: 30px;
 }
 
-.student-personal-info .github-info p {
+.student-personal-info .github-info p input {
     padding-left: 10px;
     color: var(--github_color);
     line-height: 30px;
@@ -49,8 +55,8 @@
     height: 25px;
 }
 
-.student-personal-info .phone-info p,
-.student-personal-info .email-info p{
+.student-personal-info .phone-info p input,
+.student-personal-info .email-info p input{
     padding-left: 10px;
     line-height: 25px;
     font-size: 1rem;
@@ -58,6 +64,7 @@
 
 .student-personal-info .about {
     padding: 30px;
+    height: 250px;
 }
 
 .student-personal-info .about p:nth-child(1) {
@@ -66,7 +73,7 @@
     font-size: 1.1rem;
 }
 
-.student-personal-info .about p {
+.student-personal-info .about p input {
     line-height: 25px;
     font-size: 1rem;
 }
