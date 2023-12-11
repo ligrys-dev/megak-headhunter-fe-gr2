@@ -24,6 +24,7 @@ export const ResetPassword = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(email)
         });
         const data = await res.json();
