@@ -36,6 +36,7 @@ export const LogIn = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            credentials: 'include',
             body: JSON.stringify(form)
         });
         const data = await res.json();
