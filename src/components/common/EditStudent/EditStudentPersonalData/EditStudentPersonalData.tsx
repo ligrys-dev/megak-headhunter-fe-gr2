@@ -1,12 +1,15 @@
-import {StudentProfileInterface} from "types";
-import {Btn} from "../../Btn/Btn";
+import { useContext } from 'react';
+import { EditStudentDataContext } from "src/context/EditStudentDataContext";
+import { StudentProfileInterface } from "types";
+import { Btn } from "../../Btn/Btn";
 import './EditStudentPersonalData.css';
 
 interface Props {
-    user: StudentProfileInterface
+    onChange: Function
 }
 
 export const EditStudentPersonalData = (props: Props) => {
+    const {form} = useContext(EditStudentDataContext)
     const {tel, githubUsername, firstName, initialData, bio, lastName, status} = props.user;
 
     const checkStatus = () => {
@@ -28,7 +31,8 @@ export const EditStudentPersonalData = (props: Props) => {
                 <img id="user-image"
                      src={githubUsername ? `https://github.com/${githubUsername}.png` : "/assets/user.png"}
                      alt=""/>
-                <p id="user-name">{firstName} {lastName}</p>
+                <input value={form.firstName} onChange={e => props.onChange('firstName', e.target.value)}></input> 
+                <input value={form.lastName} onChange={e => props.onChange('lastName', e.target.value)}></input>
                 <div className="github-info">
                     <img src="/assets/github.png" alt="GitHub logo"/>
                     <p>{githubUsername ? githubUsername : 'Brak profilu'}</p>

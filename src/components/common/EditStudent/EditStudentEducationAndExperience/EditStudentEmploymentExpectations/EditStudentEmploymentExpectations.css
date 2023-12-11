@@ -6,6 +6,11 @@ input {
     height: 25%;
 }
 
+form {
+    margin: 0px;
+    max-width: 100%;
+}
+
 .education-experience {
     width: 83vw;
     border-left: 3px solid var(--background_color);

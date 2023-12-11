@@ -5,7 +5,7 @@ type KeyType = 'portfolioUrls' | 'projectUrls'
 
 interface Props {
     onChange: Function;
-    key: KeyType;
+    typeOfKey: KeyType;
 }
 
 export const AddLink = (props: Props) => {
@@ -17,19 +17,28 @@ export const AddLink = (props: Props) => {
 
     const addPortfolioUrl = (e: MouseEvent, key: KeyType, link: string) => {
         e.preventDefault();
+        console.log(key);
+        
+        // if (!form[key]){
+        //     const newLinkArray = [link]
+        //     props.onChange(key, newLinkArray)
+        // }
 
-        if (!form[key]){
-            const newLinkArray = [link]
-            props.onChange(key, newLinkArray)
-        }
-
-        if (form[key]){
+        if (key === 'portfolioUrls' && form['portfolioUrls']){
             const newLinkArray = [
-                ...form[key],
+                ...form['portfolioUrls'],
                 link,
             ]
-            props.onChange(key, newLinkArray)
-        }        
+            props.onChange('portfolioUrls', newLinkArray)
+        }
+        
+        if(key === 'projectUrls' && form['projectUrls']){
+            const newLinkArray = [
+                ...form['projectUrls'],
+                link,
+            ]
+            props.onChange('projectUrls', newLinkArray)
+        }
     }
 
     if (!isOpen) {
@@ -41,7 +50,7 @@ export const AddLink = (props: Props) => {
     return (
         <>
         <input onChange={e => setLinkPlaceholder(e.target.value)} value={linkPlaceholder}/>
-        <button onClick={e => addPortfolioUrl(e, props.key,linkPlaceholder)}>Dodaj Link</button>
+        <button onClick={e => addPortfolioUrl(e, props.typeOfKey, linkPlaceholder)}>Dodaj Link</button>
         </>
     )
 }

@@ -63,7 +63,7 @@ export const EditStudentData = (props: Props) => {
         <EditStudentDataContext.Provider value={{form, setForm}}>
         <form onSubmit={submitForm}>    
         <div className="student-data">
-            <EditStudentPersonalData user={props.user}/>
+            <EditStudentPersonalData onChange={handleChange}/>
             <div className="education-experience">
                 <EditStudentEmploymentExpectations onChange={handleChange}/>
                 <EditStudentEducation onChange = {handleChange}/>

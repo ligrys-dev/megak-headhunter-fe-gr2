@@ -26,11 +26,11 @@ export const EditStudentExperience = (props: Props) => {
     return (
         <div className="student-experience">
             <h2>Doświadczenie zawodowe</h2>
-            <p>{form.workExperience ? form.workExperience : 'Brak danych'}</p>
+            <textarea value={form.workExperience ? form.workExperience : 'Brak danych'} onChange={e => props.onChange('workExperience', e.target.value)}></textarea>
             <h2>Portfolio</h2>
             <div className="links-container">
                 {form.portfolioUrls ? setPortfolioLinks(form.portfolioUrls) : 'Brak danych'}
-                <AddLink onChange = {props.onChange} key = 'portfolioUrls'></AddLink>
+                <AddLink onChange = {props.onChange} typeOfKey = 'portfolioUrls'></AddLink>
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
@@ -39,7 +39,7 @@ export const EditStudentExperience = (props: Props) => {
             <h2>Projekt na zaliczenie</h2>
             <div className="links-container">
                 {form.projectUrls ? setPortfolioLinks(form.projectUrls) : 'Brak danych'}
-                <AddLink onChange={props.onChange} key='projectUrls'></AddLink>
+                <AddLink onChange={props.onChange} typeOfKey='projectUrls'></AddLink>
             </div>
         </div>
     )

@@ -1,12 +1,18 @@
+form {
+    margin: 0px;
+    max-width: 100%;
+}
+
 .student-experience h2 {
     padding: 15px 25px;
     font-size: 1.2rem;
     background-color: var(--input_color);
 }
 
-.student-experience p {
+.student-experience textarea {
     padding: 15px 25px;
     font-size: 1rem;
+    width: 100%;
 }
 
 .student-experience .links-container {
