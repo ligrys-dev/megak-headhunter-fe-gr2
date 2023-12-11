@@ -3,6 +3,7 @@ import { EditStudentDataContext } from "src/context/EditStudentDataContext";
 import { StudentProfileInterface } from "types";
 import { Btn } from "../../Btn/Btn";
 import './EditStudentPersonalData.css';
+import { StatusBtn } from './StatusBtn';
 
 interface Props {
     onChange: Function
@@ -51,7 +52,7 @@ export const EditStudentPersonalData = (props: Props) => {
                     <textarea value={form.bio} onChange={e => props.onChange('bio', e.target.value)}></textarea>
                 </div>
                 <Btn text="Brak zainteresowania"></Btn>
-                <Btn text={checkStatus()}></Btn>
+                <StatusBtn text={checkStatus} onChange={props.onChange}></StatusBtn>
             </div>
         </div>
     )

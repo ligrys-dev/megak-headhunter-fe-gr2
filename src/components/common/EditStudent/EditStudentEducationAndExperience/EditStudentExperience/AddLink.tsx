@@ -19,10 +19,10 @@ export const AddLink = (props: Props) => {
         e.preventDefault();
         console.log(key);
         
-        // if (!form[key]){
-        //     const newLinkArray = [link]
-        //     props.onChange(key, newLinkArray)
-        // }
+        if (!form[key]){
+            const newLinkArray = [link]
+            props.onChange(key, newLinkArray)
+        }
 
         if (key === 'portfolioUrls' && form['portfolioUrls']){
             const newLinkArray = [

@@ -9,7 +9,7 @@ export const EditStudentDataContext = createContext({
         firstName: '',
         lastName: '',
         githubUsername: '',
-        portfolioUrls: null,
+        portfolioUrls: [],
         projectUrls: [],
         bio: '',
         expectedTypeWork: 0,
