@@ -2,17 +2,21 @@ import {Btn} from "../Btn/Btn";
 import {FormEvent, useRef, useState} from "react";
 import './ChangePassword.css';
 
+interface formType {
+    oldPwd: string,
+    newPwd: string,
+}
+
 export const ChangePassword = () => {
     const [response, setResponse] = useState<boolean | null>(null);
-    const [form, setForm] = useState<string>({
+    const [formData, setFormData] = useState<formType>({
         oldPwd: '',
         newPwd: '',
-        userId: ''
     });
     const text = useRef('');
 
     const updateForm = async (key: string, value: any) => {
-        setForm(form => ({
+        setFormData(form => ({
             ...form,
             [key]: value
         }))
@@ -26,21 +30,24 @@ export const ChangePassword = () => {
                 'Content-Type': 'application/json',
             },
             credentials: 'include',
-            body: JSON.stringify(form)
+            body: JSON.stringify(formData)
         });
         const data = await res.json();
-        console.log(data)
-
-        if (res.status === 400 || res.status === 401 || res.status === 404 || res.status === 500) {
+        if (res.status === 403 || res.status === 500) {
             alert('Stare hasło jest błędne, wpisz poprawne.');
             return;
-        } else {
+        }
+        if (res.ok) {
             setResponse(data.ok);
+            setFormData({
+                oldPwd: '',
+                newPwd: '',
+            });
         }
     }
 
-    if (response) {
-        text.current = 'Poprawnie zmieniono hasło.'
+    if (response === true) {
+        text.current = 'Poprawnie zmieniono hasło.';
     }
 
     return (
@@ -49,16 +56,16 @@ export const ChangePassword = () => {
             <form onSubmit={onSubmit}>
                 <label>
                     Stare hasło
-                    <input type="text" placeholder="Stare hasło" onChange={e => updateForm('oldPwd', e.target.value)}/>
+                    <input type="text" placeholder="Stare hasło" value={formData.oldPwd} onChange={e => updateForm('oldPwd', e.target.value)}/>
                 </label>
                 <label>
                     Nowe hasło
-                    <input type="text" placeholder="Nowe hasło" onChange={e => updateForm('newPwd', e.target.value)}/>
+                    <input type="text" placeholder="Nowe hasło" value={formData.newPwd} onChange={e => updateForm('newPwd', e.target.value)}/>
                 </label>
 
                 <Btn text="Zmień hasło"></Btn>
             </form>
-            <p>{text.current}</p>
+            <p className="change-password-text">{text.current}</p>
         </div>
     )
 }
