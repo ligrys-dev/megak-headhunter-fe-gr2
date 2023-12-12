@@ -68,7 +68,7 @@ export const LogIn = () => {
   return (
     <div className="authorization_container">
       <div className="authorization_wrapper">
-        <img src="/assets/megak.png" alt="MegaK logo" />
+        <img src="/assets/logo_main.png" alt="MegaK headhunter logo" />
         <form onSubmit={onSubmit}>
           <input
             type="email"

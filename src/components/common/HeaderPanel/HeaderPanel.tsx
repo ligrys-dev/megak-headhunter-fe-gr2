@@ -55,7 +55,7 @@ export const HeaderPanel = (props: Props) => {
 
     return (
         <div className="panel_header">
-            <img src="/assets/megak.png" alt="MegaK logo"/>
+            <img src="/assets/logo_header.png" alt="MegaK headhunter logo"/>
             <div className="user_account">
                 <img src={props.avatar ? `https://github.com/${props.avatar}.png` : "/assets/user.png"}
                      alt="Default user"/>
