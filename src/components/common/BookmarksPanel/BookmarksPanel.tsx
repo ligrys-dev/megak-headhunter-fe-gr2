@@ -7,9 +7,9 @@ import { Notification } from '../../StudentPanel/Notification';
 import { StudentsToInterview } from '../../HRPanel/StudentsToInterview';
 import { AvailableStudents } from '../../HRPanel/AvailableStudents';
 import { StudentProfileInterface } from 'types';
-import './BookmarksPanel.css';
 import { handleUpdateStudentProfile } from 'src/api/handle-update-student-profile';
 import { getStudentProfile } from 'src/api/get-student-profile';
+import './BookmarksPanel.css';
 
 interface Props {
   bookmarks: string[][];
@@ -20,14 +20,11 @@ interface Props {
 
 export const BookmarksPanel = (props: Props) => {
   const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
-
   const [student, setStudent] = useState<StudentProfileInterface | null>(null);
 
   useEffect(() => {
     (async () => {
-      const studentProfile = await getStudentProfile(
-        'TODO add studentProfileId',
-      );
+      const studentProfile = await getStudentProfile();
       setStudent(studentProfile);
     })();
   }, []);
