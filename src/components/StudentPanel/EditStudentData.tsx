@@ -1,10 +1,15 @@
 import { useState, useEffect, FC } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { TypeWork, ContractType, StudentProfileInterface } from 'types';
+import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
+import {
+  TypeWork,
+  ContractType,
+  StudentProfileInterface,
+  NewStudentProfileInterface,
+} from 'types';
 import './EditStudentData.css';
 
 interface StudentProfileFormProps {
-  onSubmit: SubmitHandler<StudentProfileInterface>;
+  onSubmit: SubmitHandler<NewStudentProfileInterface | StudentProfileInterface>;
   initialData?: StudentProfileInterface;
 }
 
@@ -17,7 +22,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<StudentProfileInterface>({
+  } = useForm<StudentProfileInterface | NewStudentProfileInterface>({
     defaultValues: initialData,
   });
 
@@ -28,8 +33,36 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
   }, [initialData.id]);
 
   const submitForm = handleSubmit(async data => {
+    const transformedData:
+      | NewStudentProfileInterface
+      | StudentProfileInterface = {
+      ...data,
+      expectedSalary: data.expectedSalary
+        ? Number(data.expectedSalary as unknown as string)
+        : 0,
+      monthsOfCommercialExp: data.monthsOfCommercialExp
+        ? Number(data.monthsOfCommercialExp as unknown as string)
+        : 0,
+      projectUrls: data.projectUrls
+        ? (data.projectUrls as unknown as string)
+            .split(',')
+            .map(url => url.trim())
+        : [],
+      portfolioUrls: data.portfolioUrls
+        ? (data.portfolioUrls as unknown as string)
+            .split(',')
+            .map(url => url.trim())
+        : [],
+      expectedContractType: data.expectedContractType
+        ? Number(data.expectedContractType as unknown as string)
+        : 0,
+      expectedTypeWork: data.expectedTypeWork
+        ? Number(data.expectedTypeWork as unknown as string)
+        : 0,
+    };
+
     try {
-      await onSubmit(data);
+      await onSubmit(transformedData);
       reset();
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -106,7 +139,9 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
           </option>
           <option value={TypeWork.REMOTE_ONLY}>Zdalnie</option>
         </select>
-        {errors.expectedTypeWork && <p>{errors.expectedTypeWork.message}</p>}
+        {errors.expectedTypeWork && (
+          <p>{(errors.expectedTypeWork as FieldError).message} </p>
+        )}
       </div>
 
       <div className="student-profile-input-container">
@@ -133,7 +168,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
           <option value={ContractType.POSSIBLE_B2B}>B2B</option>
         </select>
         {errors.expectedContractType && (
-          <p>{errors.expectedContractType.message}</p>
+          <p>{(errors.expectedContractType as FieldError).message}</p>
         )}
       </div>
 
