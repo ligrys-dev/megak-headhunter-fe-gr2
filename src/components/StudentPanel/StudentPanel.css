@@ -6,8 +6,3 @@
 .student_panel .panel_main {
     min-height: 100vh;
 }
-
-.student_panel .panel_main p {
-    margin: 0;
-    text-align: left;
-}

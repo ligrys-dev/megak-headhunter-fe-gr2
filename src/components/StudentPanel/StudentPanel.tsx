@@ -10,6 +10,7 @@ import {
     StudentInitialInterface
 } from "types";
 import './StudentPanel.css';
+import {WelcomeView} from "../common/WelcomeView/WelcomeView";
 
 export const StudentPanel = () => {
     const [password, setPassword] = useState(false);
@@ -64,7 +65,8 @@ export const StudentPanel = () => {
                          avatar={user?.githubUsername} onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
                 <BookmarksPanel user={user} bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
-                {bookmarksView ? '' : (password ? <ChangePassword/> : <h2>Widok powitalny lub przy pierwszym logowaniu - formularz do uzupełnienia danych </h2>)}
+                {/*@TODO tutaj trzeba dodać warunek: jeżeli nie ma danych kursanta to komponent z uzupełnianiem profilu a jak są dane to <WelcomeView/>*/}
+                {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name={user?.firstName}/>)}
             </div>
         </div>
     );

@@ -6,6 +6,7 @@ import {
 import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
 import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
 import {ChangePassword} from "../common/ChangePassword/ChangePassword";
+import {WelcomeView} from "../common/WelcomeView/WelcomeView";
 
 export const HRPanel = () => {
     const [password, setPassword] = useState(false);
@@ -36,7 +37,7 @@ export const HRPanel = () => {
             <HeaderPanel name={user?.fullName} urlAccount="/hr" onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
                 <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
-                {bookmarksView ? '' : (password ? <ChangePassword/> : <h2>Widok powitalny</h2>)}
+                {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name={user?.fullName}/>)}
             </div>
         </div>
     );
