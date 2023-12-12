@@ -11,7 +11,9 @@ import './BookmarksPanel.css';
 
 interface Props {
     bookmarks: string[][];
-    user?: StudentProfileInterface
+    user?: StudentProfileInterface;
+    bookmarksView: boolean;
+    onChildClick: () => {}
 }
 
 export const BookmarksPanel = (props: Props) => {
@@ -19,6 +21,11 @@ export const BookmarksPanel = (props: Props) => {
 
     const handleBookmarkSelection = (bookmark: string) => {
         setSelectedBookmark(bookmark);
+        changeBookmarksView(bookmark)
+    };
+
+    const changeBookmarksView = (bookmark) => {
+        props.onChildClick(bookmark);
     };
 
     const renderBookmark = () => {
@@ -43,12 +50,13 @@ export const BookmarksPanel = (props: Props) => {
     }
 
     return (
-            <div className="bookmarks_panel">
-                <div className="bookmarks">
-                    {props.bookmarks.map(bookmark => <p className={selectedBookmark === bookmark[0] ? 'active' : ''} key={bookmark[0]}
-                                                        onClick={() => handleBookmarkSelection(`${bookmark[0]}`)}>{bookmark[1]}</p>)}
-                </div>
-                {renderBookmark()}
+        <div className="bookmarks_panel">
+            <div className="bookmarks">
+                {props.bookmarks.map(bookmark => <p className={selectedBookmark === bookmark[0] ? 'active' : ''}
+                                                    key={bookmark[0]}
+                                                    onClick={() => handleBookmarkSelection(`${bookmark[0]}`)}>{bookmark[1]}</p>)}
             </div>
+            {props.bookmarksView ? renderBookmark() : ''}
+        </div>
     )
 }

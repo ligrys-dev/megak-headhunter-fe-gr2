@@ -5,8 +5,11 @@ import {
 } from "types";
 import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
 import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
+import {ChangePassword} from "../common/ChangePassword/ChangePassword";
 
 export const HRPanel = () => {
+    const [password, setPassword] = useState(false);
+    const [bookmarksView, setBookmarksView] = useState('');
     const bookmarks = [
         ['availableStudents', 'Dostępni kursanci'],
         ['studentsToInterview', 'Do rozmowy'],
@@ -17,13 +20,23 @@ export const HRPanel = () => {
         fullName: 'Rekruter Rekruterowy',
         company: 'firma',
         maxReservedStudents: 50
-    })
+    });
+
+    const handleChildHeaderClick = (newMessage) => {
+        setPassword(newMessage);
+        setBookmarksView(false)
+    };
+
+    const handleChildBookmarksClick = (newMessage) => {
+        setBookmarksView(newMessage);
+    };
 
     return (
         <div className="student_panel">
-            <HeaderPanel name={user?.fullName} urlAccount="/hr"/>
+            <HeaderPanel name={user?.fullName} urlAccount="/hr" onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
-                <BookmarksPanel bookmarks={bookmarks}/>
+                <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
+                {bookmarksView ? '' : (password ? <ChangePassword/> : <h2>Widok powitalny</h2>)}
             </div>
         </div>
     );
