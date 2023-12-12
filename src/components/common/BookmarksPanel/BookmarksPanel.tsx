@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StudentData } from '../../StudentPanel/StudentData';
 import { StudentImport } from '../../AdminPanel/StudentImport';
 import { HRForm } from '../../AdminPanel/HRForm';
@@ -6,8 +6,10 @@ import { EditStudentData } from '../../StudentPanel/EditStudentData';
 import { Notification } from '../../StudentPanel/Notification';
 import { StudentsToInterview } from '../../HRPanel/StudentsToInterview';
 import { AvailableStudents } from '../../HRPanel/AvailableStudents';
-import { NewStudentProfileInterface, StudentProfileInterface } from 'types';
+import { StudentProfileInterface } from 'types';
+import { handleUpdateStudentProfile } from 'src/context/api/handle-update-student-profile';
 import './BookmarksPanel.css';
+import { getStudentProfile } from 'src/context/api/get-student-profile';
 
 interface Props {
   bookmarks: string[][];
@@ -21,24 +23,16 @@ export const BookmarksPanel = (props: Props) => {
     setSelectedBookmark(bookmark);
   };
 
-  const handleCreate = async (data: NewStudentProfileInterface) => {
-    console.log(data);
-    try {
-      const res = await fetch('http://localhost:3001/student', {
-        body: JSON.stringify(data),
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const dataApi = await res.json();
-      console.log(dataApi);
-      // console.log('New profile created:', data);
-    } catch (error) {
-      console.error('Error creating profile:', error);
-    }
-  };
+  const [student, setStudent] = useState<StudentProfileInterface | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const studentProfile = await getStudentProfile(
+        'TODO add studentProfileId',
+      );
+      setStudent(studentProfile);
+    })();
+  }, []);
 
   // const handleUpdate = async (data: NewStudentProfileInterface) => {
   //   try {
@@ -55,7 +49,12 @@ export const BookmarksPanel = (props: Props) => {
       case 'studentData':
         return <StudentData user={props.user} />;
       case 'editStudentData':
-        return <EditStudentData onSubmit={handleCreate} />;
+        return (
+          <EditStudentData
+            onSubmit={handleUpdateStudentProfile}
+            initialData={student ? student : undefined}
+          />
+        );
       case 'notification':
         return <Notification />;
       case 'addStudents':
