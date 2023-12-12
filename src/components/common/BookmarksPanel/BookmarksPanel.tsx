@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StudentData } from '../../StudentPanel/StudentData';
 import { StudentImport } from '../../AdminPanel/StudentImport';
 import { HRForm } from '../../AdminPanel/HRForm';
@@ -7,21 +7,19 @@ import { Notification } from '../../StudentPanel/Notification';
 import { StudentsToInterview } from '../../HRPanel/StudentsToInterview';
 import { AvailableStudents } from '../../HRPanel/AvailableStudents';
 import { StudentProfileInterface } from 'types';
-import { handleUpdateStudentProfile } from 'src/context/api/handle-update-student-profile';
 import './BookmarksPanel.css';
-import { getStudentProfile } from 'src/context/api/get-student-profile';
+import { handleUpdateStudentProfile } from 'src/api/handle-update-student-profile';
+import { getStudentProfile } from 'src/api/get-student-profile';
 
 interface Props {
   bookmarks: string[][];
   user?: StudentProfileInterface;
+  bookmarksView: boolean;
+  onChildClick: () => {};
 }
 
 export const BookmarksPanel = (props: Props) => {
   const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
-
-  const handleBookmarkSelection = (bookmark: string) => {
-    setSelectedBookmark(bookmark);
-  };
 
   const [student, setStudent] = useState<StudentProfileInterface | null>(null);
 
@@ -34,15 +32,14 @@ export const BookmarksPanel = (props: Props) => {
     })();
   }, []);
 
-  // const handleUpdate = async (data: NewStudentProfileInterface) => {
-  //   try {
-  //     // Przy założeniu, że masz dostęp do ID profilu, który chcesz zaktualizować
-  //     const profileId = 'ID_PROFILU_DO_AKTUALIZACJI';
-  //     console.log('Profile updated:', updatedProfile);
-  //   } catch (error) {
-  //     console.error('Error updating profile:', error);
-  //   }
-  // };
+  const handleBookmarkSelection = (bookmark: string) => {
+    setSelectedBookmark(bookmark);
+    changeBookmarksView(bookmark);
+  };
+
+  const changeBookmarksView = bookmark => {
+    props.onChildClick(bookmark);
+  };
 
   const renderBookmark = () => {
     switch (selectedBookmark) {
@@ -52,7 +49,7 @@ export const BookmarksPanel = (props: Props) => {
         return (
           <EditStudentData
             onSubmit={handleUpdateStudentProfile}
-            initialData={student ? student : undefined}
+            initialData={student ?? undefined}
           />
         );
       case 'notification':
@@ -67,56 +64,6 @@ export const BookmarksPanel = (props: Props) => {
         return <StudentsToInterview />;
       default:
         return null;
-    bookmarks: string[][];
-    user?: StudentProfileInterface;
-    bookmarksView: boolean;
-    onChildClick: () => {}
-}
-
-export const BookmarksPanel = (props: Props) => {
-    const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
-
-    const handleBookmarkSelection = (bookmark: string) => {
-        setSelectedBookmark(bookmark);
-        changeBookmarksView(bookmark)
-    };
-
-    const changeBookmarksView = (bookmark) => {
-        props.onChildClick(bookmark);
-    };
-
-    const renderBookmark = () => {
-        switch (selectedBookmark) {
-            case 'studentData':
-                return <StudentData user={props.user}/>;
-            case 'editStudentData':
-                return <EditStudentData/>;
-            case 'notification':
-                return <Notification/>;
-            case 'addStudents':
-                return <StudentImport/>;
-            case 'addHR':
-                return <HRForm/>;
-            case 'availableStudents':
-                return <AvailableStudents/>;
-            case 'studentsToInterview':
-                return <StudentsToInterview/>;
-            default:
-                return null;
-        }
-      
-      
-  const [student, setStudent] = useState<StudentProfileInterface | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const studentProfile = await getStudentProfile(
-        'TODO add studentProfileId',
-      );
-      setStudent(studentProfile);
-    })();
-  }, []);
-
     }
   };
 
@@ -133,7 +80,7 @@ export const BookmarksPanel = (props: Props) => {
           </p>
         ))}
       </div>
-      {renderBookmark()}
+      {props.bookmarksView ? renderBookmark() : ''}
     </div>
   );
 };
