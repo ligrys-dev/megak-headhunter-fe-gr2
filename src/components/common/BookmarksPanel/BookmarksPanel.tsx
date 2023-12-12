@@ -8,8 +8,8 @@ import { StudentsToInterview } from '../../HRPanel/StudentsToInterview';
 import { AvailableStudents } from '../../HRPanel/AvailableStudents';
 import { StudentProfileInterface } from 'types';
 import './BookmarksPanel.css';
-import { handleUpdateStudentProfile } from 'src/context/api/handle-update-student-profile';
-import { getStudentProfile } from 'src/context/api/get-student-profile';
+import { handleUpdateStudentProfile } from 'src/api/handle-update-student-profile';
+import { getStudentProfile } from 'src/api/get-student-profile';
 
 interface Props {
   bookmarks: string[][];
