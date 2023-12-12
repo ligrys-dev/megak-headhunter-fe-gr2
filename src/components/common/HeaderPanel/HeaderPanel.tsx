@@ -8,11 +8,13 @@ interface Props {
     lastName?: string;
     urlAccount: string;
     avatar?: string;
+    onChildClick: () => {}
 }
 
 export const HeaderPanel = (props: Props) => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [data, setData] = useState(false);
+    const [password, setPassword] = useState(true);
 
     const showHideMenu = () => {
         if (toggleMenu) {
@@ -21,6 +23,16 @@ export const HeaderPanel = (props: Props) => {
             setToggleMenu(true)
         }
     }
+
+    const changePassword = () => {
+        if (password) {
+            setPassword(false);
+        } else {
+            setPassword(true)
+        }
+        props.onChildClick(password);
+        setToggleMenu(false)
+    };
 
     const logOut = async (e: FormEvent) => {
         e.preventDefault();
@@ -51,8 +63,7 @@ export const HeaderPanel = (props: Props) => {
                 <div className="dropdown_menu">
                     <img onClick={showHideMenu} src="/assets/arrow.png" alt="Arrow down"/>
                     <ul className={toggleMenu ? "show" : ""}>
-                        {/*<li><Link to={props.urlAccount}>Konto</Link></li>*/}
-                        {/*<li><a href={props.urlAccount}>Konto</a></li>*/}
+                        <li><Btn onClick={changePassword} text={password ? "Zmień hasło" : "Konto"}></Btn></li>
                         <li><Btn onClick={logOut} text="Wyloguj"></Btn></li>
                     </ul>
                 </div>

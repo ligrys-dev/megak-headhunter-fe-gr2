@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
 import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
+import {ChangePassword} from "../common/ChangePassword/ChangePassword";
 import {
     ContractType,
     StudentProfileInterface,
@@ -11,6 +12,8 @@ import {
 import './StudentPanel.css';
 
 export const StudentPanel = () => {
+    const [password, setPassword] = useState(false);
+    const [bookmarksView, setBookmarksView] = useState('');
     const bookmarks = [
         ['studentData', 'Dane kursanta'],
         ['editStudentData', 'Edycja danych'],
@@ -46,12 +49,22 @@ export const StudentPanel = () => {
         status: StudentStatus.AVAILABLE,
     });
 
+    const handleChildHeaderClick = (newMessage) => {
+        setPassword(newMessage);
+        setBookmarksView(false)
+    };
+
+    const handleChildBookmarksClick = (newMessage) => {
+        setBookmarksView(newMessage);
+    };
+
     return (
         <div className="student_panel">
             <HeaderPanel name={user?.firstName} lastName={user?.lastName} urlAccount="/student"
-                         avatar={user?.githubUsername}/>
+                         avatar={user?.githubUsername} onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
-                <BookmarksPanel user={user} bookmarks={bookmarks}/>
+                <BookmarksPanel user={user} bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
+                {bookmarksView ? '' : (password ? <ChangePassword/> : <h2>Widok powitalny lub przy pierwszym logowaniu - formularz do uzupełnienia danych </h2>)}
             </div>
         </div>
     );
