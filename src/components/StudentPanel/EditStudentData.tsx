@@ -13,10 +13,7 @@ interface StudentProfileFormProps {
     initialData?: StudentProfileInterface;
 }
 
-export const EditStudentData: FC<StudentProfileFormProps> = ({
-                                                                 onSubmit,
-                                                                 initialData = {} as StudentProfileInterface,
-                                                             }) => {
+export const EditStudentData: FC<StudentProfileFormProps> = ({onSubmit,initialData = {} as StudentProfileInterface,}) => {
     const {
         register,
         handleSubmit,
@@ -64,6 +61,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         try {
             await onSubmit(transformedData);
             reset();
+            window.location.reload()
         } catch (error) {
             console.error('Error submitting form:', error);
         }
@@ -71,6 +69,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
     return (
         <div className="edit-student-container">
+            {isEditing ? <h2>Zaktualizuj swoje dane</h2> : <h2>Uzupełnij swoje dane</h2>}
             <form onSubmit={submitForm}>
                 <div className="student-profile-input-container">
                     <label htmlFor="firstName">Imię</label>
@@ -105,13 +104,13 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
                 <div className="student-profile-input-container">
                     <label htmlFor="portfolioUrls">
-                        Portfolio (przedzielone przecinkami)
+                        Portfolio (url, przedzielone przecinkami)
                     </label>
                     <input {...register('portfolioUrls')} />
                 </div>
 
                 <div className="student-profile-input-container">
-                    <label htmlFor="projectUrls">Projekty (przedzielone przecinkami)</label>
+                    <label htmlFor="projectUrls">Projekty (url, przedzielone przecinkami)</label>
                     <input
                         {...register('projectUrls', {required: 'To pole jest wymagane'})}
                     />

@@ -1,12 +1,12 @@
-import {StudentProfileInterface} from "types";
+import {StudentInitialInterface} from "types";
 import './StudentExperience.css';
 
 interface Props {
-    user: StudentProfileInterface
+    user: StudentInitialInterface
 }
 
 export const StudentExperience = (props: Props) => {
-    const {workExperience, portfolioUrls, projectUrls, initialData} = props.user;
+    const {workExperience, portfolioUrls, projectUrls} = props.user.profile;
 
     const setPortfolioLinks = (portfolioUrls) => {
         return (
@@ -30,7 +30,7 @@ export const StudentExperience = (props: Props) => {
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
-                {initialData.bonusProjectUrls ? setPortfolioLinks(initialData.bonusProjectUrls) : 'Brak danych'}
+                {props.user.bonusProjectUrls ? setPortfolioLinks(props.user.bonusProjectUrls) : 'Brak danych'}
             </div>
             <h2>Projekt na zaliczenie</h2>
             <div className="links-container">

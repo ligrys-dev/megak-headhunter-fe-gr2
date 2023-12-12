@@ -1,12 +1,12 @@
 import './StudentEducation.css';
-import {StudentProfileInterface} from "types";
+import {StudentInitialInterface} from "types";
 
 interface Props {
-    user: StudentProfileInterface
+    user: StudentInitialInterface
 }
 
 export const StudentEducation = (props: Props) => {
-    const {education, courses} = props.user;
+    const {education, courses} = props.user.profile;
     return (
         <div className="student-education">
             <h2>Edukacja</h2>

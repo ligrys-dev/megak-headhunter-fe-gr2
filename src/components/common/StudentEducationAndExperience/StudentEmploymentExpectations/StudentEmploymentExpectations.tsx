@@ -1,8 +1,8 @@
-import {StudentProfileInterface} from "types";
+import {StudentInitialInterface} from "types";
 import './StudentEmploymentExpectations.css';
 
 interface Props {
-    user: StudentProfileInterface;
+    user: StudentInitialInterface;
 }
 
 export const StudentEmploymentExpectations = (props: Props) => {
@@ -14,7 +14,7 @@ export const StudentEmploymentExpectations = (props: Props) => {
         expectedSalary,
         expectedTypeWork,
 
-    } = props.user;
+    } = props.user.profile;
     const checkTypeOfWork = () => {
         switch (expectedTypeWork) {
             case 0:

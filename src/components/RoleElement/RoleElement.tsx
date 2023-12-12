@@ -7,10 +7,12 @@ const CURRENT_USER = Number(localStorage.getItem('role'));
 
 export const AdminElement = ({children}) => {
     const userRole = useContext(UserContext).user.role;
+    const userId =  useContext(UserContext).user.id;
     const role = useRef(1);
     const arr = [1, 2, 3];
     if (arr.includes(userRole)) {
         localStorage.setItem('role', userRole);
+        localStorage.setItem('id', userId);
         role.current = userRole;
     } else {
         role.current
