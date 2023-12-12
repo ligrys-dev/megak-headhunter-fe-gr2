@@ -67,6 +67,56 @@ export const BookmarksPanel = (props: Props) => {
         return <StudentsToInterview />;
       default:
         return null;
+    bookmarks: string[][];
+    user?: StudentProfileInterface;
+    bookmarksView: boolean;
+    onChildClick: () => {}
+}
+
+export const BookmarksPanel = (props: Props) => {
+    const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
+
+    const handleBookmarkSelection = (bookmark: string) => {
+        setSelectedBookmark(bookmark);
+        changeBookmarksView(bookmark)
+    };
+
+    const changeBookmarksView = (bookmark) => {
+        props.onChildClick(bookmark);
+    };
+
+    const renderBookmark = () => {
+        switch (selectedBookmark) {
+            case 'studentData':
+                return <StudentData user={props.user}/>;
+            case 'editStudentData':
+                return <EditStudentData/>;
+            case 'notification':
+                return <Notification/>;
+            case 'addStudents':
+                return <StudentImport/>;
+            case 'addHR':
+                return <HRForm/>;
+            case 'availableStudents':
+                return <AvailableStudents/>;
+            case 'studentsToInterview':
+                return <StudentsToInterview/>;
+            default:
+                return null;
+        }
+      
+      
+  const [student, setStudent] = useState<StudentProfileInterface | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const studentProfile = await getStudentProfile(
+        'TODO add studentProfileId',
+      );
+      setStudent(studentProfile);
+    })();
+  }, []);
+
     }
   };
 

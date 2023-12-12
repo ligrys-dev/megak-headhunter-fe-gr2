@@ -72,45 +72,88 @@ export const HRForm = () => {
         : 'Maksymalna liczba osób musi być liczbą w zakresie 1-999',
     };
 
-    setFormErrors(errors);
 
-    // Jeśli nie ma błędów, można wysłać dane
-    if (!Object.values(errors).some(error => error !== '')) {
-      try {
-        const res = await fetch('http://localhost:3001/user/recruiter', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          credentials: 'include',
-          body: JSON.stringify(formData),
-        });
+    const validateFullName = (fullName: string) => {
+        // Sprawdzenie, czy imię i nazwisko nie są puste
+        return fullName.trim() !== '';
+    };
 
-        setEmail(formData.email);
+    const validateCompany = (company: string) => {
+        // Sprawdzenie, czy nazwa firmy nie jest pusta
+        return company.trim() !== '';
+    };
 
-        if (res.ok) {
-          setSubmissionSuccess(true);
+    const validateMaxReservedStudents = (maxReservedStudents: number) => {
+        const numericValue = maxReservedStudents;
+        return !isNaN(numericValue) && numericValue >= 1 && numericValue <= 999;
+    };
 
-          setFormData({
-            email: '',
-            fullName: '',
-            company: '',
-            maxReservedStudents: 0,
-          });
-        } else {
-          const errorData = await res.json();
-          setError(errorData.message);
-          setSubmissionFail(true);
-          console.error(
-            'Błąd zatwierdzenia dancyh przez backend',
-            errorData.message,
-          );
-          // setFormData({
-          //     email: '',
-          //     fullName: '',
-          //     company: '',
-          //     maxReservedStudents: 0,
-          // });
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {name, value} = e.target;
+
+        // Jeśli to pole to maxReservedStudents, skonwertuj wartość na liczbę
+        const newValue = name === 'maxReservedStudents' ? parseInt(value, 10) : value;
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: newValue,
+        }));
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors = {
+            email: validateEmail(formData.email) ? '' : 'Nieprawidłowy adres e-mail',
+            fullName: validateFullName(formData.fullName) ? '' : 'Imię i nazwisko nie mogą być puste',
+            company: validateCompany(formData.company) ? '' : 'Nazwa firmy nie może być pusta',
+            maxReservedStudents: validateMaxReservedStudents(formData.maxReservedStudents)
+                ? ''
+                : 'Maksymalna liczba osób musi być liczbą w zakresie 1-999',
+        };
+
+        setFormErrors(errors);
+
+        // Jeśli nie ma błędów, można wysłać dane
+        if (!Object.values(errors).some((error) => error !== '')) {
+
+            try {
+                const res = await fetch('http://localhost:3001/user/recruiter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData),
+                });
+
+                setEmail(formData.email);
+
+                if (res.ok) {
+                    setSubmissionSuccess(true);
+
+                    setFormData({
+                        email: '',
+                        fullName: '',
+                        company: '',
+                        maxReservedStudents: 0,
+                    });
+
+                } else {
+                    const errorData = await res.json();
+                    setError(errorData.message);
+                    setSubmissionFail(true);
+                    console.error('Błąd zatwierdzenia dancyh przez backend', errorData.message);
+                    // setFormData({
+                    //     email: '',
+                    //     fullName: '',
+                    //     company: '',
+                    //     maxReservedStudents: 0,
+                    // });
+                }
+            } catch (error) {
+                console.error('Błąd podczas wysyłania danych:', error);
+            }
         }
       } catch (error) {
         console.error('Błąd podczas wysyłania danych:', error);

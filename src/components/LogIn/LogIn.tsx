@@ -51,6 +51,7 @@ export const LogIn = () => {
     } else {
       setResponse(data);
       user.setUser(data);
+
     }
   };
 

@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { HeaderPanel } from '../common/HeaderPanel/HeaderPanel';
-import { BookmarksPanel } from '../common/BookmarksPanel/BookmarksPanel';
+
+import {useState} from 'react';
+import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
+import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
+import {ChangePassword} from "../common/ChangePassword/ChangePassword";
 import {
   ContractType,
   StudentProfileInterface,
@@ -9,13 +11,17 @@ import {
   StudentInitialInterface,
 } from 'types';
 import './StudentPanel.css';
+import {WelcomeView} from "../common/WelcomeView/WelcomeView";
 
 export const StudentPanel = () => {
-  const bookmarks = [
-    ['studentData', 'Dane kursanta'],
-    ['editStudentData', 'Edycja danych'],
-    ['notification', 'Powiadomienia'],
-  ];
+
+    const [password, setPassword] = useState(false);
+    const [bookmarksView, setBookmarksView] = useState('');
+    const bookmarks = [
+        ['studentData', 'Dane kursanta'],
+        ['editStudentData', 'Edycja danych'],
+        ['notification', 'Powiadomienia'],
+    ];
 
   const [userInitial, setUserInitial] = useState<StudentInitialInterface>({
     email: 'abc@abc.pl',
@@ -49,17 +55,25 @@ export const StudentPanel = () => {
     status: StudentStatus.AVAILABLE,
   });
 
-  return (
-    <div className="student_panel">
-      <HeaderPanel
-        name={user?.firstName}
-        lastName={user?.lastName}
-        urlAccount="/student"
-        avatar={user?.githubUsername}
-      />
-      <div className="panel_main">
-        <BookmarksPanel user={user ?? undefined} bookmarks={bookmarks} />
-      </div>
-    </div>
-  );
+
+    const handleChildHeaderClick = (newMessage) => {
+        setPassword(newMessage);
+        setBookmarksView(false)
+    };
+
+    const handleChildBookmarksClick = (newMessage) => {
+        setBookmarksView(newMessage);
+    };
+
+    return (
+        <div className="student_panel">
+            <HeaderPanel name={user?.firstName} lastName={user?.lastName} urlAccount="/student"
+                         avatar={user?.githubUsername} onChildClick={handleChildHeaderClick}/>
+            <div className="panel_main">
+                <BookmarksPanel user={user} bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
+                {/*@TODO tutaj trzeba dodać warunek: jeżeli nie ma danych kursanta to komponent z uzupełnianiem profilu a jak są dane to <WelcomeView/>*/}
+                {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name={user?.firstName}/>)}
+            </div>
+        </div>
+    );
 };
