@@ -6,13 +6,13 @@ interface Props {
 }
 
 export const StudentEducation = (props: Props) => {
-    const {education, courses} = props.user.profile;
+    const {profile} = props.user;
     return (
         <div className="student-education">
             <h2>Edukacja</h2>
-            <p>{education ? education : 'Brak danych'}</p>
+            <p>{profile ? profile.education : 'Brak danych'}</p>
             <h2>Kursy</h2>
-            <p>{courses ? courses : 'Brak danych'}</p>
+            <p>{profile ? profile.courses : 'Brak danych'}</p>
         </div>
     )
 }

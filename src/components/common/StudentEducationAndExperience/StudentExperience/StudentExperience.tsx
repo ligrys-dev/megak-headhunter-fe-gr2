@@ -6,8 +6,6 @@ interface Props {
 }
 
 export const StudentExperience = (props: Props) => {
-    const {workExperience, portfolioUrls, projectUrls} = props.user.profile;
-
     const setPortfolioLinks = (portfolioUrls) => {
         return (
             portfolioUrls.map((url, index) => (
@@ -20,21 +18,22 @@ export const StudentExperience = (props: Props) => {
         )
     }
 
+    const {bonusProjectUrls, profile} = props.user;
     return (
         <div className="student-experience">
             <h2>Doświadczenie zawodowe</h2>
-            <p>{workExperience ? workExperience : 'Brak danych'}</p>
+            <p>{profile ? profile.workExperience : 'Brak danych'}</p>
             <h2>Portfolio</h2>
             <div className="links-container">
-                {portfolioUrls ? setPortfolioLinks(portfolioUrls) : 'Brak danych'}
+                {profile ? setPortfolioLinks(profile.portfolioUrls) : 'Brak danych'}
             </div>
             <h2>Projekt w zespole Scrumowym</h2>
             <div className="links-container">
-                {props.user.bonusProjectUrls ? setPortfolioLinks(props.user.bonusProjectUrls) : 'Brak danych'}
+                {bonusProjectUrls ? setPortfolioLinks(bonusProjectUrls) : 'Brak danych'}
             </div>
             <h2>Projekt na zaliczenie</h2>
             <div className="links-container">
-                {projectUrls ? setPortfolioLinks(projectUrls) : 'Brak danych'}
+                {profile ? setPortfolioLinks(profile.projectUrls) : 'Brak danych'}
             </div>
         </div>
     )
