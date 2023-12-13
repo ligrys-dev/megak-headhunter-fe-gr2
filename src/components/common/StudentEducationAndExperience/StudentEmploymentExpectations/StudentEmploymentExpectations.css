@@ -35,7 +35,7 @@
 }
 
 .education-experience .employment-expectations h3 {
-    height: 50px;
+    height: 60px;
     font-weight: normal;
     font-size: 0.9rem;
     line-height: 20px;
@@ -73,6 +73,12 @@
 
     .education-experience .employment-expectations h3 {
         height: 50px;
+    }
+}
+
+@media (max-width: 600px) {
+    .education-experience .employment-expectations h3 {
+        height: 80px;
     }
 }
 
