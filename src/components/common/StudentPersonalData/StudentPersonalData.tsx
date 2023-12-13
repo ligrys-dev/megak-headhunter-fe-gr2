@@ -1,12 +1,36 @@
 import {StudentProfileInterface} from "types";
 import './StudentPersonalData.css';
+import {Btn} from "../Btn/Btn";
 
 interface Props {
-    user: StudentProfileInterface
+    user: StudentProfileInterface,
+    onChildClick: () => {};
 }
 
 export const StudentPersonalData = (props: Props) => {
     const {profile, firstName, email, lastName} = props.user;
+
+    const setEmployed = () => {
+        const confirmText = 'Czy na pewno jesteś już zatrudniony? Jeżeli tak to gratulujemy!\nPo kliknięciu "OK" stracisz dostęp do aplikacji.'
+
+        if (confirm(confirmText)) {
+            (async ()=> {
+                const res = await fetch('http://localhost:3001/student/hired', {
+                    method: 'PATCH',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                const data = await res.json();
+                if (data) {
+                    props.onChildClick('Twój status został zmieniony na "zatrudniony". Po wylogowaniu z aplikacji nie będziesz miał do niej dostępu.Powodzenia w nowej pracy!');
+                }
+            })()
+        } else {
+            return;
+        }
+    }
 
     return (
         <div className="student-personal-info">
@@ -34,6 +58,7 @@ export const StudentPersonalData = (props: Props) => {
                     <p>{profile ? profile.bio : 'Brak bio'}</p>
                 </div>
             </div>
+            <Btn text="Zatrudniony" onClick={setEmployed}/>
         </div>
     )
 }
