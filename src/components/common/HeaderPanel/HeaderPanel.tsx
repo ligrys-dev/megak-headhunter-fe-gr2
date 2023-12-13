@@ -55,11 +55,11 @@ export const HeaderPanel = (props: Props) => {
 
     return (
         <div className="panel_header">
-            <img src="/assets/logo_header.png" alt="MegaK headhunter logo"/>
+            <a href={props.urlAccount}><img src="/assets/logo_header.png" alt="MegaK headhunter logo"/></a>
             <div className="user_account">
                 <img src={props.avatar ? `https://github.com/${props.avatar}.png` : "/assets/user.png"}
                      alt="Default user"/>
-                <p>{props.name} {props.lastName}</p>
+                <p>{props.name ? props.name : 'Brak'} {props.lastName ? props.lastName : ' danych'}</p>
                 <div className="dropdown_menu">
                     <img onClick={showHideMenu} src="/assets/arrow.png" alt="Arrow down"/>
                     <ul className={toggleMenu ? "show" : ""}>
