@@ -57,8 +57,9 @@ export const StudentPersonalData = (props: Props) => {
                     <p>O mnie</p>
                     <p>{profile ? profile.bio : 'Brak bio'}</p>
                 </div>
+                <Btn text="Oznacz mnie jako zatrudniony" onClick={setEmployed}/>
             </div>
-            <Btn text="Zatrudniony" onClick={setEmployed}/>
+
         </div>
     )
 }
