@@ -33,7 +33,6 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
   }, [initialData.id]);
 
   const submitForm = handleSubmit(async data => {
-    console.log(data);
     const transformedData:
       | NewStudentProfileInterface
       | StudentProfileInterface = {
@@ -58,12 +57,14 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
             .split(',')
             .map(url => url.trim())
         : [],
-      expectedContractType: data.expectedContractType
-        ? Number(data.expectedContractType as unknown as string)
-        : 0,
-      expectedTypeWork: data.expectedTypeWork
-        ? Number(data.expectedTypeWork as unknown as string)
-        : 0,
+      expectedContractType: Number(
+        data.expectedContractType as unknown as string,
+      ),
+      expectedTypeWork: Number(data.expectedTypeWork as unknown as string),
+      tel: data.tel || null,
+      workExperience: data.workExperience || null,
+      courses: data.courses || null,
+      education: data.education || null,
     };
 
     try {
@@ -84,36 +85,40 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
       )}
       <form onSubmit={submitForm}>
         <div className="student-profile-input-container">
-          <label>Imię
-          <input
-            {...register('firstName', { required: 'To pole jest wymagane' })}
-          />
+          <label>
+            Imię
+            <input
+              {...register('firstName', { required: 'To pole jest wymagane' })}
+            />
           </label>
           {errors.firstName && <p>{errors.firstName.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label>Nazwisko
-          <input
-            {...register('lastName', { required: 'To pole jest wymagane' })}
-          />
+          <label>
+            Nazwisko
+            <input
+              {...register('lastName', { required: 'To pole jest wymagane' })}
+            />
           </label>
           {errors.lastName && <p>{errors.lastName.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label>Numer telefonu
-          <input {...register('tel')} />
+          <label>
+            Numer telefonu
+            <input {...register('tel')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label>Konto GitHub
-          <input
-            {...register('githubUsername', {
-              required: 'To pole jest wymagane',
-            })}
-          />
+          <label>
+            Konto GitHub
+            <input
+              {...register('githubUsername', {
+                required: 'To pole jest wymagane',
+              })}
+            />
           </label>
           {errors.githubUsername && <p>{errors.githubUsername.message}</p>}
         </div>
@@ -121,45 +126,49 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         <div className="student-profile-input-container">
           <label>
             Portfolio (url, przedzielone przecinkami)
-          <input {...register('portfolioUrls')} />
+            <input {...register('portfolioUrls')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
           <label>
             Projekty (url, przedzielone przecinkami)
-          <input
-            {...register('projectUrls', { required: 'To pole jest wymagane' })}
-          />
+            <input
+              {...register('projectUrls', {
+                required: 'To pole jest wymagane',
+              })}
+            />
           </label>
           {errors.projectUrls && <p>{errors.projectUrls.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label>Bio
-          <textarea
-            {...register('bio', { required: 'To pole jest wymagane' })}
-          />
+          <label>
+            Bio
+            <textarea
+              {...register('bio', { required: 'To pole jest wymagane' })}
+            />
           </label>
           {errors.bio && <p>{errors.bio.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label>Preferowane miejsce pracy
-          <select
-            {...register('expectedTypeWork', {
-              required: 'To pole jest wymagane',
-            })}
-          >
-            <option value={''}>--wybierz--</option>
-            <option value={TypeWork.AT_LOCATION}>Na miejscu</option>
-            <option value={TypeWork.DOES_NOT_MATTER}>Nie ma znaczenia</option>
-            <option value={TypeWork.HYBRID}>Hybrydowo</option>
-            <option value={TypeWork.READINESS_TO_MOVE}>
-              Gotowość do przeprowadzi
-            </option>
-            <option value={TypeWork.REMOTE_ONLY}>Zdalnie</option>
-          </select>
+          <label>
+            Preferowane miejsce pracy
+            <select
+              {...register('expectedTypeWork', {
+                required: 'To pole jest wymagane',
+              })}
+            >
+              <option value={''}>--wybierz--</option>
+              <option value={TypeWork.AT_LOCATION}>Na miejscu</option>
+              <option value={TypeWork.DOES_NOT_MATTER}>Nie ma znaczenia</option>
+              <option value={TypeWork.HYBRID}>Hybrydowo</option>
+              <option value={TypeWork.READINESS_TO_MOVE}>
+                Gotowość do przeprowadzi
+              </option>
+              <option value={TypeWork.REMOTE_ONLY}>Zdalnie</option>
+            </select>
           </label>
           {errors.expectedTypeWork && (
             <p>{(errors.expectedTypeWork as FieldError).message} </p>
@@ -167,12 +176,13 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         </div>
 
         <div className="student-profile-input-container">
-          <label>Miasto
-          <input
-            {...register('targetWorkCity', {
-              required: 'To pole jest wymagane',
-            })}
-          />
+          <label>
+            Miasto
+            <input
+              {...register('targetWorkCity', {
+                required: 'To pole jest wymagane',
+              })}
+            />
           </label>
           {errors.targetWorkCity && <p>{errors.targetWorkCity.message}</p>}
         </div>
@@ -180,19 +190,19 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         <div className="student-profile-input-container">
           <label>
             Preferowany typ kontraktu
-          <select
-            {...register('expectedContractType', {
-              required: 'To pole jest wymagane',
-            })}
-          >
-            <option value={''}>--wybierz--</option>
-            <option value={ContractType.CONTRACT}>Umowa o pracę</option>
-            <option value={ContractType.MANDATE_CONTRACT}>
-              Umowa zlecenie
-            </option>
-            <option value={ContractType.NO_PREFERENCE}>Bez znaczenia</option>
-            <option value={ContractType.POSSIBLE_B2B}>B2B</option>
-          </select>
+            <select
+              {...register('expectedContractType', {
+                required: 'To pole jest wymagane',
+              })}
+            >
+              <option value={''}>--wybierz--</option>
+              <option value={ContractType.CONTRACT}>Umowa o pracę</option>
+              <option value={ContractType.MANDATE_CONTRACT}>
+                Umowa zlecenie
+              </option>
+              <option value={ContractType.NO_PREFERENCE}>Bez znaczenia</option>
+              <option value={ContractType.POSSIBLE_B2B}>B2B</option>
+            </select>
           </label>
           {errors.expectedContractType && (
             <p>{(errors.expectedContractType as FieldError).message}</p>
@@ -200,40 +210,44 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         </div>
 
         <div className="student-profile-input-container">
-          <label>Oczekiwane wynagrodzenie
-          <input type="number" {...register('expectedSalary')} />
+          <label>
+            Oczekiwane wynagrodzenie
+            <input type="number" {...register('expectedSalary')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
           <label>
             Możliwość bezpłatnego stażu
-          <input type="checkbox" {...register('canTakeApprenticeship')} />
+            <input type="checkbox" {...register('canTakeApprenticeship')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
           <label>
             Doświadczenie komercyjne (w miesiącach)
-          <input type="number" {...register('monthsOfCommercialExp')} />
+            <input type="number" {...register('monthsOfCommercialExp')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label>Edukacja
-          <input {...register('education')} />
+          <label>
+            Edukacja
+            <input {...register('education')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label>Doświadczenie zawodowe
-          <input {...register('workExperience')} />
+          <label>
+            Doświadczenie zawodowe
+            <input {...register('workExperience')} />
           </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label>Kursy
-          <input {...register('courses')} />
+          <label>
+            Kursy
+            <input {...register('courses')} />
           </label>
         </div>
 
