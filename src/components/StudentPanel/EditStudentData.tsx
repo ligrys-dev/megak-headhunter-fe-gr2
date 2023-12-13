@@ -84,63 +84,68 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
       )}
       <form onSubmit={submitForm}>
         <div className="student-profile-input-container">
-          <label htmlFor="firstName">Imię</label>
+          <label>Imię
           <input
             {...register('firstName', { required: 'To pole jest wymagane' })}
           />
+          </label>
           {errors.firstName && <p>{errors.firstName.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="lastName">Nazwisko</label>
+          <label>Nazwisko
           <input
             {...register('lastName', { required: 'To pole jest wymagane' })}
           />
+          </label>
           {errors.lastName && <p>{errors.lastName.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="tel">Numer telefonu</label>
+          <label>Numer telefonu
           <input {...register('tel')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="githubUsername">Konto GitHub</label>
+          <label>Konto GitHub
           <input
             {...register('githubUsername', {
               required: 'To pole jest wymagane',
             })}
           />
+          </label>
           {errors.githubUsername && <p>{errors.githubUsername.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="portfolioUrls">
+          <label>
             Portfolio (url, przedzielone przecinkami)
-          </label>
           <input {...register('portfolioUrls')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="projectUrls">
+          <label>
             Projekty (url, przedzielone przecinkami)
-          </label>
           <input
             {...register('projectUrls', { required: 'To pole jest wymagane' })}
           />
+          </label>
           {errors.projectUrls && <p>{errors.projectUrls.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="bio">Bio</label>
+          <label>Bio
           <textarea
             {...register('bio', { required: 'To pole jest wymagane' })}
           />
+          </label>
           {errors.bio && <p>{errors.bio.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="expectedTypeWork">Preferowane miejsce pracy</label>
+          <label>Preferowane miejsce pracy
           <select
             {...register('expectedTypeWork', {
               required: 'To pole jest wymagane',
@@ -155,25 +160,26 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
             </option>
             <option value={TypeWork.REMOTE_ONLY}>Zdalnie</option>
           </select>
+          </label>
           {errors.expectedTypeWork && (
             <p>{(errors.expectedTypeWork as FieldError).message} </p>
           )}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="targetWorkCity">Miasto</label>
+          <label>Miasto
           <input
             {...register('targetWorkCity', {
               required: 'To pole jest wymagane',
             })}
           />
+          </label>
           {errors.targetWorkCity && <p>{errors.targetWorkCity.message}</p>}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="expectedContractType">
+          <label>
             Preferowany typ kontraktu
-          </label>
           <select
             {...register('expectedContractType', {
               required: 'To pole jest wymagane',
@@ -187,43 +193,48 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
             <option value={ContractType.NO_PREFERENCE}>Bez znaczenia</option>
             <option value={ContractType.POSSIBLE_B2B}>B2B</option>
           </select>
+          </label>
           {errors.expectedContractType && (
             <p>{(errors.expectedContractType as FieldError).message}</p>
           )}
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="expectedSalary">Oczekiwane wynagrodzenie</label>
+          <label>Oczekiwane wynagrodzenie
           <input type="number" {...register('expectedSalary')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="canTakeApprenticeship">
+          <label>
             Możliwość bezpłatnego stażu
-          </label>
           <input type="checkbox" {...register('canTakeApprenticeship')} />
-        </div>
-
-        <div className="student-profile-input-container">
-          <label htmlFor="monthsOfCommercialExp">
-            Doświadczenie komercyjne (w miesiącach)
           </label>
+        </div>
+
+        <div className="student-profile-input-container">
+          <label>
+            Doświadczenie komercyjne (w miesiącach)
           <input type="number" {...register('monthsOfCommercialExp')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="education">Edukacja</label>
+          <label>Edukacja
           <input {...register('education')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="workExperience">Doświadczenie zawodowe</label>
+          <label>Doświadczenie zawodowe
           <input {...register('workExperience')} />
+          </label>
         </div>
 
         <div className="student-profile-input-container">
-          <label htmlFor="courses">Kursy</label>
+          <label>Kursy
           <input {...register('courses')} />
+          </label>
         </div>
 
         <button type="submit">

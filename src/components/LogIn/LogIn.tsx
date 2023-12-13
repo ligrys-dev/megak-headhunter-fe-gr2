@@ -42,13 +42,16 @@ export const LogIn = () => {
     const data = await res.json();
     if (
       res.status === 400 ||
-      res.status === 401 ||
       res.status === 404 ||
       res.status === 500
     ) {
       alert('Błędny login lub hasło.');
       return;
-    } else {
+    } else if (res.status === 401) {
+      alert('Nie masz dostępu do aplikacji.');
+      return;
+    }
+    else {
       setResponse(data);
       user.setUser(data);
 
