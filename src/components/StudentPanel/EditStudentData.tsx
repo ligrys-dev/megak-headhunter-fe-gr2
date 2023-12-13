@@ -132,7 +132,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Projekty (url, przedzielone przecinkami)
+            Link(i) do projektu zaliczeniowego (url, przedzielone przecinkami)
             <input
               {...register('projectUrls', {
                 required: 'To pole jest wymagane',
@@ -145,9 +145,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
         <div className="student-profile-input-container">
           <label>
             Bio
-            <textarea
-              {...register('bio', { required: 'To pole jest wymagane' })}
-            />
+            <textarea {...register('bio')} />
           </label>
           {errors.bio && <p>{errors.bio.message}</p>}
         </div>
