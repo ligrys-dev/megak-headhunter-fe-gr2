@@ -6,17 +6,10 @@ interface Props {
 }
 
 export const StudentEmploymentExpectations = (props: Props) => {
-    const {
-        monthsOfCommercialExp,
-        expectedContractType,
-        targetWorkCity,
-        canTakeApprenticeship,
-        expectedSalary,
-        expectedTypeWork,
 
-    } = props.user.profile;
+    const {profile} = props.user;
     const checkTypeOfWork = () => {
-        switch (expectedTypeWork) {
+        switch (profile.expectedTypeWork) {
             case 0:
                 return 'Biuro';
             case 1:
@@ -33,7 +26,7 @@ export const StudentEmploymentExpectations = (props: Props) => {
     }
 
     const checkTypeOfContract = () => {
-        switch (expectedContractType) {
+        switch (profile.expectedContractType) {
             case 0:
                 return 'Umowa o prace';
             case 1:
@@ -49,12 +42,12 @@ export const StudentEmploymentExpectations = (props: Props) => {
 
     const checkMonthsOfCommercialExp = () => {
         const arrayOfMonths = [2, 3, 4];
-        if (monthsOfCommercialExp === 1) {
+        if (profile.monthsOfCommercialExp === 1) {
             return '1 miesiąc'
-        } else if (arrayOfMonths.includes(monthsOfCommercialExp)) {
-            return `${monthsOfCommercialExp} miesiące`
+        } else if (arrayOfMonths.includes(profile.monthsOfCommercialExp)) {
+            return `${profile.monthsOfCommercialExp} miesiące`
         } else {
-            return `${monthsOfCommercialExp} miesięcy`
+            return `${profile.monthsOfCommercialExp} miesięcy`
         }
     }
 
@@ -65,29 +58,29 @@ export const StudentEmploymentExpectations = (props: Props) => {
                 <div className="employment-expectations-left-side">
                     <div className="place-of-work">
                         <h3>Preferowane miejse pracy</h3>
-                        <p>{checkTypeOfWork()}</p>
+                        <p>{profile ? checkTypeOfWork() : 'Brak danych'}</p>
                     </div>
                     <div className="city-of-work">
                         <h3>Docelowe miasto, gdzie chce pracować kandydat</h3>
-                        <p>{targetWorkCity}</p>
+                        <p>{profile ? profile.targetWorkCity : 'Brak danych'}</p>
                     </div>
                     <div className="type-of-contract">
                         <h3>Oczekiwany typ kontraktu</h3>
-                        <p>{checkTypeOfContract()}</p>
+                        <p>{profile ? checkTypeOfContract() : 'Brak danych'}</p>
                     </div>
                 </div>
                 <div className="employment-expectations-right-side">
                     <div className="place-of-work">
                         <h3>Oczekiwane wynagrodzenie netto miesięcznie</h3>
-                        <p>{expectedSalary ? `${expectedSalary} zł` : 'Brak danych'}</p>
+                        <p>{profile ? `${profile.expectedSalary} zł` : 'Brak danych'}</p>
                     </div>
                     <div className="can-take-apprenticeship">
-                        <h3>Zgod na odbycie bezpłatnych praktyk/stażu na początek</h3>
-                        <p>{canTakeApprenticeship ? 'TAK' : 'NIE'}</p>
+                        <h3>Zgoda na odbycie bezpłatnych praktyk/stażu na początek</h3>
+                        <p>{profile ? (profile.canTakeApprenticeship ? 'TAK' : 'NIE') : 'Brak danych'}</p>
                     </div>
                     <div className="months-of-commercial-exp">
                         <h3>Komercyjne doświadczenie w programowaniu</h3>
-                        <p>{checkMonthsOfCommercialExp()}</p>
+                        <p>{profile ? checkMonthsOfCommercialExp() : 'Brak danych'}</p>
                     </div>
                 </div>
             </div>
