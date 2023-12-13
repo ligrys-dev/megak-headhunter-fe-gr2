@@ -1,11 +1,43 @@
 import { FC } from 'react';
-import { StudentInitialInterface } from 'types';
+import { ContractType, StudentInitialInterface, TypeWork } from 'types';
 
 import './OneStudentProfile.css';
 
 interface Props {
   student: StudentInitialInterface;
 }
+
+const getExpectedTypeWorkString = (expectedTypeWork: TypeWork) => {
+  switch (expectedTypeWork) {
+    case 0:
+      return 'Na miejscu';
+    case 1:
+      return 'Gotowość do przeprowadzki';
+    case 2:
+      return 'Zdalnie';
+    case 3:
+      return 'Hybrid';
+    case 4:
+      return 'Nie ma znaczenia';
+    default:
+      return 'Nieokreślone';
+  }
+};
+
+const getExpectedContractType = (exprectedContractType: ContractType) => {
+  switch (exprectedContractType) {
+    case 0:
+      return 'Umowa zlecenie';
+    case 1:
+      return 'B2B';
+    case 2:
+      return 'Umowa o pracę';
+    case 3:
+      return 'Nie ma znaczenia';
+    default:
+      return 'Nieokreślone';
+  }
+};
 
 export const OneStudentProfile: FC<Props> = ({ student }) => (
   <ul className="one-student-profile">
@@ -27,7 +59,7 @@ export const OneStudentProfile: FC<Props> = ({ student }) => (
     <li>
       <div className="profile-property">Preferowane miejsce pracy</div>
       <div className="profile-property-value">
-        {student.profile?.expectedTypeWork}
+        {getExpectedTypeWorkString(student.profile?.expectedTypeWork)}
       </div>
     </li>
     <li>
@@ -41,7 +73,7 @@ export const OneStudentProfile: FC<Props> = ({ student }) => (
     <li>
       <div className="profile-property">Oczekiwany typ kontraktu</div>
       <div className="profile-property-value">
-        {student.profile?.expectedContractType}
+        {getExpectedContractType(student.profile?.expectedContractType)}
       </div>
     </li>
     <li>
@@ -58,7 +90,7 @@ export const OneStudentProfile: FC<Props> = ({ student }) => (
         Zgoda na odbycie bezpłatnych praktyk/stażu na początek
       </div>
       <div className="profile-property-value">
-        {student.profile?.canTakeApprenticeship}
+        {student.profile?.canTakeApprenticeship ? 'Tak' : 'Nie'}
       </div>
     </li>
     <li>
