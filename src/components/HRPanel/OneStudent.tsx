@@ -38,6 +38,7 @@ export const OneStudent: FC<Props> = ({ student }) => {
           text="Zarezerwuj rozmowę"
           onClick={() => reserveStudent(student.email)}
         />
+
         <LiaAngleDownSolid
           className="arrow"
           style={{ transform: `rotate(${rotationAngle}deg)` }}
