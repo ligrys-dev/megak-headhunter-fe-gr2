@@ -1,0 +1,22 @@
+.one-student-profile {
+  display: flex;
+  align-items: center;
+}
+
+.one-student-profile li {
+  font-size: 0.8rem;
+  padding: 5px;
+  border-right: 2px solid var(--input_color);
+}
+
+.one-student-profile :last-child {
+  border-right: none;
+}
+
+.profile-property {
+  padding-bottom: 15px;
+}
+
+.profile-property-value {
+  font-weight: bold;
+}

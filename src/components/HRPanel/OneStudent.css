@@ -1,0 +1,21 @@
+.one-student {
+  background: var(--input_color);
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.one-student .student-name {
+  width: 80%;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.arrow {
+  fill: var(--input_font_color);
+  margin: 0 15px;
+  font-size: 2rem;
+  cursor: pointer;
+}
