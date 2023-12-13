@@ -5,9 +5,5 @@ export const getStudent = async (): Promise<StudentInitialInterface | null> => {
     credentials: 'include',
   });
   const data: UserType = await res.json();
-  if (!data.student.profile) {
-    return null;
-  } else {
-    return data.student;
-  }
+  return data.student;
 };
