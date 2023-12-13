@@ -18,6 +18,16 @@ export const StudentsToInterview = () => {
     })();
   }, []);
 
+  const showCv = () => {
+    console.log('show cv');
+  };
+  const handleNotInterested = () => {
+    console.log('not interested');
+  };
+  const handleHire = () => {
+    console.log('hired');
+  };
+
   if (!students) return <Spinner />;
 
   return (
@@ -25,9 +35,12 @@ export const StudentsToInterview = () => {
       {students?.map(student => (
         <li>
           <OneStudent key={student.profile?.id} student={student}>
-            <Btn text="Pokaż CV"></Btn>
-            <Btn text="Brak Zainteresowania"></Btn>
-            <Btn text="Zatrudniony"></Btn>
+            <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
+            <Btn
+              text="Brak Zainteresowania"
+              onClick={() => handleNotInterested()}
+            ></Btn>
+            <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
           </OneStudent>
         </li>
       ))}
