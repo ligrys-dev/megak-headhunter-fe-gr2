@@ -6,9 +6,9 @@ import { EditStudentData } from '../../StudentPanel/EditStudentData';
 import { Notification } from '../../StudentPanel/Notification';
 import { StudentsToInterview } from '../../HRPanel/StudentsToInterview';
 import { AvailableStudents } from '../../HRPanel/AvailableStudents';
-import { StudentProfileInterface } from 'types';
+import { StudentInitialInterface, StudentProfileInterface } from 'types';
 import { handleUpdateStudentProfile } from 'src/api/handle-update-student-profile';
-import { getStudentProfile } from 'src/api/get-student-profile';
+import { getStudent } from 'src/api/get-student';
 import './BookmarksPanel.css';
 
 interface Props {
@@ -24,8 +24,8 @@ export const BookmarksPanel = (props: Props) => {
 
   useEffect(() => {
     (async () => {
-      const studentProfile = await getStudentProfile();
-      setStudent(studentProfile);
+      const { profile } = (await getStudent()) as StudentInitialInterface;
+      setStudent(profile ?? null);
     })();
   }, []);
 
