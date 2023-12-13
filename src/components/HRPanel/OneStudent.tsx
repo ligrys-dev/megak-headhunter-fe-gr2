@@ -4,6 +4,7 @@ import { LiaAngleDownSolid } from 'react-icons/lia';
 
 import './OneStudent.css';
 import { OneStudentProfile } from './OneStudentProfile';
+import { ReservationDate } from './ReservationDate';
 
 interface Props {
   student: StudentInitialInterface;
@@ -23,11 +24,20 @@ export const OneStudent: FC<Props> = ({ student, isReserved, children }) => {
   return (
     <>
       <div className="one-student">
+        {isReserved ? (
+          <ReservationDate
+            date={
+              new Date(student.reservationExpirationDate as unknown as string)
+            }
+          />
+        ) : (
+          ''
+        )}
         <div className="student-name">
           {student.profile?.firstName}{' '}
           {isReserved
-            ? student.profile?.lastName.charAt(0) + '.'
-            : student.profile?.lastName}
+            ? student.profile?.lastName
+            : student.profile?.lastName.charAt(0) + '.'}
         </div>
 
         {children}
