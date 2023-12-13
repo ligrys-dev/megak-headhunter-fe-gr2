@@ -1,0 +1,17 @@
+/* Notification.css */
+
+.notification-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center; /* Centruj tekst */
+}

@@ -50,7 +50,7 @@ export const BookmarksPanel = (props: Props) => {
           />
         );
       case 'notification':
-        return <Notification />;
+        return <Notification user={props.user}/>;
       case 'addStudents':
         return <StudentImport />;
       case 'addHR':
