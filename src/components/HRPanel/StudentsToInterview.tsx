@@ -34,7 +34,7 @@ export const StudentsToInterview = () => {
     <ul>
       {students?.map(student => (
         <li>
-          <OneStudent key={student.profile?.id} student={student}>
+          <OneStudent key={student.profile?.id} student={student} isReserved>
             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
             <Btn
               text="Brak Zainteresowania"

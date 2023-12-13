@@ -33,7 +33,7 @@ export const AvailableStudents = () => {
     <ul>
       {students?.map(student => (
         <li>
-          <OneStudent key={student.profile?.id} student={student} isReserved>
+          <OneStudent key={student.profile?.id} student={student}>
             <Btn
               text="Zarezerwuj rozmowę"
               onClick={() => reserveStudent(student.email)}
