@@ -56,7 +56,7 @@ export const StudentPanel = () => {
           ''
         ) : password ? (
           <ChangePassword />
-        ) : user ? (
+        ) : user?.profile ? (
           <WelcomeView name={user?.profile?.firstName} />
         ) : (
           <EditStudentData onSubmit={handleCreateStudentProfile} />
