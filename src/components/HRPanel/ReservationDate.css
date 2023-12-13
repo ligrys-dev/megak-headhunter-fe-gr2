@@ -1,0 +1,13 @@
+.reservation-date :first-child {
+  font-size: 0.85rem;
+  padding: 2px;
+}
+
+.reservation-date :last-child {
+  font-weight: bold;
+  padding: 2px;
+}
+
+.reservation-date {
+  margin-right: 50px;
+}
