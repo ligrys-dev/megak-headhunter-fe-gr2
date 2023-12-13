@@ -19,3 +19,8 @@
   font-size: 2rem;
   cursor: pointer;
 }
+
+img {
+  border-radius: 50%;
+  height: 40px;
+}

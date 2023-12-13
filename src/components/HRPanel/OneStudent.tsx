@@ -25,11 +25,22 @@ export const OneStudent: FC<Props> = ({ student, isReserved, children }) => {
     <>
       <div className="one-student">
         {isReserved ? (
-          <ReservationDate
-            date={
-              new Date(student.reservationExpirationDate as unknown as string)
-            }
-          />
+          <>
+            <ReservationDate
+              date={
+                new Date(student.reservationExpirationDate as unknown as string)
+              }
+            />
+            <img
+              id="user-image"
+              src={
+                student.profile
+                  ? `https://github.com/${student.profile.githubUsername}.png`
+                  : '/assets/user.png'
+              }
+              alt=""
+            />
+          </>
         ) : (
           ''
         )}
