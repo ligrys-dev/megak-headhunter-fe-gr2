@@ -1,6 +1,6 @@
 .one-student {
   background: var(--input_color);
-  margin: 10px 0;
+  margin: 0 0 15px;
   padding: 10px;
   display: flex;
   align-items: center;
