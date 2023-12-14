@@ -79,7 +79,7 @@ export const BookmarksPanel = (props: Props) => {
                     </p>
                 ))}
             </div>
-            {Number(localStorage.getItem('role')) === 3 ? <FilterPanel></FilterPanel> : ''}
+            {selectedBookmark === 'availableStudents' || selectedBookmark === 'studentsToInterview' ? <FilterPanel></FilterPanel> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );
