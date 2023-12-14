@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react';
-import {StudentInitialInterface} from 'types';
-import {Spinner} from '../common/Spinner/Spinner';
-import {OneStudent} from './OneStudent';
+import { useState, useEffect } from 'react';
+import {FilteredStudents, StudentInitialInterface} from 'types';
+import { Spinner } from '../common/Spinner/Spinner';
+import { OneStudent } from './OneStudent';
 import {getReservedStudents} from 'src/api/get-reserved-students';
-import {Btn} from '../common/Btn/Btn';
-import './StudentsToInterview.css';
+import { Btn } from '../common/Btn/Btn';
+import { Pagination } from './Pagination';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
@@ -12,17 +12,23 @@ interface Props {
 }
 
 export const StudentsToInterview = (props: Props) => {
-    const [students, setStudents] = useState<StudentInitialInterface[] | null>(
-        null,
-    );
+    const [students, setStudents] = useState<FilteredStudents[] | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     useEffect(() => {
         (async () => {
-            const studentArray = await getReservedStudents();
-            setStudents(studentArray.students);
+            const studentArray = await getReservedStudents(currentPage, itemsPerPage);
+            setStudents(studentArray);
             props.onChildClick(studentArray.students);
         })();
-    }, []);
+    }, [currentPage, itemsPerPage]);
+    console.log(students)
+
+    const onPageChange = (page: number, take: number) => {
+        setCurrentPage(page);
+        setItemsPerPage(take);
+    };
 
     const showCv = () => {
         console.log('show cv');
@@ -39,8 +45,8 @@ export const StudentsToInterview = (props: Props) => {
     return (
         <div className="students-to-interview">
             <ul>
-                {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.map(student => (
-                    <li key={student.profile?.id}>
+                {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.students.map(student => (
+                    <li key={student.profile.id}>
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn
@@ -64,6 +70,13 @@ export const StudentsToInterview = (props: Props) => {
                 ))) : ''
                 }
             </ul>
+            <Pagination
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={students.studentsCount}
+                totalPages={students.numberOfPages}
+                onPageChange={onPageChange}
+            />
         </div>
     );
 };
