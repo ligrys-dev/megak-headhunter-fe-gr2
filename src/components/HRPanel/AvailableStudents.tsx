@@ -19,7 +19,7 @@ export const AvailableStudents = (props: Props) => {
             const studentArray = await getStudentsForRecruiter();
             setStudents(studentArray.students);
         })();
-    }, []);
+    }, [students]);
 
     const reserveStudent = async (email: string) => {
         const student = await reserveStudentByHr(email);
@@ -46,7 +46,7 @@ export const AvailableStudents = (props: Props) => {
                     <li key={student.profile?.id}>
                         <OneStudent student={student}>
                             <Btn
-                                text="Zarezerwuj rozmowę"
+                                text="Zarezerwuj do rozmowy"
                                 onClick={() => reserveStudent(student.email)}
                             />
                         </OneStudent>
