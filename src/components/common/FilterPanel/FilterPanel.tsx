@@ -10,6 +10,7 @@ interface Props {
 export const FilterPanel = (props: Props) => {
     const [searchItem, setSearchItem] = useState('');
     const [students, setStudents] = useState([]);
+
     useEffect(() => {
         (async () => {
             const studentArray = await getStudentsForRecruiter();
@@ -24,7 +25,12 @@ export const FilterPanel = (props: Props) => {
         const filteredItems = students.filter((user) =>
             user.profile.firstName.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        props.onChildClick(filteredItems)
+        if (filteredItems.length !== 0){
+            props.onChildClick(filteredItems)
+        } else {
+            props.onChildClick(null)
+        }
+
     }
 
     return (

@@ -33,7 +33,7 @@ export const AvailableStudents = (props: Props) => {
     return (
         <div className="available-students">
             <ul>
-                {props.filteredUsers.length === 0 ? students.map(student => (
+                {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.map(student => (
                     <li key={student.profile?.id}>
                         <OneStudent student={student}>
                             <Btn
@@ -51,9 +51,7 @@ export const AvailableStudents = (props: Props) => {
                             />
                         </OneStudent>
                     </li>
-                ))
-
-
+                ))) : ''
                 }
             </ul>
         </div>
