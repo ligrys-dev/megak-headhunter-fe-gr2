@@ -10,6 +10,7 @@ import {StudentInitialInterface, StudentProfileInterface} from 'types';
 import {handleUpdateStudentProfile} from 'src/api/handle-update-student-profile';
 import {getStudent} from 'src/api/get-student';
 import './BookmarksPanel.css';
+import {FilterPanel} from "../FilterPanel/FilterPanel";
 
 interface Props {
     bookmarks: string[][];
@@ -78,6 +79,7 @@ export const BookmarksPanel = (props: Props) => {
                     </p>
                 ))}
             </div>
+            {Number(localStorage.getItem('role')) === 3 ? <FilterPanel></FilterPanel> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );
