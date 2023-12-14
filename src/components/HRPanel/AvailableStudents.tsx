@@ -1,46 +1,61 @@
-import { useEffect, useState } from 'react';
-import { StudentInitialInterface } from 'types';
-import { getStudentsForRecruiter } from 'src/api/get-students-for-recruiter';
-import { OneStudent } from './OneStudent';
-import { Spinner } from '../common/Spinner/Spinner';
-import { Btn } from '../common/Btn/Btn';
-import { reserveStudentByHr } from 'src/api/reserve-student-by-hr';
+import {useEffect, useState} from 'react';
+import {StudentInitialInterface} from 'types';
+import {getStudentsForRecruiter} from 'src/api/get-students-for-recruiter';
+import {OneStudent} from './OneStudent';
+import {Spinner} from '../common/Spinner/Spinner';
+import {Btn} from '../common/Btn/Btn';
+import {reserveStudentByHr} from 'src/api/reserve-student-by-hr';
+import './AvailableStudents.css';
 
-export const AvailableStudents = () => {
-  const [students, setStudents] = useState<StudentInitialInterface[] | null>(
-    null,
-  );
+interface Props {
+    filteredUsers: StudentInitialInterface[];
+}
 
-  useEffect(() => {
-    (async () => {
-      const studentArray = await getStudentsForRecruiter();
+export const AvailableStudents = (props: Props) => {
+    const [students, setStudents] = useState<StudentInitialInterface[] | null>(null);
 
-      setStudents(studentArray.students);
-    })();
-  }, []);
+    useEffect(() => {
+        (async () => {
+            const studentArray = await getStudentsForRecruiter();
+            setStudents(studentArray.students);
+        })();
+    }, []);
 
-  const reserveStudent = async (email: string) => {
-    const student = await reserveStudentByHr(email);
-    console.log(student.reservationExpirationDate);
-    return {
-      expirationDate: student.reservationExpirationDate,
+    const reserveStudent = async (email: string) => {
+        const student = await reserveStudentByHr(email);
+        return {
+            expirationDate: student.reservationExpirationDate,
+        };
     };
-  };
 
-  if (!students) return <Spinner />;
+    if (!students) return <Spinner/>;
 
-  return (
-    <ul>
-      {students?.map(student => (
-        <li>
-          <OneStudent key={student.profile?.id} student={student}>
-            <Btn
-              text="Zarezerwuj rozmowę"
-              onClick={() => reserveStudent(student.email)}
-            />
-          </OneStudent>
-        </li>
-      ))}
-    </ul>
-  );
+    return (
+        <div className="available-students">
+            <ul>
+                {props.filteredUsers.length === 0 ? students.map(student => (
+                    <li key={student.profile?.id}>
+                        <OneStudent student={student}>
+                            <Btn
+                                text="Zarezerwuj rozmowę"
+                                onClick={() => reserveStudent(student.email)}
+                            />
+                        </OneStudent>
+                    </li>
+                )) : props.filteredUsers.map(student => (
+                    <li key={student.profile?.id}>
+                        <OneStudent student={student}>
+                            <Btn
+                                text="Zarezerwuj rozmowę"
+                                onClick={() => reserveStudent(student.email)}
+                            />
+                        </OneStudent>
+                    </li>
+                ))
+
+
+                }
+            </ul>
+        </div>
+    );
 };
