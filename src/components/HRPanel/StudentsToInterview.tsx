@@ -31,7 +31,6 @@ export const StudentsToInterview = () => {
   };
   const handleNotInterested = async (email: string) => {
     await cancelStudentByHr(email);
-    console.log('not interested');
   };
   const handleHire = () => {
     console.log('hired');
@@ -47,7 +46,7 @@ export const StudentsToInterview = () => {
             <OneStudent key={student.profile?.id} student={student} isReserved>
               <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
               <Btn
-                text="Brak Zainteresowania"
+                text="Anuluj rezerwację do rozmowy"
                 onClick={() => handleNotInterested(student.email)}
               ></Btn>
               <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
