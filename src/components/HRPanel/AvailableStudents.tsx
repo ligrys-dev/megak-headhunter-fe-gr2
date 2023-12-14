@@ -9,6 +9,7 @@ import './AvailableStudents.css';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
+    onChildClick: () => {}
 }
 
 export const AvailableStudents = (props: Props) => {
@@ -18,6 +19,7 @@ export const AvailableStudents = (props: Props) => {
         (async () => {
             const studentArray = await getStudentsForRecruiter();
             setStudents(studentArray.students);
+            props.onChildClick(studentArray.students);
         })();
     }, []);
 
