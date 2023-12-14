@@ -1,0 +1,110 @@
+.student-import-container p {
+    margin: 30px 50px;
+    font-size: 1.3rem;
+}
+
+.student-import-container .file-input {
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #d0d0d0;
+    color: var(--background_color);
+}
+
+.student-import-container .table-container {
+    text-align: center;
+    margin: 0 40px;
+}
+
+.student-import-container .table-container .result-of-import {
+    display: flex;
+    justify-content: space-around;
+}
+
+.student-import-container .table-container .result-of-import .added-emails,
+.student-import-container .table-container .result-of-import .not-added-emails{
+    width: 40%;
+}
+
+.student-import-container .table-container .result-of-import .added-emails p strong{
+   color: green;
+}
+
+.student-import-container .table-container .result-of-import .not-added-emails p strong{
+    color: red;
+}
+
+.student-import-container .table-container .result-of-import .added-emails ol,
+.student-import-container .table-container .result-of-import .not-added-emails ol{
+    margin-left: 6%;
+    padding-top: 15px;
+    text-align: left;
+    width: 100%;
+}
+
+.student-import-container .table-container .result-of-import .added-emails ol li,
+.student-import-container .table-container .result-of-import .not-added-emails ol li{
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+.student-import-container .table-container .table {
+    margin: 40px auto;
+    width: 90%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.student-import-container .table-container .table .table-headers {
+    border: 2px solid #802a2a;
+    padding: 10px;
+    font-size: 1.1rem;
+    background-color: rgba(208, 208, 208, 0.05);
+}
+
+.student-import-container .table-container .table .table-cell {
+    padding: 10px;
+    border: 2px solid #802a2a;
+    font-size: 1rem;
+}
+
+.student-import-container .table-container button {
+    margin-top: 0;
+    padding: 10px 17px;
+}
+
+.student-import-container .table-container p {
+    margin: 20px 40px;
+    font-size: 1.2rem;
+}
+
+.student-import-container .table-container p:first-child {
+    margin: 0 7%;
+    font-size: 1.3rem;
+    text-align: left;
+}
+
+@media (max-width: 1023px) {
+    .student-import-container .table-container {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 425px) {
+    .student-import-container p {
+        font-size: 1.2rem;
+    }
+
+    .student-import-container .table-container {
+        margin: 0 10px;
+    }
+
+    .student-import-container .table-container p {
+        margin: 20px;
+        font-size: 1.1rem;
+    }
+
+    .student-import-container .table-container p:first-child {
+        margin: 0 20px;
+        font-size: 1.1rem;
+    }
+}

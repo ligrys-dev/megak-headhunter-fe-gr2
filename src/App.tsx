@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {useState} from "react";
+import {LogIn} from "./components/LogIn/LogIn";
+import {Route, Routes} from "react-router-dom";
+import {ResetPassword} from "./components/ResetPassword/ResetPassword";
+import {AdminPanel} from "./components/AdminPanel/AdminPanel.tsx";
+import {StudentPanel} from "./components/StudentPanel/StudentPanel";
+import {HRPanel} from "./components/HRPanel/HRPanel";
+import {AdminElement, HRElement, StudentElement} from "./components/RoleElement/RoleElement";
+import {UserContext} from "./context/context";
+import {PageNotFound} from "./components/common/PageNotFound/PageNotFound";
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface userType {
+    id: string | null;
+    role: number;
 }
 
-export default App
+function App() {
+    const [user, setUser] = useState<userType>({
+        id: '',
+        role: 4,
+    });
+
+    return (
+        <div className="app-container">
+            <UserContext.Provider value={{user, setUser}}>
+                <Routes>
+                    <Route path="/" element={<LogIn/>}/>
+                    <Route path="/reset-password" element={<ResetPassword/>}/>
+                    <Route path="/admin" element={<AdminElement><AdminPanel/></AdminElement>}/>
+                    <Route path="/student" element={<StudentElement><StudentPanel/></StudentElement>}/>
+                    <Route path="/hr" element={<HRElement><HRPanel/></HRElement>}/>
+                    <Route path="*" element={<PageNotFound/>} />
+                </Routes>
+            </UserContext.Provider>
+        </div>
+    )
+}
+
+export default App;

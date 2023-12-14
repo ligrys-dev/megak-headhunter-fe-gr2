@@ -1,0 +1,8 @@
+.student_panel {
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.student_panel .panel_main {
+    min-height: 100vh;
+}

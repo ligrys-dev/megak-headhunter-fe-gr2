@@ -1,0 +1,80 @@
+.authorization_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.authorization_container .authorization_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 20%;
+}
+
+.authorization_container .authorization_wrapper img {
+    margin: 0 auto 25px;
+    width: 270px;
+}
+
+.authorization_container .authorization_wrapper form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.authorization_container .authorization_wrapper form input {
+    margin: 5px 0 10px;
+    padding: 10px 15px;
+    width: 100%;
+    border: none;
+    background-color: var(--input_color);
+    font-size: 0.9rem;
+    color: var(--font_color);
+}
+
+.authorization_container .authorization_wrapper form a {
+    margin: 10px 0;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.7px;
+}
+
+.authorization_container .authorization_wrapper form button {
+    width: 50%;
+    margin-left: auto;
+}
+
+@media (max-width: 1440px) {
+    .authorization_container .authorization_wrapper {
+        width: 30%;
+    }
+}
+
+@media (max-width: 1160px) {
+    .authorization_container .authorization_wrapper {
+        width: 40%;
+    }
+}
+
+@media (max-width: 850px){
+    .authorization_container .authorization_wrapper {
+        width: 55%;
+    }
+}
+
+@media (max-width: 640px) {
+    .authorization_container .authorization_wrapper {
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px){
+    .authorization_container .authorization_wrapper form  button {
+        margin: 15px 0 0 auto;
+        width: 60%;
+    }
+}
