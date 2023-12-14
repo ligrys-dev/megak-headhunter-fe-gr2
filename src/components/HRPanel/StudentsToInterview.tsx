@@ -31,16 +31,6 @@ export const StudentsToInterview = (props: Props) => {
         setItemsPerPage(take);
     };
 
-    const showCv = () => {
-        console.log('show cv');
-    };
-    const handleNotInterested = () => {
-        console.log('not interested');
-    };
-    const handleHire = () => {
-        console.log('hired');
-    };
-
   const showCv = () => {
     console.log('show cv');
   };
