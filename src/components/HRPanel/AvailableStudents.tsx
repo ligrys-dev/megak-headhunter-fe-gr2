@@ -7,16 +7,30 @@ import { Btn } from '../common/Btn/Btn';
 import { reserveStudentByHr } from 'src/api/reserve-student-by-hr';
 import './AvailableStudents.css';
 import { Pagination } from './Pagination';
+import {getReservedAllStudents, getReservedStudents} from "../../api/get-reserved-students";
+import {Simulate} from "react-dom/test-utils";
+import loadedData = Simulate.loadedData;
 
 interface Props {
-  filteredUsers: StudentInitialInterface[];
+    filteredUsers: StudentInitialInterface[];
+    onChildClick: () => {}
 }
 
 export const AvailableStudents = (props: Props) => {
-  const [students, setStudents] = useState<FilteredStudents | null>(null);
+    const [students, setStudents] = useState<FilteredStudents | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+    useEffect(() => {
+        (async () => {
+            const studentArray = await getStudentsForRecruiter(
+                currentPage,
+                itemsPerPage,
+            );
+            setStudents(studentArray);
+            props.onChildClick(studentArray.students);
+        })();
+    }, [currentPage, itemsPerPage]);
 
   useEffect(() => {
     (async () => {
@@ -27,57 +41,58 @@ export const AvailableStudents = (props: Props) => {
       setStudents(studentArray);
     })();
   }, [currentPage, itemsPerPage, students]);
+    console.log(students, 'av')
 
-  const onPageChange = (page: number, take: number) => {
-    setCurrentPage(page);
-    setItemsPerPage(take);
-  };
-
-  const reserveStudent = async (email: string) => {
-    const student = await reserveStudentByHr(email);
-    return {
-      expirationDate: student.reservationExpirationDate,
+    const onPageChange = (page: number, take: number) => {
+        setCurrentPage(page);
+        setItemsPerPage(take);
     };
-  };
 
-  if (!students) return <Spinner />;
+    const reserveStudent = async (email: string) => {
+        const student = await reserveStudentByHr(email);
+        return {
+            expirationDate: student.reservationExpirationDate,
+        };
+    };
 
-  return (
-    <>
-      <div className="available-students">
-        <ul>
-          {props.filteredUsers
-            ? props.filteredUsers.length === 0
-              ? students.students.map(student => (
-                  <li key={student.profile?.id}>
-                    <OneStudent student={student}>
-                      <Btn
-                        text="Zarezerwuj rozmowę"
-                        onClick={() => reserveStudent(student.email)}
-                      />
-                    </OneStudent>
-                  </li>
-                ))
-              : props.filteredUsers.map(student => (
-                  <li key={student.profile?.id}>
-                    <OneStudent student={student}>
-                      <Btn
-                        text="Zarezerwuj do rozmowy"
-                        onClick={() => reserveStudent(student.email)}
-                      />
-                    </OneStudent>
-                  </li>
-                ))
-            : ''}
-        </ul>
-      </div>
-      <Pagination
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        totalItems={students.studentsCount}
-        totalPages={students.numberOfPages}
-        onPageChange={onPageChange}
-      />
-    </>
-  );
+    if (!students) return <Spinner />;
+
+    return (
+        <>
+            <div className="available-students">
+                <ul>
+                    {props.filteredUsers
+                        ? (props.filteredUsers.length === 0
+                            ?students.students.map(student => (
+                                <li key={student.profile?.id}>
+                                    <OneStudent student={student}>
+                                        <Btn
+                                            text="Zarezerwuj do rozmowy"
+                                            onClick={() => reserveStudent(student.email)}
+                                        />
+                                    </OneStudent>
+                                </li>
+                            ))
+                            : props.filteredUsers.map(student => (
+                                <li key={student.profile?.id}>
+                                    <OneStudent student={student}>
+                                        <Btn
+                                            text="Zarezerwuj do rozmowy"
+                                            onClick={() => reserveStudent(student.email)}
+                                        />
+                                    </OneStudent>
+                                </li>
+                            )))
+                        : ''}
+                </ul>
+            </div>
+            <Pagination
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={students.studentsCount}
+                totalPages={students.numberOfPages}
+                onPageChange={onPageChange}
+            />
+        </>
+    );
 };
