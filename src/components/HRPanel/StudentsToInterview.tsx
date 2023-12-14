@@ -1,28 +1,34 @@
-import {useState, useEffect} from 'react';
-import {StudentInitialInterface} from 'types';
-import {Spinner} from '../common/Spinner/Spinner';
-import {OneStudent} from './OneStudent';
-import {getReservedStudents} from 'src/api/get-reserved-students';
-import {Btn} from '../common/Btn/Btn';
-import './StudentsToInterview.css';
+import { useState, useEffect } from 'react';
+import { FilteredStudents } from 'types';
+import { Spinner } from '../common/Spinner/Spinner';
+import { OneStudent } from './OneStudent';
+import { getReservedStudents } from 'src/api/get-reserved-students';
+import { Btn } from '../common/Btn/Btn';
+import { Pagination } from './Pagination';
 
 interface Props {
-    filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
+  filteredUsers: StudentInitialInterface[];
+  onChildClick: () => {}
 }
 
 export const StudentsToInterview = (props: Props) => {
-    const [students, setStudents] = useState<StudentInitialInterface[] | null>(
-        null,
-    );
+  const [students, setStudents] = useState<FilteredStudents | null>(null);
 
-    useEffect(() => {
-        (async () => {
-            const studentArray = await getReservedStudents();
-            setStudents(studentArray.students);
-            props.onChildClick(studentArray.students);
-        })();
-    }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  useEffect(() => {
+    (async () => {
+      const studentArray = await getReservedStudents(currentPage, itemsPerPage);
+      setStudents(studentArray);
+      props.onChildClick(studentArray.students);
+    })();
+  }, [currentPage, itemsPerPage]);
+
+  const onPageChange = (page: number, take: number) => {
+    setCurrentPage(page);
+    setItemsPerPage(take);
+  };
 
     const showCv = () => {
         console.log('show cv');
@@ -64,6 +70,13 @@ export const StudentsToInterview = (props: Props) => {
                 ))) : ''
                 }
             </ul>
+          <Pagination
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              totalItems={students.studentsCount}
+              totalPages={students.numberOfPages}
+              onPageChange={onPageChange}
+          />
         </div>
     );
 };
