@@ -6,8 +6,8 @@ interface Props {
 }
 
 export const StudentEmploymentExpectations = (props: Props) => {
-
     const {profile} = props.user;
+
     const checkTypeOfWork = () => {
         switch (profile.expectedTypeWork) {
             case 0:
