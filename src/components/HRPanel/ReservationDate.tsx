@@ -9,8 +9,8 @@ interface Props {
 export const ReservationDate: FC<Props> = ({ date }) => {
   return (
     <div className="reservation-date">
-      <div>Rezerwacja do</div>
-      <div>{date.toLocaleDateString()} r.</div>
+      <p>Rezerwacja do</p>
+      <p>{date.toLocaleDateString()} r.</p>
     </div>
   );
 };
