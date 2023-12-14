@@ -1,4 +1,5 @@
 import './FilterPanel.css';
+import {FilterPopup} from "../FilterPopup/FilterPopup";
 
 export const FilterPanel = () => {
     return (
@@ -7,10 +8,7 @@ export const FilterPanel = () => {
                 <img src="/assets/search.svg" alt="Magnifier"/>
                 <input type="text" placeholder="Szukaj"/>
             </div>
-            <button>
-                <img src="/assets/arrow.png" alt="Arrow"/>
-                <p>Filtrowanie</p>
-            </button>
+            <FilterPopup></FilterPopup>
         </div>
     )
 }
