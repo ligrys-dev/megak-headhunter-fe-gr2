@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {StudentData} from '../../StudentPanel/StudentData';
 import {StudentImport} from '../../AdminPanel/StudentImport';
 import {HRForm} from '../../AdminPanel/HRForm';
@@ -9,8 +9,8 @@ import {AvailableStudents} from '../../HRPanel/AvailableStudents';
 import {StudentInitialInterface, StudentProfileInterface} from 'types';
 import {handleUpdateStudentProfile} from 'src/api/handle-update-student-profile';
 import {getStudent} from 'src/api/get-student';
-import './BookmarksPanel.css';
 import {FilterPanel} from "../FilterPanel/FilterPanel";
+import './BookmarksPanel.css';
 
 interface Props {
     bookmarks: string[][];
@@ -24,13 +24,14 @@ export const BookmarksPanel = (props: Props) => {
     const [student, setStudent] = useState<StudentProfileInterface | null>(null);
     const [filteredUsers, setFilteredUsers] = useState([]);
 
-    if (Number(localStorage.getItem('role')) === 2) {
-        (async () => {
-            const {profile} = (await getStudent()) as StudentInitialInterface;
-            setStudent(profile ?? null);
-        })();
-    }
-
+    useEffect(() => {
+        if (Number(localStorage.getItem('role')) === 2) {
+            (async () => {
+                const {profile} = (await getStudent()) as StudentInitialInterface;
+                setStudent(profile ?? null);
+            })();
+        }
+    }, []);
 
     const handleBookmarkSelection = (bookmark: string) => {
         setSelectedBookmark(bookmark);
