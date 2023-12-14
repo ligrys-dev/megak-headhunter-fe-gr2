@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {StudentData} from '../../StudentPanel/StudentData';
 import {StudentImport} from '../../AdminPanel/StudentImport';
 import {HRForm} from '../../AdminPanel/HRForm';
@@ -9,6 +9,7 @@ import {AvailableStudents} from '../../HRPanel/AvailableStudents';
 import {StudentInitialInterface, StudentProfileInterface} from 'types';
 import {handleUpdateStudentProfile} from 'src/api/handle-update-student-profile';
 import {getStudent} from 'src/api/get-student';
+import {FilterPanel} from "../FilterPanel/FilterPanel";
 import './BookmarksPanel.css';
 
 interface Props {
@@ -21,14 +22,16 @@ interface Props {
 export const BookmarksPanel = (props: Props) => {
     const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
     const [student, setStudent] = useState<StudentProfileInterface | null>(null);
+    const [filteredUsers, setFilteredUsers] = useState([]);
 
-        useEffect(() => {
+    useEffect(() => {
+        if (Number(localStorage.getItem('role')) === 2) {
             (async () => {
                 const {profile} = (await getStudent()) as StudentInitialInterface;
                 setStudent(profile ?? null);
             })();
-        }, []);
-
+        }
+    }, []);
 
     const handleBookmarkSelection = (bookmark: string) => {
         setSelectedBookmark(bookmark);
@@ -37,6 +40,10 @@ export const BookmarksPanel = (props: Props) => {
 
     const changeBookmarksView = bookmark => {
         props.onChildClick(bookmark);
+    };
+
+    const handleFilteredUsers = newMessage => {
+        setFilteredUsers(newMessage);
     };
 
     const renderBookmark = () => {
@@ -57,7 +64,7 @@ export const BookmarksPanel = (props: Props) => {
             case 'addHR':
                 return <HRForm/>;
             case 'availableStudents':
-                return <AvailableStudents/>;
+                return <AvailableStudents filteredUsers={filteredUsers}/>;
             case 'studentsToInterview':
                 return <StudentsToInterview/>;
             default:
@@ -78,6 +85,8 @@ export const BookmarksPanel = (props: Props) => {
                     </p>
                 ))}
             </div>
+            {selectedBookmark === 'availableStudents' || selectedBookmark === 'studentsToInterview' ?
+                <FilterPanel onChildClick={handleFilteredUsers}></FilterPanel> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );

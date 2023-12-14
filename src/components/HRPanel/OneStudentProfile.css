@@ -23,16 +23,8 @@
   width: 33%;
 }
 
-.one-student-profile .right-side li:nth-child(4) {
-  /*width: 20%;*/
-}
-
 .one-student-profile .right-side :last-child {
   border-right: none;
-}
-
-.one-student-profile .profile-property {
-  /*padding-bottom: 15px;*/
 }
 
 .one-student-profile .profile-property p {
