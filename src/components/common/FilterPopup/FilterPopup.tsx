@@ -24,7 +24,7 @@ export const FilterPopup = () => {
                 <div className="popup">
                     <div onClick={toggleModal} className="overlay"></div>
                     <div className="popup-content">
-                        <h2>Filtrowaniel</h2>
+                        <h2>Filtrowanie</h2>
                         <p>
                             Tutaj ma być filtrowanie z inputami
                         </p>
