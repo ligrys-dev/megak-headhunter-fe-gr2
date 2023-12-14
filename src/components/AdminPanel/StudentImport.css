@@ -35,10 +35,10 @@
 
 .student-import-container .table-container .result-of-import .added-emails ol,
 .student-import-container .table-container .result-of-import .not-added-emails ol{
-    margin-left: 10%;
+    margin-left: 6%;
     padding-top: 15px;
     text-align: left;
-    width: 300px;
+    width: 100%;
 }
 
 .student-import-container .table-container .result-of-import .added-emails ol li,
