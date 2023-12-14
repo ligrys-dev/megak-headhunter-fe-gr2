@@ -2,9 +2,16 @@
     margin-top: 30px;
 }
 
-.hr-import-container h2, p {
+.hr-import-container h2 {
     margin-bottom: 30px;
     text-align: center;
+}
+
+.hr-import-container p.success-message {
+    text-align: center;
+    color: green;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .hr-import-container form {

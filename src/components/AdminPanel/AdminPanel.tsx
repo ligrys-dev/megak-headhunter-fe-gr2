@@ -24,7 +24,7 @@ export const AdminPanel = () => {
 
     return (
         <div className='admin_panel'>
-            <HeaderPanel name="Admin" lastName="admin@admin.com" urlAccount="/admin" onChildClick={handleChildHeaderClick}/>
+            <HeaderPanel name="Admin" lastName=" " urlAccount="/admin" onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
                 <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView} onChildClick={handleChildBookmarksClick}/>
                 {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name="Admin"/>)}
