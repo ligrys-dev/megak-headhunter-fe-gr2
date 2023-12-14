@@ -5,6 +5,7 @@ import { OneStudent } from './OneStudent';
 import { getReservedStudents } from 'src/api/get-reserved-students';
 import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
+import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
 
 export const StudentsToInterview = () => {
   const [students, setStudents] = useState<FilteredStudents | null>(null);
@@ -18,7 +19,7 @@ export const StudentsToInterview = () => {
 
       setStudents(studentArray);
     })();
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, students]);
 
   const onPageChange = (page: number, take: number) => {
     setCurrentPage(page);
@@ -28,7 +29,8 @@ export const StudentsToInterview = () => {
   const showCv = () => {
     console.log('show cv');
   };
-  const handleNotInterested = () => {
+  const handleNotInterested = async (email: string) => {
+    await cancelStudentByHr(email);
     console.log('not interested');
   };
   const handleHire = () => {
@@ -46,7 +48,7 @@ export const StudentsToInterview = () => {
               <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
               <Btn
                 text="Brak Zainteresowania"
-                onClick={() => handleNotInterested()}
+                onClick={() => handleNotInterested(student.email)}
               ></Btn>
               <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
             </OneStudent>
