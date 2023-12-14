@@ -1,28 +1,21 @@
 import './FilterPanel.css';
 import {FilterPopup} from "../FilterPopup/FilterPopup";
-import {useEffect, useState} from "react";
-import {getStudentsForRecruiter} from "../../../api/get-students-for-recruiter";
+import {useState} from "react";
+import {StudentInitialInterface} from "types";
 
 interface Props {
+    students: StudentInitialInterface[];
     onChildClick: () => {};
 }
 
 export const FilterPanel = (props: Props) => {
     const [searchItem, setSearchItem] = useState('');
-    const [students, setStudents] = useState([]);
-
-    useEffect(() => {
-        (async () => {
-            const studentArray = await getStudentsForRecruiter();
-            setStudents(studentArray.students);
-        })();
-    }, []);
 
     const handleInputChange = (e) => {
         const searchTerm = e.target.value;
         setSearchItem(searchTerm)
 
-        const filteredItems = students.filter((user) =>
+        const filteredItems = props.students.filter((user) =>
             user.profile.firstName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         if (filteredItems.length !== 0){
