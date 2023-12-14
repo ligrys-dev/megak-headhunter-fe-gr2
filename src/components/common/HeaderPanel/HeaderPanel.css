@@ -18,18 +18,19 @@
 
 .panel_header .user_account img {
     width: auto;
-    height: 50px;
+    height: 60px;
 }
 
 .panel_header .user_account p {
     margin: 0 15px;
-    line-height: 50px;
+    font-size: 1.2rem;
+    line-height: 60px;
 }
 
 .panel_header .user_account .dropdown_menu img {
-    margin-top: 21px;
-    width: 9px;
-    height: 9px;
+    margin-top: 25px;
+    width: 10px;
+    height: 10px;
     cursor: pointer;
 }
 
@@ -82,7 +83,7 @@
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 490px) {
     .panel_header {
         width: 100%;
         margin: 0;
@@ -93,15 +94,40 @@
         height: auto;
         width: 138px;
     }
+
+    .panel_header .user_account img {
+        width: auto;
+        height: 42px;
+    }
+
+    .panel_header .user_account p {
+        font-size: 1.1rem;
+        line-height: 42px;
+    }
+
+    .panel_header .user_account .dropdown_menu img {
+        margin-top: 17px;
+        width: 9px;
+        height: 9px;
+    }
 }
 
 @media (max-width: 340px) {
-    .panel_header .user_account img {
-        width: auto;
-        height: 40px;
-    }
     .panel_header img {
         height: auto;
-        width: 130px;
+        width: 120px;
+    }
+
+    .panel_header .user_account img {
+        width: auto;
+        height: 36px;
+    }
+
+    .panel_header .user_account p {
+            line-height: 36px;
+    }
+
+    .panel_header .user_account .dropdown_menu img {
+        margin-top: 15px;
     }
 }
