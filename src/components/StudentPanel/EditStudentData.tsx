@@ -83,10 +83,11 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
       ) : (
         <h2>Uzupełnij swoje dane</h2>
       )}
+      <h3>* Pole obowiązkowe</h3>
       <form onSubmit={submitForm}>
         <div className="student-profile-input-container">
           <label>
-            Imię
+            Imię *
             <input
               {...register('firstName', { required: 'To pole jest wymagane' })}
             />
@@ -96,7 +97,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Nazwisko
+            Nazwisko *
             <input
               {...register('lastName', { required: 'To pole jest wymagane' })}
             />
@@ -113,7 +114,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Konto GitHub
+            Konto GitHub *
             <input
               {...register('githubUsername', {
                 required: 'To pole jest wymagane',
@@ -132,7 +133,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Link(i) do projektu zaliczeniowego (url, przedzielone przecinkami)
+            Link(i) do projektu zaliczeniowego (url, przedzielone przecinkami) *
             <input
               {...register('projectUrls', {
                 required: 'To pole jest wymagane',
@@ -152,7 +153,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Preferowane miejsce pracy
+            Preferowane miejsce pracy *
             <select
               {...register('expectedTypeWork', {
                 required: 'To pole jest wymagane',
@@ -177,9 +178,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
           <label>
             Miasto
             <input
-              {...register('targetWorkCity', {
-                required: 'To pole jest wymagane',
-              })}
+              {...register('targetWorkCity')}
             />
           </label>
           {errors.targetWorkCity && <p>{errors.targetWorkCity.message}</p>}
@@ -187,7 +186,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
         <div className="student-profile-input-container">
           <label>
-            Preferowany typ kontraktu
+            Preferowany typ kontraktu *
             <select
               {...register('expectedContractType', {
                 required: 'To pole jest wymagane',
