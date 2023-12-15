@@ -1,0 +1,42 @@
+form.form-popup div{
+    font-size: 0.9rem;
+    padding: 5px 5px 5px 0;
+}
+
+form.form-popup input {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #3f3f41;
+    border: 1px solid var(--input_color);
+}
+
+form.form-popup div label input{
+    margin-left: 10px;
+}
+
+form.form-popup div label div label {
+    display: inline-block;
+    padding: 5px 8px;
+    margin: 0 10px 10px 0;
+    background-color: #3b3d3d;
+}
+
+form.form-popup div label div label:nth-child(4),
+form.form-popup div label div label:nth-child(5){
+    margin: 0 10px 0 0;
+}
+
+form.form-popup div:nth-child(6) label div label {
+    margin: 0 10px 0 0;
+}
+
+form.form-popup div:nth-child(10) label input {
+    margin-left: 0;
+}
+
+form.form-popup button {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 1rem;
+    background-color: var(--button_color);
+}
