@@ -7,6 +7,7 @@ import {
 import {StudentEducation} from "../common/StudentEducationAndExperience/StudentEducation/StudentEducation";
 import {StudentExperience} from "../common/StudentEducationAndExperience/StudentExperience/StudentExperience";
 import './StudentCV.css';
+import {StudentEvaluation} from "../common/StudentEducationAndExperience/StudentEvaluation/StudentEvaluation";
 
 interface Props {
     student: StudentInitialInterface,
@@ -25,6 +26,7 @@ export const StudentCV = (props: Props) => {
                 <div className="student-data">
                     <StudentPersonalData user={props.student}/>
                     <div className="education-experience">
+                        <StudentEvaluation user={props.student}/>
                         <StudentEmploymentExpectations user={props.student}/>
                         <StudentEducation user={props.student}/>
                         <StudentExperience user={props.student}/>
