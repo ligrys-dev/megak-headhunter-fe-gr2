@@ -1,0 +1,27 @@
+.stars-container {
+    padding: 6px 0 0 5px;
+    display: flex;
+}
+
+.stars-container p {
+    font-size: 0.9rem;
+    padding-right: 10px;
+    line-height: 22px;
+}
+
+.stars-container img {
+  padding: 0 2px;
+    width: auto;
+    height: 20px;
+}
+
+@media (max-width: 425px) {
+    .stars-container {
+       padding-bottom: 30px;
+    }
+
+    .student-evaluation .left-side {
+        padding-bottom: 0;
+    }
+}
+
