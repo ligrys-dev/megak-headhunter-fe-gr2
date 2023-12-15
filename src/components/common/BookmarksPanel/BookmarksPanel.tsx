@@ -8,7 +8,7 @@ import {StudentsToInterview} from '../../HRPanel/StudentsToInterview';
 import {AvailableStudents} from '../../HRPanel/AvailableStudents';
 import {StudentInitialInterface, StudentProfileInterface} from 'types';
 import {handleUpdateStudentProfile} from 'src/api/handle-update-student-profile';
-import {getStudent} from 'src/api/get-student';
+import {getUser} from 'src/api/get-user';
 import {FilterPanelAvailableStudents} from "../FilterPanel/FilterPanelAvailableStudents";
 import {FilterPanelStudentsToInterview} from "../FilterPanel/FilterPanelStudentsToInterview";
 import './BookmarksPanel.css';
@@ -30,7 +30,7 @@ export const BookmarksPanel = (props: Props) => {
     useEffect(() => {
         if (Number(localStorage.getItem('role')) === 2) {
             (async () => {
-                const {profile} = (await getStudent()) as StudentInitialInterface;
+                const {profile} = (await getUser()) as StudentInitialInterface;
                 setStudent(profile ?? null);
             })();
         }

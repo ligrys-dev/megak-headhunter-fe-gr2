@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { HeaderPanel } from '../common/HeaderPanel/HeaderPanel';
 import { BookmarksPanel } from '../common/BookmarksPanel/BookmarksPanel';
 import { ChangePassword } from '../common/ChangePassword/ChangePassword';
-import { StudentInitialInterface } from 'types';
+import {StudentInitialInterface, UserType} from 'types';
 import { WelcomeView } from '../common/WelcomeView/WelcomeView';
-import { getStudent } from '../../api/get-student';
+import { getUser } from '../../api/get-user';
 import { EditStudentData } from './EditStudentData';
 import { handleCreateStudentProfile } from '../../api/handle-create-student-profile';
 import './StudentPanel.css';
@@ -22,8 +22,8 @@ export const StudentPanel = () => {
 
   useEffect(() => {
     (async () => {
-      const studentProfile = await getStudent();
-      setUser(studentProfile);
+      const studentProfile = await getUser() as UserType;
+      setUser(studentProfile.student);
     })();
   }, []);
 
@@ -37,31 +37,31 @@ export const StudentPanel = () => {
   };
 
   return (
-    <div className="student_panel">
-      <HeaderPanel
-        name={user?.profile?.firstName}
-        lastName={user?.profile?.lastName}
-        urlAccount="/student"
-        avatar={user?.profile?.githubUsername}
-        onChildClick={handleChildHeaderClick}
-      />
-      <div className="panel_main">
-        <BookmarksPanel
-          user={user}
-          bookmarks={bookmarks}
-          bookmarksView={bookmarksView}
-          onChildClick={handleChildBookmarksClick}
+      <div className="student_panel">
+        <HeaderPanel
+            name={user?.profile?.firstName}
+            lastName={user?.profile?.lastName}
+            urlAccount="/student"
+            avatar={user?.profile?.githubUsername}
+            onChildClick={handleChildHeaderClick}
         />
-        {bookmarksView ? (
-          ''
-        ) : password ? (
-          <ChangePassword />
-        ) : user?.profile ? (
-          <WelcomeView name={user?.profile?.firstName} />
-        ) : (
-          <EditStudentData onSubmit={handleCreateStudentProfile} />
-        )}
+        <div className="panel_main">
+          <BookmarksPanel
+              user={user}
+              bookmarks={bookmarks}
+              bookmarksView={bookmarksView}
+              onChildClick={handleChildBookmarksClick}
+          />
+          {bookmarksView ? (
+              ''
+          ) : password ? (
+              <ChangePassword />
+          ) : user?.profile ? (
+              <WelcomeView name={user?.profile?.firstName} />
+          ) : (
+              <EditStudentData onSubmit={handleCreateStudentProfile} />
+          )}
+        </div>
       </div>
-    </div>
   );
 };
