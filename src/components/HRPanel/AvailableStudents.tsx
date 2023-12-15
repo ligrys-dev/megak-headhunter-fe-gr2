@@ -32,6 +32,15 @@ export const AvailableStudents = (props: Props) => {
         })();
     }, [currentPage, itemsPerPage]);
 
+  useEffect(() => {
+    (async () => {
+      const studentArray = await getStudentsForRecruiter(
+        currentPage,
+        itemsPerPage,
+      );
+      setStudents(studentArray);
+    })();
+  }, [currentPage, itemsPerPage, students]);
     console.log(students, 'av')
 
     const onPageChange = (page: number, take: number) => {
@@ -58,7 +67,7 @@ export const AvailableStudents = (props: Props) => {
                                 <li key={student.profile?.id}>
                                     <OneStudent student={student}>
                                         <Btn
-                                            text="Zarezerwuj rozmowę"
+                                            text="Zarezerwuj do rozmowy"
                                             onClick={() => reserveStudent(student.email)}
                                         />
                                     </OneStudent>
@@ -68,7 +77,7 @@ export const AvailableStudents = (props: Props) => {
                                 <li key={student.profile?.id}>
                                     <OneStudent student={student}>
                                         <Btn
-                                            text="Zarezerwuj rozmowę"
+                                            text="Zarezerwuj do rozmowy"
                                             onClick={() => reserveStudent(student.email)}
                                         />
                                     </OneStudent>
