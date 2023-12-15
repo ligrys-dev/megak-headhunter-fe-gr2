@@ -1,0 +1,22 @@
+.student-cv-container a {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    text-decoration: none;
+}
+
+.student-cv-container a img {
+    padding-top: 10px;
+    height: auto;
+    width: 25px;
+}
+
+.student-cv-container a p {
+    padding: 10px 0 0 7px;
+    font-size: 1.2rem;
+    line-height: 30px;
+}
+
+.student-cv-container .student-data {
+    margin-top: 25px;
+}
