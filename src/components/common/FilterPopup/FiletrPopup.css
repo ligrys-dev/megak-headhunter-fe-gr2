@@ -23,7 +23,7 @@ body.active-modal {
 }
 .popup-content {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
@@ -39,9 +39,14 @@ body.active-modal {
     top: 20px;
     right: 20px;
     padding: 5px 7px;
+    font-size: 1rem;
     background-color: var(--button_color);
 }
 
 .popup-content p {
     padding: 20px 0;
+}
+
+.popup-content h2 {
+    padding: 10px 0;
 }

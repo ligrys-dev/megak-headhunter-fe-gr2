@@ -26,6 +26,9 @@ export const BookmarksPanel = (props: Props) => {
     const [student, setStudent] = useState<StudentProfileInterface | null>(null);
     const [filteredAvailableUsers, setFilteredAvailableUsers] = useState([]);
     const [filteredUsersToInterview, setFilteredUsersToInterview] = useState([]);
+    const [filteredAvailableUsersPopup, setFilteredAvailableUsersPopup] = useState([]);
+    const [filteredUsersToInterviewPopup, setFilteredUsersToInterviewPopup] = useState([]);
+
 
     useEffect(() => {
         if (Number(localStorage.getItem('role')) === 2) {
@@ -58,6 +61,14 @@ export const BookmarksPanel = (props: Props) => {
         props.onChildClickStudentId(student)
     };
 
+    const handleFilteredUsersToInterviewPopup = student => {
+        setFilteredUsersToInterviewPopup(student)
+    };
+
+    const handleFilteredAvailableUsersPopup = student => {
+        setFilteredAvailableUsersPopup(student)
+    };
+
     const renderBookmark = () => {
         switch (selectedBookmark) {
             case 'studentData':
@@ -76,9 +87,9 @@ export const BookmarksPanel = (props: Props) => {
             case 'addHR':
                 return <HRForm/>;
             case 'availableStudents':
-                return <AvailableStudents filteredUsers={filteredAvailableUsers}/>;
+                return <AvailableStudents filteredUsersFromPopup = {filteredAvailableUsersPopup} filteredUsers={filteredAvailableUsers}/>;
             case 'studentsToInterview':
-                return <StudentsToInterview filteredUsers={filteredUsersToInterview} onChildClick={handleStudentId}/>;
+                return <StudentsToInterview filteredUsersFromPopup = {filteredUsersToInterviewPopup} filteredUsers={filteredUsersToInterview} onChildClick={handleStudentId}/>;
             default:
                 return null;
         }
@@ -98,9 +109,9 @@ export const BookmarksPanel = (props: Props) => {
                 ))}
             </div>
             {selectedBookmark === 'availableStudents' ? <FilterPanelAvailableStudents
-                onChildClick={handleFilteredAvailableUsers}></FilterPanelAvailableStudents> : ''}
+                onChildClick={handleFilteredAvailableUsers} onHandleFilter={handleFilteredAvailableUsersPopup}/> : ''}
             {selectedBookmark === 'studentsToInterview' ? <FilterPanelStudentsToInterview
-                onChildClick={handleFilteredUsersToInterview}></FilterPanelStudentsToInterview> : ''}
+                onChildClick={handleFilteredUsersToInterview} onHandleFilter={handleFilteredUsersToInterviewPopup}/> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );

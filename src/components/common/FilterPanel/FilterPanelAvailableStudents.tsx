@@ -6,6 +6,7 @@ import {getStudentsForRecruiter} from "../../../api/get-students-for-recruiter";
 
 interface Props {
     onChildClick: () => {};
+    onHandleFilter: () =>{};
 }
 
 export const FilterPanelAvailableStudents = (props: Props) => {
@@ -44,7 +45,7 @@ export const FilterPanelAvailableStudents = (props: Props) => {
                     onChange={handleInputChange}
                     placeholder="Szukaj"/>
             </div>
-            <FilterPopup></FilterPopup>
+            <FilterPopup onHandleFilter={props.onHandleFilter}></FilterPopup>
         </div>
     )
 }

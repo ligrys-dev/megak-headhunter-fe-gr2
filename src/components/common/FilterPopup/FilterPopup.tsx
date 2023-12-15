@@ -2,7 +2,12 @@ import { useState } from 'react';
 import './FiletrPopup.css';
 import { FilterForm } from './FilterForm';
 
-export const FilterPopup = () => {
+interface Props {
+  onHandleFilter: () =>{}
+}
+
+
+export const FilterPopup = (props: Props) => {
   const [popup, setPopup] = useState(false);
   const toggleModal = () => {
     setPopup(!popup);
@@ -15,24 +20,24 @@ export const FilterPopup = () => {
   }
 
   return (
-    <>
-      <button onClick={toggleModal} className="btn-popup">
-        <img src="/assets/arrow.png" alt="Arrow" />
-        <p>Filtrowanie</p>
-      </button>
+      <>
+        <button onClick={toggleModal} className="btn-popup">
+          <img src="/assets/arrow.png" alt="Arrow" />
+          <p>Filtrowanie</p>
+        </button>
 
-      {popup && (
-        <div className="popup">
-          <div onClick={toggleModal} className="overlay"></div>
-          <div className="popup-content">
-            <h2>Filtrowanie</h2>
-            <FilterForm />
-            <button className="close-popup" onClick={toggleModal}>
-              Zamknij
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+        {popup && (
+            <div className="popup">
+              <div onClick={toggleModal} className="overlay"></div>
+              <div className="popup-content">
+                <h2>Filtrowanie</h2>
+                <FilterForm  onHandleFilter={props.onHandleFilter}/>
+                <button className="close-popup" onClick={toggleModal}>
+                  Zamknij
+                </button>
+              </div>
+            </div>
+        )}
+      </>
   );
 };
