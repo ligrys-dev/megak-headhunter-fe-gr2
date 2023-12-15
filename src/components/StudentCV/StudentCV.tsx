@@ -14,15 +14,14 @@ interface Props {
 }
 
 export const StudentCV = (props: Props) => {
-    console.log(props.student)
-    const handle = () => {
+    const handleCloseCV = () => {
         props.onChildClick(null)
     }
 
     return (
         <>
             <div className="student-cv-container">
-                <Link onClick={handle} to='/hr'>Wróć</Link>
+                <Link onClick={handleCloseCV} to='/hr'><img src="/assets/arrow-left.svg" alt="Arrow left"/><p>Wróć</p></Link>
                 <div className="student-data">
                     <StudentPersonalData user={props.student}/>
                     <div className="education-experience">
