@@ -18,7 +18,7 @@ interface Props {
     user?: StudentProfileInterface;
     bookmarksView: boolean;
     onChildClick: () => {};
-    onChildClickStudentId: () => {}
+    onChildClickStudentId?: () => {}
 }
 
 export const BookmarksPanel = (props: Props) => {
@@ -87,9 +87,11 @@ export const BookmarksPanel = (props: Props) => {
             case 'addHR':
                 return <HRForm/>;
             case 'availableStudents':
-                return <AvailableStudents filteredUsersFromPopup = {filteredAvailableUsersPopup} filteredUsers={filteredAvailableUsers}/>;
+                return <AvailableStudents filteredUsersFromPopup={filteredAvailableUsersPopup}
+                                          filteredUsers={filteredAvailableUsers}/>;
             case 'studentsToInterview':
-                return <StudentsToInterview filteredUsersFromPopup = {filteredUsersToInterviewPopup} filteredUsers={filteredUsersToInterview} onChildClick={handleStudentId}/>;
+                return <StudentsToInterview filteredUsersFromPopup={filteredUsersToInterviewPopup}
+                                            filteredUsers={filteredUsersToInterview} onChildClick={handleStudentId}/>;
             default:
                 return null;
         }
@@ -111,7 +113,8 @@ export const BookmarksPanel = (props: Props) => {
             {selectedBookmark === 'availableStudents' ? <FilterPanelAvailableStudents
                 onChildClick={handleFilteredAvailableUsers} onHandleFilter={handleFilteredAvailableUsersPopup}/> : ''}
             {selectedBookmark === 'studentsToInterview' ? <FilterPanelStudentsToInterview
-                onChildClick={handleFilteredUsersToInterview} onHandleFilter={handleFilteredUsersToInterviewPopup}/> : ''}
+                onChildClick={handleFilteredUsersToInterview}
+                onHandleFilter={handleFilteredUsersToInterviewPopup}/> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );
