@@ -2,29 +2,26 @@ import { useState, useEffect } from 'react';
 import {FilteredStudents, StudentInitialInterface} from 'types';
 import { Spinner } from '../common/Spinner/Spinner';
 import { OneStudent } from './OneStudent';
-import {getReservedStudents} from 'src/api/get-reserved-students';
+import { getReservedStudents } from 'src/api/get-reserved-students';
 import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
 import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
 }
 
 export const StudentsToInterview = (props: Props) => {
-    const [students, setStudents] = useState<FilteredStudents[] | null>(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [students, setStudents] = useState<FilteredStudents | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
     useEffect(() => {
         (async () => {
             const studentArray = await getReservedStudents(currentPage, itemsPerPage);
             setStudents(studentArray);
-            props.onChildClick(studentArray.students);
         })();
-    }, [currentPage, itemsPerPage, students]);
-    console.log(students)
+    }, [currentPage, itemsPerPage]);
 
     const onPageChange = (page: number, take: number) => {
         setCurrentPage(page);
@@ -41,13 +38,13 @@ export const StudentsToInterview = (props: Props) => {
     console.log('hired');
   };
 
-  if (!students) return <Spinner />;
+    if (!students) return <Spinner/>;
 
     return (
         <div className="students-to-interview">
             <ul>
                 {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.students.map(student => (
-                    <li key={student.profile.id}>
+                    <li key={student.profile?.id}>
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn

@@ -7,13 +7,9 @@ import { Btn } from '../common/Btn/Btn';
 import { reserveStudentByHr } from 'src/api/reserve-student-by-hr';
 import './AvailableStudents.css';
 import { Pagination } from './Pagination';
-import {getReservedAllStudents, getReservedStudents} from "../../api/get-reserved-students";
-import {Simulate} from "react-dom/test-utils";
-import loadedData = Simulate.loadedData;
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
 }
 
 export const AvailableStudents = (props: Props) => {
@@ -28,25 +24,13 @@ export const AvailableStudents = (props: Props) => {
                 itemsPerPage,
             );
             setStudents(studentArray);
-            props.onChildClick(studentArray.students);
         })();
     }, [currentPage, itemsPerPage]);
 
-  useEffect(() => {
-    (async () => {
-      const studentArray = await getStudentsForRecruiter(
-        currentPage,
-        itemsPerPage,
-      );
-      setStudents(studentArray);
-    })();
-  }, [currentPage, itemsPerPage, students]);
-    console.log(students, 'av')
-
-    const onPageChange = (page: number, take: number) => {
-        setCurrentPage(page);
-        setItemsPerPage(take);
-    };
+  const onPageChange = (page: number, take: number) => {
+    setCurrentPage(page);
+    setItemsPerPage(take);
+  };
 
     const reserveStudent = async (email: string) => {
         const student = await reserveStudentByHr(email);
@@ -67,7 +51,7 @@ export const AvailableStudents = (props: Props) => {
                                 <li key={student.profile?.id}>
                                     <OneStudent student={student}>
                                         <Btn
-                                            text="Zarezerwuj do rozmowy"
+                                            text="Zarezerwuj rozmowę"
                                             onClick={() => reserveStudent(student.email)}
                                         />
                                     </OneStudent>
@@ -77,7 +61,7 @@ export const AvailableStudents = (props: Props) => {
                                 <li key={student.profile?.id}>
                                     <OneStudent student={student}>
                                         <Btn
-                                            text="Zarezerwuj do rozmowy"
+                                            text="Zarezerwuj rozmowę"
                                             onClick={() => reserveStudent(student.email)}
                                         />
                                     </OneStudent>
