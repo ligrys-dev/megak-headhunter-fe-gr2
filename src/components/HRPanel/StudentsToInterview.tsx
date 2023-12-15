@@ -11,7 +11,7 @@ import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
 import { cancelStudentByHr } from '../../api/cancel-reservation-by-hr.ts';
 import './StudentsToInterview.css';
-import {employedByHr} from "../../api/student-employed-by-hr";
+import { employedByHr } from '../../api/student-employed-by-hr';
 
 interface Props {
   filteredUsers: StudentInitialInterface[];
@@ -61,7 +61,7 @@ export const StudentsToInterview = (props: Props) => {
 
   const handleHire = async (email: string) => {
     setTextInfo(
-        'Gratulujemy zatrudnienia nowego pracownika! Kursant nie jest już dostępny dla innych rekruterów.',
+      'Gratulujemy zatrudnienia nowego pracownika! Kursant nie jest już dostępny dla innych rekruterów.',
     );
     await employedByHr(email);
   };
@@ -86,7 +86,10 @@ export const StudentsToInterview = (props: Props) => {
                       text="Anuluj rezerwację do rozmowy"
                       onClick={() => handleNotInterested(student.email)}
                     ></Btn>
-                    <Btn text="Zatrudniony" onClick={() => handleHire(student.email)}></Btn>
+                    <Btn
+                      text="Zatrudniony"
+                      onClick={() => handleHire(student.email)}
+                    ></Btn>
                   </OneStudent>
                 </li>
               ))
@@ -103,8 +106,8 @@ export const StudentsToInterview = (props: Props) => {
                       onClick={() => handleNotInterested(student.email)}
                     ></Btn>
                     <Btn
-                        text="Zatrudniony"
-                        onClick={() => handleHire(student.email)}
+                      text="Zatrudniony"
+                      onClick={() => handleHire(student.email)}
                     ></Btn>
                   </OneStudent>
                 </li>
