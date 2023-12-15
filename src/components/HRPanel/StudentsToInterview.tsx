@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FilteredStudents } from 'types';
+import {FilteredStudents, StudentInitialInterface} from 'types';
 import { Spinner } from '../common/Spinner/Spinner';
 import { OneStudent } from './OneStudent';
 import { getReservedStudents } from 'src/api/get-reserved-students';
@@ -9,12 +9,10 @@ import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
 }
 
 export const StudentsToInterview = (props: Props) => {
   const [students, setStudents] = useState<FilteredStudents | null>(null);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -22,10 +20,8 @@ export const StudentsToInterview = (props: Props) => {
         (async () => {
             const studentArray = await getReservedStudents(currentPage, itemsPerPage);
             setStudents(studentArray);
-            props.onChildClick(studentArray.students);
         })();
-    }, [currentPage, itemsPerPage, students]);
-    console.log(students)
+    }, [currentPage, itemsPerPage]);
 
     const onPageChange = (page: number, take: number) => {
         setCurrentPage(page);
@@ -47,7 +43,7 @@ export const StudentsToInterview = (props: Props) => {
     return (
         <div className="students-to-interview">
             <ul>
-                {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.map(student => (
+                {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.students.map(student => (
                     <li key={student.profile?.id}>
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>

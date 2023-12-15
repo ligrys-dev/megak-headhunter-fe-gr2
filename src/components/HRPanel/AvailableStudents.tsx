@@ -10,7 +10,6 @@ import { Pagination } from './Pagination';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
 }
 
 export const AvailableStudents = (props: Props) => {
@@ -25,9 +24,8 @@ export const AvailableStudents = (props: Props) => {
                 itemsPerPage,
             );
             setStudents(studentArray);
-            props.onChildClick(studentArray.students);
         })();
-    }, [currentPage, itemsPerPage, students]);
+    }, [currentPage, itemsPerPage]);
 
   const onPageChange = (page: number, take: number) => {
     setCurrentPage(page);
