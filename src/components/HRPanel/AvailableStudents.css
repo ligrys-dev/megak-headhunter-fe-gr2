@@ -8,3 +8,18 @@
     color: green;
     padding: 20px;
 }
+
+@media (max-width: 400px) {
+    .available-students ul li .one-student button {
+        font-size: 1rem;
+    }
+
+    .available-students ul li .one-student {
+        padding: 10px;
+    }
+
+
+    .available-students ul li .one-student svg {
+        font-size: 1.1rem;
+    }
+}

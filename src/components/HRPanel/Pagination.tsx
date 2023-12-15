@@ -1,6 +1,5 @@
 import { useState, useEffect, FC, ChangeEvent } from 'react';
-
-// import './Pagination.css';
+import './Pagination.css';
 
 interface Props {
   totalItems: number;
@@ -38,7 +37,7 @@ export const Pagination: FC<Props> = ({
   return (
     <div className="pagination">
       <span>
-        Ilość elementów
+        <p>Ilość elementów</p>
         <select value={pageSize} onChange={handlePageSizeChange}>
           <option value={10}>10</option>
           <option value={25}>25</option>
@@ -46,10 +45,10 @@ export const Pagination: FC<Props> = ({
         </select>
       </span>
       <span>
+        <p>
         {currentPage * itemsPerPage < totalItems
           ? currentPage * itemsPerPage
-          : totalItems}
-        /{totalItems}
+          : totalItems} / {totalItems}</p>
       </span>
       <span>
         <button
