@@ -16,7 +16,11 @@ const initialFormData: StudentFilters = {
   'profile.monthsOfCommercialExp': undefined,
 };
 
-export const FilterForm: FC = () => {
+interface Props {
+  onHandleFilter: (data: StudentFilters) => void;
+}
+
+export const FilterForm: FC<Props> = ({ onHandleFilter }) => {
   const [formData, setFormData] = useState<StudentFilters>(initialFormData);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -44,8 +48,7 @@ export const FilterForm: FC = () => {
       if (formData[key] !== undefined) result[key] = formData[key];
     }
 
-    console.log(result);
-    return result;
+    onHandleFilter(result);
   };
 
   return (
