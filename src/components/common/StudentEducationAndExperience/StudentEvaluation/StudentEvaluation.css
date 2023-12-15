@@ -1,0 +1,72 @@
+.student-evaluation {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.student-evaluation .left-side,
+.student-evaluation .right-side {
+    display: flex;
+    justify-content: space-between;
+    width: 48%;
+}
+
+.student-evaluation .left-side div,
+.student-evaluation .right-side div {
+    width: 47%;
+}
+
+.student-evaluation div h3{
+    height: 40px;
+}
+
+.student-evaluation div .stars-container{
+    width: 100%;
+}
+
+.student-evaluation h3 {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+@media (max-width: 780px) {
+    .student-evaluation {
+        flex-direction: column;
+        /*padding: 30px 50px;*/
+    }
+
+    .student-evaluation .left-side {
+        padding-bottom: 30px;
+    }
+
+    .student-evaluation .left-side,
+    .student-evaluation .right-side {
+        justify-content: space-around;
+        margin: 0 auto;
+        width: 80%;
+    }
+}
+
+@media (max-width: 425px) {
+    .student-evaluation .left-side,
+    .student-evaluation .right-side {
+        flex-direction: column;
+    }
+
+    .student-evaluation .left-side div,
+    .student-evaluation .right-side div {
+        width: 100%;
+    }
+
+    .student-evaluation div h3{
+        height: 30px;
+    }
+}
+
+@media (max-width: 425px) {
+    .student-evaluation .left-side,
+    .student-evaluation .right-side {
+        width: 90%;
+    }
+}
