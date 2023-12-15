@@ -48,7 +48,6 @@ export const FilterForm: FC<Props> = ({ onHandleFilter }) => {
         for (const key in formData) {
             if (formData[key] !== undefined) result[key] = formData[key];
         }
-
         onHandleFilter(result);
     };
 

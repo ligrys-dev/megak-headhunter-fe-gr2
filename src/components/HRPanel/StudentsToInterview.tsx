@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {FilteredStudents, StudentInitialInterface} from 'types';
+import {FilteredStudents, StudentFilters, StudentInitialInterface} from 'types';
 import {Spinner} from '../common/Spinner/Spinner';
 import {OneStudent} from './OneStudent';
 import {getReservedStudents} from 'src/api/get-reserved-students';
@@ -10,7 +10,8 @@ import './StudentsToInterview.css';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
-    onChildClick: () => {}
+    onChildClick: () => {};
+    filteredUsersFromPopup: StudentFilters
 }
 
 export const StudentsToInterview = (props: Props) => {
@@ -18,6 +19,9 @@ export const StudentsToInterview = (props: Props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [textInfo, setTextInfo] = useState<string | null>(null);
+
+    // Tutaj w props.filteredUsersFromPopup jest obiekt z popupu
+    console.log(props.filteredUsersFromPopup)
 
     useEffect(() => {
         (async () => {

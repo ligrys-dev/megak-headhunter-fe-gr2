@@ -6,6 +6,7 @@ import {getReservedStudents} from "../../../api/get-reserved-students";
 
 interface Props {
     onChildClick: () => {};
+    onHandleFilter: () =>{};
 }
 
 export const FilterPanelStudentsToInterview = (props: Props) => {
@@ -43,7 +44,7 @@ export const FilterPanelStudentsToInterview = (props: Props) => {
                     onChange={handleInputChange}
                     placeholder="Szukaj"/>
             </div>
-            <FilterPopup></FilterPopup>
+            <FilterPopup onHandleFilter={props.onHandleFilter}/>
         </div>
     )
 }
