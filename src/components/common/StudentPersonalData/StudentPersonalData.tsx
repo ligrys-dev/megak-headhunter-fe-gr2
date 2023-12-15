@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const StudentPersonalData = (props: Props) => {
-    const {profile, firstName, email, lastName} = props.user;
+    const {profile, email} = props.user;
 
     const setEmployed = () => {
         const confirmText = 'Czy na pewno jesteś już zatrudniony? Jeżeli tak to gratulujemy!\nPo kliknięciu "OK" stracisz dostęp do aplikacji.'
@@ -38,7 +38,7 @@ export const StudentPersonalData = (props: Props) => {
                 <img id="user-image"
                      src={profile ? `https://github.com/${profile.githubUsername}.png` : "/assets/user.png"}
                      alt=""/>
-                <p id="user-name">{profile ? firstName : 'Brak'} {profile ? lastName : ' danych'}</p>
+                <p id="user-name">{profile ? profile.firstName : 'Brak'} {profile ? profile.lastName : ' danych'}</p>
                 <div className="github-info">
                     <img src="/assets/github.png" alt="GitHub logo"/>
                     <p>{profile ? profile.githubUsername : 'Brak profilu'}</p>

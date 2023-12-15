@@ -16,6 +16,7 @@
 }
 
 .student-personal-info p#user-name {
+    text-align: center;
     padding: 20px 0 5px;
     font-size: 1.4rem;
 }
@@ -26,6 +27,12 @@
     display: flex;
     padding: 8px 5px;
 }
+
+.student-personal-info .github-info {
+    justify-content: center;
+    padding: 8px 5px 20px;
+}
+
 
 .student-personal-info .github-info img {
     width: auto;

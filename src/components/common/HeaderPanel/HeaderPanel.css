@@ -42,8 +42,9 @@
     display: none;
     margin-top: 20px;
     width: 200px;
+    padding-top: 15px;
     position: absolute;
-    right: 30px;
+    right: 0;
     background-color: var(--background_color);
 }
 

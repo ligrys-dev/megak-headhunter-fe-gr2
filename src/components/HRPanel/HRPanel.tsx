@@ -44,8 +44,9 @@ export const HRPanel = () => {
         <div className="student_panel">
             <HeaderPanel name={user?.fullName} lastName=" " urlAccount="/hr" onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
-                { student ? <StudentCV student = {student} onChildClick={handleStudent}></StudentCV> : <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView}
-                                                                       onChildClick={handleChildBookmarksClick} onChildClickStudentId={handleStudent}/>}
+                {student ? <StudentCV student={student} onChildClick={handleStudent}></StudentCV> :
+                    <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView}
+                                    onChildClick={handleChildBookmarksClick} onChildClickStudentId={handleStudent}/>}
                 {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name={user?.fullName}/>)}
             </div>
         </div>
