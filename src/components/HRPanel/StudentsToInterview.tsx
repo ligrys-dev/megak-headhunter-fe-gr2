@@ -1,20 +1,22 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import {FilteredStudents, StudentInitialInterface} from 'types';
-import { Spinner } from '../common/Spinner/Spinner';
-import { OneStudent } from './OneStudent';
-import { getReservedStudents } from 'src/api/get-reserved-students';
-import { Btn } from '../common/Btn/Btn';
-import { Pagination } from './Pagination';
+import {Spinner} from '../common/Spinner/Spinner';
+import {OneStudent} from './OneStudent';
+import {getReservedStudents} from 'src/api/get-reserved-students';
+import {Btn} from '../common/Btn/Btn';
+import {Pagination} from './Pagination';
 import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
+import './StudentsToInterview.css';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
 }
 
 export const StudentsToInterview = (props: Props) => {
-  const [students, setStudents] = useState<FilteredStudents | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [students, setStudents] = useState<FilteredStudents | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [textInfo, setTextInfo] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -28,20 +30,22 @@ export const StudentsToInterview = (props: Props) => {
         setItemsPerPage(take);
     };
 
-  const showCv = () => {
-    console.log('show cv');
-  };
-  const handleNotInterested = async (email: string) => {
-    await cancelStudentByHr(email);
-  };
-  const handleHire = () => {
-    console.log('hired');
-  };
+    const showCv = () => {
+        console.log('show cv');
+    };
+    const handleNotInterested = async (email: string) => {
+        setTextInfo('Rezerwacja została anulowana. Przejdź do zakładki "Dostępni kursanci".')
+        await cancelStudentByHr(email);
+    };
+    const handleHire = () => {
+        console.log('hired');
+    };
 
     if (!students) return <Spinner/>;
 
     return (
         <div className="students-to-interview">
+            {textInfo ? <p className="text-info">{textInfo}</p> : ''}
             <ul>
                 {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.students.map(student => (
                     <li key={student.profile?.id}>
