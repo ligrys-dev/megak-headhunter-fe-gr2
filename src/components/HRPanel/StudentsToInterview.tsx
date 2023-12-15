@@ -5,6 +5,7 @@ import { OneStudent } from './OneStudent';
 import {getReservedStudents} from 'src/api/get-reserved-students';
 import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
+import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
@@ -22,7 +23,7 @@ export const StudentsToInterview = (props: Props) => {
             setStudents(studentArray);
             props.onChildClick(studentArray.students);
         })();
-    }, [currentPage, itemsPerPage]);
+    }, [currentPage, itemsPerPage, students]);
     console.log(students)
 
     const onPageChange = (page: number, take: number) => {
@@ -30,17 +31,17 @@ export const StudentsToInterview = (props: Props) => {
         setItemsPerPage(take);
     };
 
-    const showCv = () => {
-        console.log('show cv');
-    };
-    const handleNotInterested = () => {
-        console.log('not interested');
-    };
-    const handleHire = () => {
-        console.log('hired');
-    };
+  const showCv = () => {
+    console.log('show cv');
+  };
+  const handleNotInterested = async (email: string) => {
+    await cancelStudentByHr(email);
+  };
+  const handleHire = () => {
+    console.log('hired');
+  };
 
-    if (!students) return <Spinner/>;
+  if (!students) return <Spinner />;
 
     return (
         <div className="students-to-interview">
@@ -50,8 +51,8 @@ export const StudentsToInterview = (props: Props) => {
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn
-                                text="Brak Zainteresowania"
-                                onClick={() => handleNotInterested()}
+                                text="Anuluj rezerwację do rozmowy"
+                                onClick={() => handleNotInterested(student.email)}
                             ></Btn>
                             <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
                         </OneStudent>
@@ -61,8 +62,8 @@ export const StudentsToInterview = (props: Props) => {
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn
-                                text="Brak Zainteresowania"
-                                onClick={() => handleNotInterested()}
+                                text="Anuluj rezerwację do rozmowy"
+                                onClick={() => handleNotInterested(student.email)}
                             ></Btn>
                             <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
                         </OneStudent>
