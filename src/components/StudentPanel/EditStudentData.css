@@ -6,9 +6,17 @@
   text-align: center;
 }
 
-.edit-student-container h2:nth-child(2) {
+.edit-student-container p.text-error {
+  padding-top: 30px;
+  text-align: center;
+  color: red;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+.edit-student-container h3.available {
   padding: 10px;
   font-size: 1.2rem;
+  text-align: center;
 }
 
 .edit-student-container form {
