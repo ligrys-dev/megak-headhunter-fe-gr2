@@ -86,7 +86,7 @@ export const StudentsToInterview = (props: Props) => {
                       text="Anuluj rezerwację do rozmowy"
                       onClick={() => handleNotInterested(student.email)}
                     ></Btn>
-                    <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
+                    <Btn text="Zatrudniony" onClick={() => handleHire(student.email)}></Btn>
                   </OneStudent>
                 </li>
               ))
