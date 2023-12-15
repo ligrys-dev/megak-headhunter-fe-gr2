@@ -24,11 +24,7 @@
 .student-personal-info .phone-info,
 .student-personal-info .email-info {
     display: flex;
-    padding: 5px;
-}
-
-.student-personal-info .github-info {
-    padding-bottom: 13px;
+    padding: 8px 5px;
 }
 
 .student-personal-info .github-info img {

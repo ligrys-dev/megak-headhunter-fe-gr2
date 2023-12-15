@@ -4,7 +4,7 @@ import {Btn} from "../Btn/Btn";
 
 interface Props {
     user: StudentProfileInterface,
-    onChildClick: () => {};
+    onChildClick?: () => {};
 }
 
 export const StudentPersonalData = (props: Props) => {
@@ -57,7 +57,7 @@ export const StudentPersonalData = (props: Props) => {
                     <p>O mnie</p>
                     <p>{profile ? profile.bio : 'Brak bio'}</p>
                 </div>
-                <Btn text="Oznacz mnie jako zatrudniony" onClick={setEmployed}/>
+                {props.onChildClick ? <Btn text="Oznacz mnie jako zatrudniony" onClick={setEmployed}/> : ''}
             </div>
 
         </div>

@@ -83,7 +83,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
       ) : (
         <h2>Uzupełnij swoje dane</h2>
       )}
-      <h3>* Pole obowiązkowe</h3>
+      <h2>* Pole obowiązkowe</h2>
       <form onSubmit={submitForm}>
         <div className="student-profile-input-container">
           <label>

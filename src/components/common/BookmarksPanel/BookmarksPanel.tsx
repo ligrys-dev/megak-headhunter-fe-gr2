@@ -18,6 +18,7 @@ interface Props {
     user?: StudentProfileInterface;
     bookmarksView: boolean;
     onChildClick: () => {};
+    onChildClickStudentId: () => {}
 }
 
 export const BookmarksPanel = (props: Props) => {
@@ -25,7 +26,6 @@ export const BookmarksPanel = (props: Props) => {
     const [student, setStudent] = useState<StudentProfileInterface | null>(null);
     const [filteredAvailableUsers, setFilteredAvailableUsers] = useState([]);
     const [filteredUsersToInterview, setFilteredUsersToInterview] = useState([]);
-
 
     useEffect(() => {
         if (Number(localStorage.getItem('role')) === 2) {
@@ -53,6 +53,10 @@ export const BookmarksPanel = (props: Props) => {
         setFilteredUsersToInterview(users);
     };
 
+    const handleStudentId = student => {
+        props.onChildClickStudentId(student)
+    };
+
     const renderBookmark = () => {
         switch (selectedBookmark) {
             case 'studentData':
@@ -73,7 +77,7 @@ export const BookmarksPanel = (props: Props) => {
             case 'availableStudents':
                 return <AvailableStudents filteredUsers={filteredAvailableUsers}/>;
             case 'studentsToInterview':
-                return <StudentsToInterview filteredUsers={filteredUsersToInterview}/>;
+                return <StudentsToInterview filteredUsers={filteredUsersToInterview} onChildClick={handleStudentId}/>;
             default:
                 return null;
         }

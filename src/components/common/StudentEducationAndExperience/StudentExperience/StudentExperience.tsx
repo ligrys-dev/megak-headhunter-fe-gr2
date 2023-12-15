@@ -8,7 +8,7 @@ interface Props {
 export const StudentExperience = (props: Props) => {
     const setPortfolioLinks = (portfolioUrls) => {
         return (
-            portfolioUrls.map((url, index) => (
+            portfolioUrls?.map((url, index) => (
                     <div key={index} className="portfolio-links">
                         <img src="/assets/clip.png" alt="Clip image"/>
                         <p>{url}</p>
