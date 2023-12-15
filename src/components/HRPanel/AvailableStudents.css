@@ -1,3 +1,10 @@
 .available-students ul li {
     margin-bottom: 10px;
 }
+.available-students p.text-info {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: green;
+    padding: 20px;
+}

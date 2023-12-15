@@ -16,6 +16,7 @@ export const AvailableStudents = (props: Props) => {
     const [students, setStudents] = useState<FilteredStudents | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [textInfo, setTextInfo] = useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
@@ -34,6 +35,7 @@ export const AvailableStudents = (props: Props) => {
 
     const reserveStudent = async (email: string) => {
         const student = await reserveStudentByHr(email);
+        setTextInfo('Student został poprawnie zarezerwowany. Przejdź do zakładki "Do rozmowy".')
         return {
             expirationDate: student.reservationExpirationDate,
         };
@@ -41,9 +43,11 @@ export const AvailableStudents = (props: Props) => {
 
     if (!students) return <Spinner />;
 
+
     return (
         <>
             <div className="available-students">
+                {textInfo ? <p className="text-info">{textInfo}</p> : ''}
                 <ul>
                     {props.filteredUsers
                         ? (props.filteredUsers.length === 0
