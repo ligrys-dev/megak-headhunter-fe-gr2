@@ -9,7 +9,8 @@ import {AvailableStudents} from '../../HRPanel/AvailableStudents';
 import {StudentInitialInterface, StudentProfileInterface} from 'types';
 import {handleUpdateStudentProfile} from 'src/api/handle-update-student-profile';
 import {getStudent} from 'src/api/get-student';
-import {FilterPanel} from "../FilterPanel/FilterPanel";
+import {FilterPanelAvailableStudents} from "../FilterPanel/FilterPanelAvailableStudents";
+import {FilterPanelStudentsToInterview} from "../FilterPanel/FilterPanelStudentsToInterview";
 import './BookmarksPanel.css';
 
 interface Props {
@@ -23,7 +24,6 @@ export const BookmarksPanel = (props: Props) => {
     const [selectedBookmark, setSelectedBookmark] = useState<string | null>(null);
     const [student, setStudent] = useState<StudentProfileInterface | null>(null);
     const [filteredUsers, setFilteredUsers] = useState([]);
-    const [requiredStudents, setRequiredStudents] = useState([])
 
     useEffect(() => {
         if (Number(localStorage.getItem('role')) === 2) {
@@ -47,10 +47,6 @@ export const BookmarksPanel = (props: Props) => {
         setFilteredUsers(users);
     };
 
-    const handleRequiredStudents = students => {
-        setRequiredStudents(students);
-    };
-
     const renderBookmark = () => {
         switch (selectedBookmark) {
             case 'studentData':
@@ -69,9 +65,9 @@ export const BookmarksPanel = (props: Props) => {
             case 'addHR':
                 return <HRForm/>;
             case 'availableStudents':
-                return <AvailableStudents onChildClick={handleRequiredStudents} filteredUsers={filteredUsers}/>;
+                return <AvailableStudents filteredUsers={filteredUsers}/>;
             case 'studentsToInterview':
-                return <StudentsToInterview onChildClick={handleRequiredStudents} filteredUsers={filteredUsers}/>;
+                return <StudentsToInterview filteredUsers={filteredUsers}/>;
             default:
                 return null;
         }
@@ -90,8 +86,8 @@ export const BookmarksPanel = (props: Props) => {
                     </p>
                 ))}
             </div>
-            {selectedBookmark === 'availableStudents' || selectedBookmark === 'studentsToInterview' ?
-                <FilterPanel onChildClick={handleFilteredUsers} students = {requiredStudents}></FilterPanel> : ''}
+            {selectedBookmark === 'availableStudents' ? <FilterPanelAvailableStudents onChildClick={handleFilteredUsers}></FilterPanelAvailableStudents> : ''}
+            {selectedBookmark === 'studentsToInterview' ? <FilterPanelStudentsToInterview onChildClick={handleFilteredUsers}></FilterPanelStudentsToInterview> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );
