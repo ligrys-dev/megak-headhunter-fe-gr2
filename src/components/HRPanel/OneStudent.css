@@ -23,3 +23,20 @@
   border-radius: 50%;
   height: 44px;
 }
+
+@media (max-width: 500px) {
+  .students-to-interview .one-student {
+    height: 40vh;
+    flex-direction: column;
+  }
+
+  .students-to-interview .one-student .reservation-date {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+ .students-to-interview .one-student button {
+    margin: 5px;
+  }
+
+}

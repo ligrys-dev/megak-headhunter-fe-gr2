@@ -47,13 +47,13 @@
 }
 
 .student-personal-info .phone-info img,
-.student-personal-info .email-info img{
+.student-personal-info .email-info img {
     width: auto;
     height: 25px;
 }
 
 .student-personal-info .phone-info p,
-.student-personal-info .email-info p{
+.student-personal-info .email-info p {
     padding-left: 10px;
     line-height: 25px;
     font-size: 1rem;
@@ -81,18 +81,19 @@
 
 @media (max-width: 1024px) {
     .student-personal-info {
-        width: 100%;
+        margin: 0 auto;
+        width: 80%;
         flex-direction: row;
         border-bottom: 3px solid var(--background_color);
     }
 
     .student-personal-info .student-personal-info-left-side,
-    .student-personal-info .student-personal-info-right-side{
+    .student-personal-info .student-personal-info-right-side {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-       width: 40%;
+        width: 40%;
     }
 
     .student-personal-info .student-personal-info-right-side {
@@ -104,14 +105,20 @@
     }
 }
 
+@media (max-width: 768px) {
+    .student-personal-info {
+        width: 100%;
+    }
+}
+
 @media (max-width: 425px) {
     .student-personal-info {
         flex-direction: column;
-        margin: 0 ;
+        margin: 0;
     }
 
     .student-personal-info .student-personal-info-left-side,
-    .student-personal-info .student-personal-info-right-side{
+    .student-personal-info .student-personal-info-right-side {
         width: 100%;
     }
 
