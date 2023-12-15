@@ -30,7 +30,8 @@ export const BookmarksPanel = (props: Props) => {
     useEffect(() => {
         if (Number(localStorage.getItem('role')) === 2) {
             (async () => {
-                const {profile} = (await getUser()) as StudentInitialInterface;
+                const data = (await getUser())?.student as StudentInitialInterface;
+                const {profile} = data;
                 setStudent(profile ?? null);
             })();
         }
@@ -96,8 +97,10 @@ export const BookmarksPanel = (props: Props) => {
                     </p>
                 ))}
             </div>
-            {selectedBookmark === 'availableStudents' ? <FilterPanelAvailableStudents onChildClick={handleFilteredAvailableUsers}></FilterPanelAvailableStudents> : ''}
-            {selectedBookmark === 'studentsToInterview' ? <FilterPanelStudentsToInterview onChildClick={handleFilteredUsersToInterview}></FilterPanelStudentsToInterview> : ''}
+            {selectedBookmark === 'availableStudents' ? <FilterPanelAvailableStudents
+                onChildClick={handleFilteredAvailableUsers}></FilterPanelAvailableStudents> : ''}
+            {selectedBookmark === 'studentsToInterview' ? <FilterPanelStudentsToInterview
+                onChildClick={handleFilteredUsersToInterview}></FilterPanelStudentsToInterview> : ''}
             {props.bookmarksView ? renderBookmark() : ''}
         </div>
     );

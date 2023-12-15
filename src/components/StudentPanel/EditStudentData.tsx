@@ -27,6 +27,7 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [textError, setTextError] = useState<string | null>(null);
 
   useEffect(() => {
     setIsEditing(!!initialData.id);
@@ -68,9 +69,17 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
     };
 
     try {
-      await onSubmit(transformedData);
-      reset();
-      window.location.reload();
+      const res = await onSubmit(transformedData);
+      if (res.statusCode === 400) {
+        if (res.message[0] === 'tel must be longer than or equal to 9 characters') {
+          setTextError('Telefon musi mieć od 9 do 20 znaków.')
+        } else if (res.message[0] === 'each value in portfolioUrls must be a URL address') {
+          setTextError('Pole portfolio musi zawierać linki.')
+        }
+      } else {
+        reset();
+        window.location.reload();
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -78,12 +87,13 @@ export const EditStudentData: FC<StudentProfileFormProps> = ({
 
   return (
     <div className="edit-student-container">
+      {textError ? <p className="text-error">{textError}</p> : ''}
       {isEditing ? (
         <h2>Zaktualizuj swoje dane</h2>
       ) : (
         <h2>Uzupełnij swoje dane</h2>
       )}
-      <h2>* Pole obowiązkowe</h2>
+      <h3 className="available">* Pole obowiązkowe</h3>
       <form onSubmit={submitForm}>
         <div className="student-profile-input-container">
           <label>
