@@ -11,6 +11,7 @@ import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
 import { cancelStudentByHr } from '../../api/cancel-reservation-by-hr.ts';
 import './StudentsToInterview.css';
+import {employedByHr} from "../../api/student-employed-by-hr";
 
 interface Props {
   filteredUsers: StudentInitialInterface[];
@@ -50,14 +51,19 @@ export const StudentsToInterview = (props: Props) => {
   const showCv = student => {
     props.onChildClick(student);
   };
+
   const handleNotInterested = async (email: string) => {
     setTextInfo(
       'Rezerwacja została anulowana. Przejdź do zakładki "Dostępni kursanci".',
     );
     await cancelStudentByHr(email);
   };
-  const handleHire = () => {
-    console.log('hired');
+
+  const handleHire = async (email: string) => {
+    setTextInfo(
+        'Gratulujemy zatrudnienia nowego pracownika! Kursant nie jest już dostępny dla innych rekruterów.',
+    );
+    await employedByHr(email);
   };
 
   if (!students) return <Spinner />;
@@ -80,7 +86,7 @@ export const StudentsToInterview = (props: Props) => {
                       text="Anuluj rezerwację do rozmowy"
                       onClick={() => handleNotInterested(student.email)}
                     ></Btn>
-                    <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
+                    <Btn text="Zatrudniony" onClick={() => handleHire(student.email)}></Btn>
                   </OneStudent>
                 </li>
               ))
@@ -96,7 +102,10 @@ export const StudentsToInterview = (props: Props) => {
                       text="Anuluj rezerwację do rozmowy"
                       onClick={() => handleNotInterested(student.email)}
                     ></Btn>
-                    <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
+                    <Btn
+                        text="Zatrudniony"
+                        onClick={() => handleHire(student.email)}
+                    ></Btn>
                   </OneStudent>
                 </li>
               ))
