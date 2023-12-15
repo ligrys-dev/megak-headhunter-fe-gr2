@@ -1,51 +1,51 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { ContractType, TypeWork } from 'types';
+import { ContractType, StudentFilters, TypeWork } from 'types';
 
-interface FilterForm {
-  courseCompletion: number | undefined;
-  courseEngagement: number | undefined;
-  projectDegree: number | undefined;
-  teamProjectDegree: number | undefined;
-  expectedTypeWork: TypeWork | undefined;
-  expectedContractType: ContractType | undefined;
-  expectedSalary: {
-    min: number | undefined;
-    max: number | undefined;
-  };
-  canTakeApprenticeship: boolean | undefined;
-  monthsOfCommercialExp: number | undefined;
-}
-
-const initialFormData: FilterForm = {
+const initialFormData: StudentFilters = {
   courseCompletion: undefined,
   courseEngagement: undefined,
   projectDegree: undefined,
   teamProjectDegree: undefined,
-  expectedTypeWork: undefined,
-  expectedContractType: undefined,
-  expectedSalary: {
+  'profile.expectedTypeWork': undefined,
+  'profile.expectedContractType': undefined,
+  '.profile.expectedSalary': {
     min: undefined,
     max: undefined,
   },
-  canTakeApprenticeship: undefined,
-  monthsOfCommercialExp: undefined,
+  'profile.canTakeApprenticeship': undefined,
+  'profile.monthsOfCommercialExp': undefined,
 };
 
 export const FilterForm: FC = () => {
-  const [formData, setFormData] = useState<FilterForm>(initialFormData);
+  const [formData, setFormData] = useState<StudentFilters>(initialFormData);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
 
-    setFormData(prevFormData => ({
+    setFormData((prevFormData: NonNullable<unknown>) => ({
       ...prevFormData,
-      [name]: type === 'number' ? Number(value) : value,
+      [name]:
+        type === 'number'
+          ? Number(value)
+          : type === 'radio'
+          ? value === '1'
+            ? 1
+            : 0
+          : value,
     }));
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    const result: StudentFilters = {};
+
+    for (const key in formData) {
+      if (formData[key] !== undefined) result[key] = formData[key];
+    }
+
+    console.log(result);
+    return result;
   };
 
   return (
@@ -114,13 +114,15 @@ export const FilterForm: FC = () => {
               Biuro
               <input
                 type="radio"
-                name="expectedTypeWork"
+                name="profile.expectedTypeWork"
                 value={TypeWork.AT_LOCATION}
-                checked={formData.expectedTypeWork === TypeWork.AT_LOCATION}
+                checked={
+                  formData['profile.expectedTypeWork'] === TypeWork.AT_LOCATION
+                }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedTypeWork: TypeWork.AT_LOCATION,
+                    'profile.expectedTypeWork': TypeWork.AT_LOCATION,
                   }))
                 }
               />
@@ -130,13 +132,15 @@ export const FilterForm: FC = () => {
               Zdalnie
               <input
                 type="radio"
-                name="expectedTypeWork"
+                name="profile.expectedTypeWork"
                 value={TypeWork.REMOTE_ONLY}
-                checked={formData.expectedTypeWork === TypeWork.REMOTE_ONLY}
+                checked={
+                  formData['profile.expectedTypeWork'] === TypeWork.REMOTE_ONLY
+                }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedTypeWork: TypeWork.REMOTE_ONLY,
+                    'profile.expectedTypeWork': TypeWork.REMOTE_ONLY,
                   }))
                 }
               />
@@ -146,13 +150,15 @@ export const FilterForm: FC = () => {
               Hybrydowo
               <input
                 type="radio"
-                name="expectedTypeWork"
+                name="profile.expectedTypeWork"
                 value={TypeWork.HYBRID}
-                checked={formData.expectedTypeWork === TypeWork.HYBRID}
+                checked={
+                  formData['profile.expectedTypeWork'] === TypeWork.HYBRID
+                }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedTypeWork: TypeWork.HYBRID,
+                    'profile.expectedTypeWork': TypeWork.HYBRID,
                   }))
                 }
               />
@@ -162,15 +168,16 @@ export const FilterForm: FC = () => {
               Gotowość do przeprowadzki
               <input
                 type="radio"
-                name="expectedTypeWork"
+                name="profile.expectedTypeWork"
                 value={TypeWork.READINESS_TO_MOVE}
                 checked={
-                  formData.expectedTypeWork === TypeWork.READINESS_TO_MOVE
+                  formData['profile.expectedTypeWork'] ===
+                  TypeWork.READINESS_TO_MOVE
                 }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedTypeWork: TypeWork.READINESS_TO_MOVE,
+                    'profile.expectedTypeWork': TypeWork.READINESS_TO_MOVE,
                   }))
                 }
               />
@@ -180,13 +187,16 @@ export const FilterForm: FC = () => {
               Nie ma znaczenia
               <input
                 type="radio"
-                name="expectedTypeWork"
+                name="profile.expectedTypeWork"
                 value={TypeWork.DOES_NOT_MATTER}
-                checked={formData.expectedTypeWork === TypeWork.DOES_NOT_MATTER}
+                checked={
+                  formData['profile.expectedTypeWork'] ===
+                  TypeWork.DOES_NOT_MATTER
+                }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedTypeWork: TypeWork.DOES_NOT_MATTER,
+                    'profile.expectedTypeWork': TypeWork.DOES_NOT_MATTER,
                   }))
                 }
               />
@@ -203,15 +213,16 @@ export const FilterForm: FC = () => {
               UoP
               <input
                 type="radio"
-                name="expectedContractType"
+                name="profile.expectedContractType"
                 value={ContractType.CONTRACT}
                 checked={
-                  formData.expectedContractType === ContractType.CONTRACT
+                  formData['profile.expectedContractType'] ===
+                  ContractType.CONTRACT
                 }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedContractType: ContractType.CONTRACT,
+                    'profile.expectedContractType': ContractType.CONTRACT,
                   }))
                 }
               />
@@ -221,15 +232,16 @@ export const FilterForm: FC = () => {
               B2B
               <input
                 type="radio"
-                name="expectedContractType"
+                name="profile.expectedContractType"
                 value={ContractType.POSSIBLE_B2B}
                 checked={
-                  formData.expectedContractType === ContractType.POSSIBLE_B2B
+                  formData['profile.expectedContractType'] ===
+                  ContractType.POSSIBLE_B2B
                 }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedContractType: ContractType.POSSIBLE_B2B,
+                    'profile.expectedContractType': ContractType.POSSIBLE_B2B,
                   }))
                 }
               />
@@ -239,16 +251,17 @@ export const FilterForm: FC = () => {
               Zlecenie
               <input
                 type="radio"
-                name="expectedContractType"
+                name="profile.expectedContractType"
                 value={ContractType.MANDATE_CONTRACT}
                 checked={
-                  formData.expectedContractType ===
+                  formData['profile.expectedContractType'] ===
                   ContractType.MANDATE_CONTRACT
                 }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedContractType: ContractType.MANDATE_CONTRACT,
+                    'profile.expectedContractType':
+                      ContractType.MANDATE_CONTRACT,
                   }))
                 }
               />
@@ -258,15 +271,16 @@ export const FilterForm: FC = () => {
               Nie ma znaczenia
               <input
                 type="radio"
-                name="expectedContractType"
+                name="profile.expectedContractType"
                 value={ContractType.NO_PREFERENCE}
                 checked={
-                  formData.expectedContractType === ContractType.NO_PREFERENCE
+                  formData['profile.expectedContractType'] ===
+                  ContractType.NO_PREFERENCE
                 }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    expectedContractType: ContractType.NO_PREFERENCE,
+                    'profile.expectedContractType': ContractType.NO_PREFERENCE,
                   }))
                 }
               />
@@ -279,13 +293,13 @@ export const FilterForm: FC = () => {
           Oczekiwane wynagrodzenie miesięczne netto (min):
           <input
             type="number"
-            name="expectedSalaryMin"
-            value={formData.expectedSalary.min}
+            name="profile.expectedSalaryMin"
+            value={formData['profile.expectedSalary']?.min}
             onChange={e =>
               setFormData(prevFormData => ({
                 ...prevFormData,
-                expectedSalary: {
-                  ...prevFormData.expectedSalary,
+                'profile.expectedSalary': {
+                  ...prevFormData['profile.expectedSalary'],
                   min: parseFloat(e.target.value),
                 },
               }))
@@ -299,13 +313,13 @@ export const FilterForm: FC = () => {
           Oczekiwane wynagrodzenie miesięczne netto (max):
           <input
             type="number"
-            name="expectedSalaryMax"
-            value={formData.expectedSalary.max}
+            name="profile.expectedSalaryMax"
+            value={formData['profile.expectedSalary']?.max}
             onChange={e =>
               setFormData(prevFormData => ({
                 ...prevFormData,
-                expectedSalary: {
-                  ...prevFormData.expectedSalary,
+                'profile.expectedSalary': {
+                  ...prevFormData['profile.expectedSalary'],
                   max: parseFloat(e.target.value),
                 },
               }))
@@ -322,13 +336,13 @@ export const FilterForm: FC = () => {
               Tak
               <input
                 type="radio"
-                name="canTakeApprenticeship"
+                name="profile.canTakeApprenticeship"
                 value={1}
-                checked={formData.canTakeApprenticeship}
+                checked={!!formData['profile.canTakeApprenticeship']}
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    canTakeApprenticeship: true,
+                    'profile.canTakeApprenticeship': 1,
                   }))
                 }
               />
@@ -338,13 +352,17 @@ export const FilterForm: FC = () => {
               Nie
               <input
                 type="radio"
-                name="internshipConsent"
+                name="profile.canTakeApprenticeship"
                 value={0}
-                checked={!formData.canTakeApprenticeship}
+                checked={
+                  formData['profile.canTakeApprenticeship'] === undefined
+                    ? false
+                    : !formData['profile.canTakeApprenticeship']
+                }
                 onChange={() =>
                   setFormData(prev => ({
                     ...prev,
-                    canTakeApprenticeship: false,
+                    'profile.canTakeApprenticeship': 0,
                   }))
                 }
               />
@@ -358,8 +376,8 @@ export const FilterForm: FC = () => {
           Ilość miesięcy doświadczenia komercyjnego kandydata w programowaniu:
           <input
             type="number"
-            name="experienceMonths"
-            value={formData.monthsOfCommercialExp}
+            name="profile.monthsOfCommercialExp"
+            value={formData['profile.monthsOfCommercialExp']}
             onChange={handleInputChange}
             min={0}
           />
