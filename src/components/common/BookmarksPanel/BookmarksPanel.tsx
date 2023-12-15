@@ -53,8 +53,8 @@ export const BookmarksPanel = (props: Props) => {
         setFilteredUsersToInterview(users);
     };
 
-    const handleStudentId = id => {
-        props.onChildClickStudentId(id)
+    const handleStudentId = student => {
+        props.onChildClickStudentId(student)
     };
 
     const renderBookmark = () => {

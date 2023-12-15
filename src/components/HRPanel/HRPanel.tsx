@@ -1,7 +1,7 @@
 import './HRPanel.css';
 import {useEffect, useState} from "react";
 import {
-    RecruiterInterface, UserType,
+    RecruiterInterface, StudentInitialInterface, UserType,
 } from "types";
 import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
 import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
@@ -14,11 +14,12 @@ export const HRPanel = () => {
     const [password, setPassword] = useState(false);
     const [bookmarksView, setBookmarksView] = useState('');
     const [user, setUser] = useState<RecruiterInterface | null>(null);
-    const [studentId, setStudentId] = useState<string | null>(null);
+    const [student, setStudent] = useState<StudentInitialInterface | null>(null);
     const bookmarks = [
         ['availableStudents', 'Dostępni kursanci'],
         ['studentsToInterview', 'Do rozmowy'],
     ];
+    console.log(student)
 
     useEffect(() => {
         (async () => {
@@ -36,16 +37,16 @@ export const HRPanel = () => {
         setBookmarksView(newMessage);
     };
 
-    const handleStudentId = (newMessage) => {
-        setStudentId(newMessage);
+    const handleStudent = (student) => {
+        setStudent(student);
     };
 
     return (
         <div className="student_panel">
             <HeaderPanel name={user?.fullName} lastName=" " urlAccount="/hr" onChildClick={handleChildHeaderClick}/>
             <div className="panel_main">
-                {studentId ? <StudentCV id = {studentId} onChildClick={handleStudentId}></StudentCV> : <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView}
-                                                                       onChildClick={handleChildBookmarksClick} onChildClickStudentId={handleStudentId}/>}
+                { student ? <StudentCV student = {student} onChildClick={handleStudent}></StudentCV> : <BookmarksPanel bookmarks={bookmarks} bookmarksView={bookmarksView}
+                                                                       onChildClick={handleChildBookmarksClick} onChildClickStudentId={handleStudent}/>}
                 {bookmarksView ? '' : (password ? <ChangePassword/> : <WelcomeView name={user?.fullName}/>)}
             </div>
         </div>

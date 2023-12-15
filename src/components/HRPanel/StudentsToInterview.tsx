@@ -31,8 +31,8 @@ export const StudentsToInterview = (props: Props) => {
         setItemsPerPage(take);
     };
 
-    const showCv = (id) => {
-        props.onChildClick(id)
+    const showCv = (student) => {
+        props.onChildClick(student)
     };
     const handleNotInterested = async (email: string) => {
         setTextInfo('Rezerwacja została anulowana. Przejdź do zakładki "Dostępni kursanci".')
@@ -51,7 +51,7 @@ export const StudentsToInterview = (props: Props) => {
                 {props.filteredUsers ? (props.filteredUsers.length === 0 ? students.students.map(student => (
                     <li key={student.profile?.id}>
                         <OneStudent key={student.profile?.id} student={student} isReserved>
-                            <Btn text="Pokaż CV" onClick={() => showCv(student.profile?.id)}></Btn>
+                            <Btn text="Pokaż CV" onClick={() => showCv(student)}></Btn>
                             <Btn
                                 text="Anuluj rezerwację do rozmowy"
                                 onClick={() => handleNotInterested(student.email)}
