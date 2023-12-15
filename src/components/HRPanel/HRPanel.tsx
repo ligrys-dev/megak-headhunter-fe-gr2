@@ -1,27 +1,29 @@
 import './HRPanel.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
-    RecruiterInterface,
+    RecruiterInterface, UserType,
 } from "types";
 import {HeaderPanel} from "../common/HeaderPanel/HeaderPanel";
 import {BookmarksPanel} from "../common/BookmarksPanel/BookmarksPanel";
 import {ChangePassword} from "../common/ChangePassword/ChangePassword";
 import {WelcomeView} from "../common/WelcomeView/WelcomeView";
+import {getUser} from "../../api/get-user";
 
 export const HRPanel = () => {
     const [password, setPassword] = useState(false);
     const [bookmarksView, setBookmarksView] = useState('');
+    const [user, setUser] = useState<RecruiterInterface | null>(null);
     const bookmarks = [
         ['availableStudents', 'Dostępni kursanci'],
         ['studentsToInterview', 'Do rozmowy'],
     ];
 
-    const [user, setUser] = useState<RecruiterInterface | null>({
-        email: 'abc@hr.pl',
-        fullName: 'Rekruter Rekruterowy',
-        company: 'firma',
-        maxReservedStudents: 50
-    });
+    useEffect(() => {
+        (async () => {
+            const data = await getUser() as UserType;
+            setUser(data.recruiter)
+        })();
+    }, []);
 
     const handleChildHeaderClick = (newMessage) => {
         setPassword(newMessage);
@@ -42,4 +44,3 @@ export const HRPanel = () => {
         </div>
     );
 }
-

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FilteredStudents, StudentInitialInterface } from 'types';
+import {FilteredStudents, StudentInitialInterface} from 'types';
 import { getStudentsForRecruiter } from 'src/api/get-students-for-recruiter';
 import { OneStudent } from './OneStudent';
 import { Spinner } from '../common/Spinner/Spinner';
 import { Btn } from '../common/Btn/Btn';
 import { reserveStudentByHr } from 'src/api/reserve-student-by-hr';
-import './AvailableStudents.css';
 import { Pagination } from './Pagination';
+import './AvailableStudents.css';
 
 interface Props {
     filteredUsers: StudentInitialInterface[];
@@ -28,10 +28,10 @@ export const AvailableStudents = (props: Props) => {
         })();
     }, [currentPage, itemsPerPage]);
 
-  const onPageChange = (page: number, take: number) => {
-    setCurrentPage(page);
-    setItemsPerPage(take);
-  };
+    const onPageChange = (page: number, take: number) => {
+        setCurrentPage(page);
+        setItemsPerPage(take);
+    };
 
     const reserveStudent = async (email: string) => {
         const student = await reserveStudentByHr(email);
