@@ -6,6 +6,11 @@
   text-align: center;
 }
 
+.edit-student-container h2:nth-child(2) {
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
 .edit-student-container form {
   display: flex;
   flex-direction: column;
