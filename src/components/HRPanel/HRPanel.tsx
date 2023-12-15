@@ -19,7 +19,6 @@ export const HRPanel = () => {
         ['availableStudents', 'Dostępni kursanci'],
         ['studentsToInterview', 'Do rozmowy'],
     ];
-    console.log(student)
 
     useEffect(() => {
         (async () => {
