@@ -5,10 +5,11 @@ import { OneStudent } from './OneStudent';
 import { getReservedStudents } from 'src/api/get-reserved-students';
 import { Btn } from '../common/Btn/Btn';
 import { Pagination } from './Pagination';
+import {cancelStudentByHr} from "../../api/cancel-reservation-by-hr.ts";
 
 interface Props {
-  filteredUsers: StudentInitialInterface[];
-  onChildClick: () => {}
+    filteredUsers: StudentInitialInterface[];
+    onChildClick: () => {}
 }
 
 export const StudentsToInterview = (props: Props) => {
@@ -17,28 +18,29 @@ export const StudentsToInterview = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  useEffect(() => {
-    (async () => {
-      const studentArray = await getReservedStudents(currentPage, itemsPerPage);
-      setStudents(studentArray);
-      props.onChildClick(studentArray.students);
-    })();
-  }, [currentPage, itemsPerPage]);
+    useEffect(() => {
+        (async () => {
+            const studentArray = await getReservedStudents(currentPage, itemsPerPage);
+            setStudents(studentArray);
+            props.onChildClick(studentArray.students);
+        })();
+    }, [currentPage, itemsPerPage, students]);
+    console.log(students)
 
-  const onPageChange = (page: number, take: number) => {
-    setCurrentPage(page);
-    setItemsPerPage(take);
+    const onPageChange = (page: number, take: number) => {
+        setCurrentPage(page);
+        setItemsPerPage(take);
+    };
+
+  const showCv = () => {
+    console.log('show cv');
   };
-
-    const showCv = () => {
-        console.log('show cv');
-    };
-    const handleNotInterested = () => {
-        console.log('not interested');
-    };
-    const handleHire = () => {
-        console.log('hired');
-    };
+  const handleNotInterested = async (email: string) => {
+    await cancelStudentByHr(email);
+  };
+  const handleHire = () => {
+    console.log('hired');
+  };
 
     if (!students) return <Spinner/>;
 
@@ -50,8 +52,8 @@ export const StudentsToInterview = (props: Props) => {
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn
-                                text="Brak Zainteresowania"
-                                onClick={() => handleNotInterested()}
+                                text="Anuluj rezerwację do rozmowy"
+                                onClick={() => handleNotInterested(student.email)}
                             ></Btn>
                             <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
                         </OneStudent>
@@ -61,8 +63,8 @@ export const StudentsToInterview = (props: Props) => {
                         <OneStudent key={student.profile?.id} student={student} isReserved>
                             <Btn text="Pokaż CV" onClick={() => showCv()}></Btn>
                             <Btn
-                                text="Brak Zainteresowania"
-                                onClick={() => handleNotInterested()}
+                                text="Anuluj rezerwację do rozmowy"
+                                onClick={() => handleNotInterested(student.email)}
                             ></Btn>
                             <Btn text="Zatrudniony" onClick={() => handleHire()}></Btn>
                         </OneStudent>
@@ -70,13 +72,13 @@ export const StudentsToInterview = (props: Props) => {
                 ))) : ''
                 }
             </ul>
-          <Pagination
-              currentPage={currentPage}
-              itemsPerPage={itemsPerPage}
-              totalItems={students.studentsCount}
-              totalPages={students.numberOfPages}
-              onPageChange={onPageChange}
-          />
+            <Pagination
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={students.studentsCount}
+                totalPages={students.numberOfPages}
+                onPageChange={onPageChange}
+            />
         </div>
     );
 };
