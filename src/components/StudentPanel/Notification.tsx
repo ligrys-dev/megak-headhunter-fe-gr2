@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './Notification.css';
 import {StudentInitialInterface} from "types";
 import {Btn} from "../common/Btn/Btn";
+import './Notification.css';
 
 interface Props {
     user: StudentInitialInterface
@@ -12,13 +12,12 @@ export const Notification = (props: Props) => {
 
     const formatDateTime = (dateTimeString) => {
         const options = {day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'};
-        const formattedDateTime = new Date(dateTimeString).toLocaleDateString('pl-PL', options);
-        return formattedDateTime;
+        return new Date(dateTimeString).toLocaleDateString('pl-PL', options);
+
     };
 
     const handleRefreshNotify = async () => {
         try {
-            // Zapytanie do /student/initial/:email
             const initialResponse = await fetch(`http://localhost:3001/student/initial/${props.user.email}`, {
                 method: 'GET',
                 headers: {
@@ -34,10 +33,6 @@ export const Notification = (props: Props) => {
             }
 
             const initialData = await initialResponse.json();
-            console.log('Initial response:', initialData);
-
-            console.log(initialData.status);
-
             if (initialData.status === 0) {
                 setNotificationText(`
                     <p>Twój aktualny status to: Dostępny.</p>
@@ -47,7 +42,7 @@ export const Notification = (props: Props) => {
                 const formattedExpirationDate = formatDateTime(initialData.reservationExpirationDate);
                 setNotificationText(`
                     <p>Twój aktualny status to: Oczekujący na rozmowę.</p>
-                    <p>HR (${initialData.reservedBy}) zarezerwował sobie czas na rozmowę z Tobą do dnia ${formattedExpirationDate}.</p>
+                    <p>Rekruter zarezerwował sobie czas na rozmowę z Tobą do dnia ${formattedExpirationDate}.</p>
                     <p>W najbliższym czasie otrzymasz informację o dokładnym terminie rozmowy. </p>
                     <p>W przypadku braku kontaktu ze strony rekrutera, po 10 dniach Twoj status zostanie ponownie zmieniony na Dostępny.</p> 
                 `);
