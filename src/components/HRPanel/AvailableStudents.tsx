@@ -35,7 +35,7 @@ export const AvailableStudents = (props: Props) => {
       );
       setStudents(studentArray);
     })();
-  }, [currentPage, itemsPerPage, filters]);
+  }, [currentPage, itemsPerPage, filters, textInfo]);
 
   useEffect(() => {
     setFilters(props.filteredUsersFromPopup);
@@ -49,7 +49,7 @@ export const AvailableStudents = (props: Props) => {
   const reserveStudent = async (email: string) => {
     const student = await reserveStudentByHr(email);
     setTextInfo(
-      'Student został poprawnie zarezerwowany. Przejdź do zakładki "Do rozmowy".',
+      `Kursant ${student.profile.firstName} został zarezerwowany do rozmowy.`,
     );
     return {
       expirationDate: student.reservationExpirationDate,

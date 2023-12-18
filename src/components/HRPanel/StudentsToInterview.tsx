@@ -37,7 +37,7 @@ export const StudentsToInterview = (props: Props) => {
       );
       setStudents(studentArray);
     })();
-  }, [currentPage, itemsPerPage, filters]);
+  }, [currentPage, itemsPerPage, filters, textInfo]);
 
   useEffect(() => {
     setFilters(props.filteredUsersFromPopup);
@@ -53,10 +53,10 @@ export const StudentsToInterview = (props: Props) => {
   };
 
   const handleNotInterested = async (email: string) => {
+    const student = await cancelStudentByHr(email);
     setTextInfo(
-      'Rezerwacja została anulowana. Przejdź do zakładki "Dostępni kursanci".',
+      `Rezerwacja Kursanta o imieniu ${student.profile.firstName} została anulowana.`,
     );
-    await cancelStudentByHr(email);
   };
 
   const handleHire = async (email: string) => {
