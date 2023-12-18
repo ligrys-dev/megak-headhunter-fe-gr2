@@ -55,7 +55,7 @@ export const StudentsToInterview = (props: Props) => {
   const handleNotInterested = async (email: string) => {
     const student = await cancelStudentByHr(email);
     setTextInfo(
-      `Rezerwacja Kursanta o imieniu ${student.profile.firstName} została anulowana.`,
+      `Rezerwacja kursanta o imieniu ${student.profile.firstName} (email: ${student.email}) została anulowana.`,
     );
   };
 

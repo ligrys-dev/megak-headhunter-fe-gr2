@@ -49,7 +49,7 @@ export const AvailableStudents = (props: Props) => {
   const reserveStudent = async (email: string) => {
     const student = await reserveStudentByHr(email);
     setTextInfo(
-      `Kursant ${student.profile.firstName} został zarezerwowany do rozmowy.`,
+      `Kursant ${student.profile.firstName} (email: ${student.email}) został zarezerwowany do rozmowy.`,
     );
     return {
       expirationDate: student.reservationExpirationDate,
